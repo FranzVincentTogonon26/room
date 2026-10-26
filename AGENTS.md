@@ -22,6 +22,17 @@ npx eas-cli@latest <cmd>    # EAS builds, submits, and updates (use instead of b
 - Routes live in `src/app/`: every file is a screen and `_layout.tsx` files define navigators. API routes are `src/app/api/*+api.ts`. Keep components, hooks, and utils outside `src/app/`.
 - `ios/` and `android/` are generated. Never create or edit them by hand; configure native behavior in `app.json` and config plugins.
 - Expo Go only includes its bundled native modules. After adding a library with native code, switch to a development build (`npx expo run:ios`).
+- Styling uses NativeWind 4.2.7 with Tailwind CSS 3: use `className`, not `StyleSheet`, for component styles. `global.css` at the root is the Tailwind entry and is imported once in `src/app/_layout.tsx`; `tailwind.config.js` `content` must cover `src/`. Keep the NativeWind preset in `babel.config.js` and `withNativeWind` in `metro.config.js`.
+- Don't use `animate-*` classes on native: NativeWind 4.2.7 leaves infinite animations running after unmount. Use Reanimated hooks with `useSharedValue` instead.
+
+## Design system
+
+- Tokens live in `src/theme/tokens.json`; `tailwind.config.js` and `src/theme/theme.ts` both read them. Style with semantic classes (`bg-canvas`, `text-foreground`, `rounded-card`, `shadow-card`), never hex values or raw `fontSize`.
+- Use `AppText` for all text and `Icon` for Lucide icons. Poppins weights are separate families (`font-sans`, `font-sans-medium`, `font-sans-semibold`, `font-sans-bold`, `font-sans-extrabold`); never use `fontWeight`.
+- Primitives live in `src/components/ui/`, domain cards in `src/components/`. `/catalog` is the living preview; update it when adding a primitive. The brand tagline uses `taglineCompact` below 480 dp so its two-line phrase break survives on phones.
+- Light/dark is semantic. Use classes for styling and `useThemeColors()` for non-class props (icons, `placeholderTextColor`, spinners, native header options), never hardcoded white or black.
+- `roam`'s wordmark is a typeset placeholder until a brand SVG is supplied; the Google mark is not bundled (Globe stands in).
+- The glass tab bar is presentational until navigation exists. On iOS 26 it uses `expo-glass-effect`, otherwise a translucent fallback.
 
 ## Who owns what
 
