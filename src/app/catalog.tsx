@@ -1,4 +1,3 @@
-import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { useEffect, useState, type PropsWithChildren } from "react";
@@ -39,9 +38,6 @@ import {
 
 const LISTING_IMAGE =
   "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=800&q=80";
-const TAB_BAR_IMAGE =
-  "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80";
-
 const semanticKeys = [
   "canvas",
   "card",
@@ -256,9 +252,15 @@ export default function CatalogScreen() {
   const [showSuccess, setShowSuccess] = useState(true);
   const [showError, setShowError] = useState(true);
 
+  // Cleanup: reset to system scheme when leaving the catalog.
+  // Empty dep array so this only runs on unmount — setColorScheme is a new
+  // function reference on every render (NativeWind creates a wrapper closure
+  // each time), so including it would re-run the effect (and its cleanup)
+  // after every theme change, immediately resetting back to "system".
   useEffect(() => {
     return () => setColorScheme("system");
-  }, [setColorScheme]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -479,21 +481,7 @@ export default function CatalogScreen() {
             title="10. Bottom navigation"
             subtitle="Liquid glass tab bar, presentational"
           >
-            <View className="h-44 overflow-hidden rounded-card">
-              <Image
-                source={{ uri: TAB_BAR_IMAGE }}
-                contentFit="cover"
-                transition={150}
-                style={{ width: "100%", height: "100%" }}
-                accessibilityIgnoresInvertColors
-              />
-              <View className="absolute inset-x-3 bottom-3">
-                <GlassTabBar items={tabItems} value={tab} onChange={setTab} />
-              </View>
-            </View>
-            <AppText variant="caption">
-              Sample photo · Unsplash placeholder. Not wired to Expo Router.
-            </AppText>
+            <GlassTabBar items={tabItems} value={tab} onChange={setTab} />
           </Section>
 
           <Section
@@ -600,21 +588,21 @@ export default function CatalogScreen() {
               <View className="items-center gap-2">
                 <View
                   className="h-16 w-16 bg-muted"
-                  style={{ borderRadius: radius.tile }}
+                  style={{ borderRadius: radius.tile, borderCurve: "continuous" }}
                 />
                 <AppText variant="caption">tile {radius.tile}</AppText>
               </View>
               <View className="items-center gap-2">
                 <View
                   className="h-16 w-16 bg-muted"
-                  style={{ borderRadius: radius.card }}
+                  style={{ borderRadius: radius.card, borderCurve: "continuous" }}
                 />
                 <AppText variant="caption">card {radius.card}</AppText>
               </View>
               <View className="items-center gap-2">
                 <View
                   className="h-16 w-16 bg-muted"
-                  style={{ borderRadius: radius.field }}
+                  style={{ borderRadius: radius.field, borderCurve: "continuous" }}
                 />
                 <AppText variant="caption">field {radius.field}</AppText>
               </View>

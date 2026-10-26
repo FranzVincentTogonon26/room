@@ -1,4 +1,6 @@
-import { rem } from "nativewind";
+import { Platform } from "react-native";
+
+import { rem, StyleSheet } from "nativewind";
 
 import rawTokens from "./tokens.json";
 
@@ -54,3 +56,31 @@ const toCssVars = (colors: ThemeColors) =>
 
 export const lightVars = toCssVars(themeColors.light);
 export const darkVars = toCssVars(themeColors.dark);
+
+/**
+ * Combined light/dark CSS variables for NativeWind's cssVariableObservable.
+ * Each variable is a { light, dark } pair so NativeWind resolves the correct
+ * value automatically when setColorScheme("light" | "dark") is called.
+ * Registering at module scope ensures variables exist before any component
+ * resolves them at render time.
+ */
+export const rootVars = Object.fromEntries(
+  Object.entries(themeColors.light).map(([key, value]) => {
+    const darkValue = themeColors.dark[key as keyof typeof themeColors.dark];
+    return [
+      `--color-${kebab(key)}`,
+      {
+        light: RAW_COLOR_KEYS.has(key) ? value : channels(value),
+        dark: RAW_COLOR_KEYS.has(key) ? darkValue : channels(darkValue),
+      },
+    ];
+  }),
+);
+
+/**
+ * registerCompiled is native-only. On web, CSS variables flow through global.css
+ * natively, and react-native-css-interop's web stylesheet throws if called.
+ */
+if (Platform.OS !== "web") {
+  StyleSheet.registerCompiled({ $compiled: true, rootVariables: rootVars });
+}
