@@ -1,289 +1,169 @@
-import { useClerk, useUser } from "@clerk/expo";
-import { Image } from "expo-image";
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { useUser } from "@clerk/expo";
+import { useRouter } from "expo-router";
+import { useRef, useState, type ComponentRef } from "react";
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  TextInput,
+  View,
+} from "react-native";
+import Animated, {
+  Easing,
+  FadeIn,
+  FadeInDown,
+  ReduceMotion,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { StayCard } from "@/components/stay-card";
+import { StaySearchField } from "@/components/stay-search-field";
+import { AppText, Chip, Icon } from "@/components/ui";
+import { UserAvatar } from "@/components/user-avatar";
 import {
-  GlassTabBar,
-  type GlassTabItem,
-} from "@/components/glass-tab-bar";
-import { AppText, Chip, Icon, IconButton } from "@/components/ui";
-import { fontFamily, useThemeColors } from "@/theme";
+  filterStays,
+  STAY_CATEGORIES,
+  type StayCategoryId,
+} from "@/data/stays";
+import { usePressScale } from "@/lib/use-press-scale";
+import { firstNameFor } from "@/lib/user-name";
+import { motion, useThemeColors } from "@/theme";
 
-const TAB_ITEMS: GlassTabItem[] = [
-  { value: "home", label: "Home", icon: "house" },
-  { value: "search", label: "Search", icon: "search" },
-  { value: "trips", label: "Trips", icon: "calendarDays" },
-  { value: "profile", label: "Profile", icon: "user" },
-];
-
-type Category = {
-  label: string;
-  icon: "house" | "treePine" | "waves" | "building2" | "treePalm";
-};
-
-const CATEGORIES: Category[] = [
-  { label: "All Stays", icon: "house" },
-  { label: "Cabins", icon: "treePine" },
-  { label: "Beach", icon: "waves" },
-  { label: "City", icon: "building2" },
-  { label: "Villas", icon: "treePalm" },
-];
-
-const FEATURED_STAY = {
-  image:
-    "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=1200&q=80",
-  location: "Lake Arrowhead, CA",
-  title: "Modern Cabin\nwith Hot Tub",
-  rating: "4.9",
-};
-
-function displayNameFor(user: ReturnType<typeof useUser>["user"]) {
-  if (!user) return "there";
-
-  if (user.firstName?.trim()) return user.firstName.trim();
-  if (user.fullName?.trim()) return user.fullName.trim();
-
-  const email = user.primaryEmailAddress?.emailAddress;
-  if (!email) return "there";
-
-  const name = email
-    .split("@")[0]
-    .replace(/[._-]+/g, " ")
-    .trim()
-    .split(/\s+/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-
-  return name || "there";
-}
+const enter = (step: number) =>
+  FadeInDown.duration(motion.slow)
+    .delay(step * 40)
+    .easing(Easing.out(Easing.cubic))
+    .reduceMotion(ReduceMotion.System);
 
 export function HomeScreen() {
   const { user } = useUser();
-  const { signOut } = useClerk();
+  const router = useRouter();
   const colors = useThemeColors();
   const insets = useSafeAreaInsets();
-  const [activeTab, setActiveTab] = useState("home");
-  const [activeCategory, setActiveCategory] = useState("All Stays");
+  const inputRef = useRef<ComponentRef<typeof TextInput>>(null);
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<StayCategoryId>("all");
+  const avatarPress = usePressScale();
+  const searchButtonPress = usePressScale();
 
-  const firstName = displayNameFor(user).split(/\s+/)[0] || "there";
+  const firstName = firstNameFor(user);
+  const stays = filterStays(category);
+
+  const submitSearch = () => {
+    const trimmed = query.trim();
+    Keyboard.dismiss();
+
+    router.navigate({
+      pathname: "/search",
+      params: { q: trimmed, t: String(Date.now()) },
+    });
+  };
 
   return (
-    <>
-      <StatusBar style="dark" />
-      <View className="flex-1 bg-card">
-        <ScrollView
-          className="flex-1"
-          contentContainerStyle={{
-            paddingTop: Math.max(insets.top, 16),
-            paddingBottom: 120,
-            paddingHorizontal: 20,
-          }}
-          showsVerticalScrollIndicator={false}
+    <ScrollView
+      className="flex-1 bg-card"
+      contentInsetAdjustmentBehavior="never"
+      automaticallyAdjustContentInsets={false}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+        paddingTop: 8,
+        paddingBottom: insets.bottom + 24,
+      }}
+    >
+      <View className="px-5">
+        <Animated.View
+          entering={enter(0)}
+          className="flex-row items-center justify-between"
         >
-          {/* Header: wordmark, sign out, avatar */}
-          <View className="flex-row items-center justify-between">
-            <AppText
-              variant="heading"
-              tone="foreground"
-              style={{
-                fontFamily: fontFamily.sansExtraBold,
-                fontSize: 32,
-                lineHeight: 34,
-                letterSpacing: -1.5,
-              }}
-            >
-              room
-            </AppText>
+          <AppText variant="wordmark">room</AppText>
 
-            <View className="flex-row items-center gap-2.5">
-              <IconButton
-                icon="logOut"
-                label="Sign out"
-                size="sm"
-                variant="surface"
-                onPress={() => void signOut()}
-              />
-              <View className="h-14 w-14 overflow-hidden rounded-full bg-primary">
-                {user?.imageUrl ? (
-                  <Image
-                    source={{ uri: user.imageUrl }}
-                    contentFit="cover"
-                    transition={200}
-                    style={{ width: "100%", height: "100%" }}
-                    accessibilityIgnoresInvertColors
-                  />
-                ) : (
-                  <View className="h-full w-full items-center justify-center">
-                    <AppText variant="title" tone="primaryForeground">
-                      {firstName.charAt(0).toUpperCase()}
-                    </AppText>
-                  </View>
-                )}
-              </View>
-            </View>
-          </View>
-
-          {/* Greeting */}
-          <AppText
-            variant="title"
-            tone="mutedForeground"
-            style={{
-              fontFamily: fontFamily.sans,
-              fontSize: 28,
-              lineHeight: 34,
-              marginTop: 28,
-            }}
-          >
-            Hey, {firstName} 👋
-          </AppText>
-
-          {/* Headline + search button */}
-          <View className="mt-1 flex-row items-start justify-between">
-            <AppText
-              variant="heading"
-              tone="foreground"
-              style={{
-                fontFamily: fontFamily.sansBold,
-                fontSize: 46,
-                lineHeight: 50,
-                letterSpacing: -1.5,
-              }}
-            >
-              {"Find your\nnext stay"}
-            </AppText>
-
+          <Animated.View style={avatarPress.animatedStyle}>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Search stays"
-              className="mt-1 h-[88px] w-[72px] items-center justify-center rounded-[24px] bg-muted active:opacity-75"
+              accessibilityLabel="Open profile"
+              onPress={() => router.navigate("/profile")}
+              onPressIn={avatarPress.onPressIn}
+              onPressOut={avatarPress.onPressOut}
             >
-              <Icon name="search" size={26} color={colors.foreground} />
+              <UserAvatar size="lg" />
             </Pressable>
-          </View>
+          </Animated.View>
+        </Animated.View>
 
-          {/* Natural-language search pill */}
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Describe your stay: quiet pet friendly cabin with hot tub"
-            className="mt-6 h-[64px] flex-row items-center gap-2.5 rounded-pill bg-lavender pl-4 pr-2 active:opacity-90"
-          >
-            <Icon name="sparkles" size={18} color={colors.lavenderForeground} />
-            <AppText
-              variant="button"
-              tone="lavenderForeground"
-              numberOfLines={1}
-              style={{
-                flex: 1,
-                fontFamily: fontFamily.sansMedium,
-                fontSize: 14,
-              }}
-            >
-              quiet pet friendly cabin with hot tub
-            </AppText>
-            <View className="h-[46px] w-[46px] items-center justify-center rounded-full bg-card">
-              <Icon name="arrowUpRight" size={20} color={colors.foreground} />
-            </View>
-          </Pressable>
+        <Animated.View entering={enter(1)}>
+          <AppText variant="greeting" className="mt-2">
+            Hey, {firstName} 👋
+          </AppText>
+        </Animated.View>
 
-          {/* Category chips */}
-          <View className="mt-5 flex-row flex-wrap gap-2.5">
-            {CATEGORIES.map((category) => {
-              const selected = category.label === activeCategory;
-              return (
-                <Chip
-                  key={category.label}
-                  label={category.label}
-                  icon={category.icon}
-                  variant={selected ? "yellow" : "neutral"}
-                  selected={selected}
-                  onPress={() => setActiveCategory(category.label)}
-                />
-              );
-            })}
-          </View>
-
-          {/* Featured stay */}
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel={`${FEATURED_STAY.title.replace("\n", " ")}, ${FEATURED_STAY.location}, rated ${FEATURED_STAY.rating}`}
-            className="mt-6 h-[240px] overflow-hidden rounded-card active:opacity-95"
-          >
-            <Image
-              source={{ uri: FEATURED_STAY.image }}
-              contentFit="cover"
-              transition={200}
-              style={{ width: "100%", height: "100%" }}
-              accessibilityIgnoresInvertColors
-            />
-
-            {/* Rating badge */}
-            <View className="absolute right-4 top-4 h-11 flex-row items-center gap-1.5 rounded-pill bg-card/95 px-4">
-              <Icon name="star" size={16} color={colors.star} fill={colors.star} />
-              <AppText
-                variant="label"
-                tone="foreground"
-                style={{ fontFamily: fontFamily.sansSemiBold }}
-              >
-                {FEATURED_STAY.rating}
-              </AppText>
-            </View>
-
-            {/* Readability scrim */}
-            <View className="absolute inset-x-0 bottom-0 h-1/2 bg-foreground/35" />
-
-            {/* Location + title */}
-            <View className="absolute inset-x-0 bottom-0 flex-row items-end justify-between p-5">
-              <View className="flex-1 pr-3">
-                <View className="flex-row items-center gap-1.5">
-                  <Icon name="mapPin" size={14} color={colors.card} />
-                  <AppText
-                    variant="caption"
-                    style={{
-                      fontFamily: fontFamily.sansMedium,
-                      fontSize: 14,
-                      color: colors.card,
-                    }}
-                  >
-                    {FEATURED_STAY.location}
-                  </AppText>
-                </View>
-                <AppText
-                  variant="title"
-                  style={{
-                    fontFamily: fontFamily.sansBold,
-                    fontSize: 27,
-                    lineHeight: 32,
-                    letterSpacing: -0.6,
-                    color: colors.card,
-                    marginTop: 4,
-                  }}
-                >
-                  {FEATURED_STAY.title}
-                </AppText>
-              </View>
-
-              <View className="h-12 w-12 items-center justify-center rounded-full bg-card">
-                <Icon name="chevronRight" size={22} color={colors.foreground} />
-              </View>
-            </View>
-          </Pressable>
-        </ScrollView>
-
-        {/* Presentational glass tab bar */}
-        <View
-          className="absolute inset-x-4"
-          style={{ bottom: Math.max(insets.bottom, 12) }}
+        <Animated.View
+          entering={enter(2)}
+          className="mt-1 flex-row items-start justify-between"
         >
-          <GlassTabBar
-            items={TAB_ITEMS}
-            value={activeTab}
-            onChange={setActiveTab}
+          <AppText variant="hero" className="flex-1 pr-3">
+            {"Find your\nnext stay"}
+          </AppText>
+
+          <Animated.View style={searchButtonPress.animatedStyle}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Focus search"
+              onPress={() => inputRef.current?.focus()}
+              onPressIn={searchButtonPress.onPressIn}
+              onPressOut={searchButtonPress.onPressOut}
+              className="mt-1 h-22 w-18 items-center justify-center rounded-field bg-muted"
+            >
+              <Icon name="search" size={24} color={colors.foreground} />
+            </Pressable>
+          </Animated.View>
+        </Animated.View>
+
+        <Animated.View entering={enter(3)} className="mt-4">
+          <StaySearchField
+            inputRef={inputRef}
+            value={query}
+            onChangeText={setQuery}
+            onSubmit={submitSearch}
+            placeholder="quiet pet friendly cabin with hot tub"
           />
-        </View>
+        </Animated.View>
+
+        <Animated.View
+          entering={enter(4)}
+          className="mt-5 flex-row flex-wrap gap-2.5"
+        >
+          {STAY_CATEGORIES.map((item) => {
+            const selected = item.id === category;
+
+            return (
+              <Chip
+                key={item.id}
+                label={item.label}
+                icon={item.icon}
+                variant={selected ? "yellow" : "neutral"}
+                selected={selected}
+                onPress={() => setCategory(item.id)}
+              />
+            );
+          })}
+        </Animated.View>
+
+        <Animated.View entering={enter(5)} className="mt-5">
+          <Animated.View
+            key={category}
+            entering={FadeIn.duration(motion.fast).reduceMotion(
+              ReduceMotion.System,
+            )}
+            className="gap-4"
+          >
+            {stays.map((stay) => (
+              <StayCard key={stay.id} stay={stay} />
+            ))}
+          </Animated.View>
+        </Animated.View>
       </View>
-    </>
+    </ScrollView>
   );
 }

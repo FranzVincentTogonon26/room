@@ -25,15 +25,18 @@ npx eas-cli@latest <cmd>    # EAS builds, submits, and updates (use instead of b
 - Expo Go only includes its bundled native modules. After adding a library with native code, switch to a development build (`npx expo run:ios`).
 - Styling uses NativeWind 4.2.7 with Tailwind CSS 3: use `className`, not `StyleSheet`, for component styles. `global.css` at the root is the Tailwind entry and is imported once in `src/app/_layout.tsx`; `tailwind.config.js` `content` must cover `src/`. Keep the NativeWind preset in `babel.config.js` and `withNativeWind` in `metro.config.js`.
 - Don't use `animate-*` classes on native: NativeWind 4.2.7 leaves infinite animations running after unmount. Use Reanimated hooks with `useSharedValue` instead.
+- `(app)` uses `NativeTabs` from `expo-router/native-tabs`: Home, Search, Trips, Profile, with the brand yellow selected tint. iOS 26 draws the system bar, so the mock's floating yellow pill is not reproduced. `GlassTabBar` stays a catalog-only preview. Sign-out lives on Profile; the Home avatar opens Profile.
+- Home and Search read `src/data/stays.ts` (12 local stays, remote Unsplash placeholders). Home submits a query to the Search tab as `q` plus a `t` nonce; category chips filter in place. Cards are display-only until a detail route exists.
+- Native tab screens are not consistently auto-inset: Home gets a native top inset itself and needs `paddingTop: 8`, while Search, Trips, and Profile add `insets.top + 8`. Bottom padding is `insets.bottom + 24` everywhere; do not restore the old 100 dp bar allowance.
 
 ## Design system
 
 - Tokens live in `src/theme/tokens.json`; `tailwind.config.js` and `src/theme/theme.ts` both read them. Style with semantic classes (`bg-canvas`, `text-foreground`, `rounded-card`, `shadow-card`), never hex values or raw `fontSize`.
-- Use `AppText` for all text and `Icon` for Lucide icons. Poppins weights are separate families (`font-sans`, `font-sans-medium`, `font-sans-semibold`, `font-sans-bold`, `font-sans-extrabold`); never use `fontWeight`.
+- Use `AppText` for all text and `Icon` for Lucide icons. Plus Jakarta Sans weights are separate families (`font-sans`, `font-sans-medium`, `font-sans-semibold`, `font-sans-bold`); `font-sans-extrabold` still resolves to Bold because there is no ExtraBold file. Never use `fontWeight`. Fonts load at runtime through `useFonts`, so Expo Go renders them.
 - Primitives live in `src/components/ui/`, domain cards in `src/components/`. `/catalog` is the living preview; update it when adding a primitive. The brand tagline uses `taglineCompact` below 480 dp so its two-line phrase break survives on phones.
 - Light/dark is semantic. Use classes for styling and `useThemeColors()` for non-class props (icons, `placeholderTextColor`, spinners, native header options), never hardcoded white or black.
-- `room`'s wordmark is a typeset placeholder in Poppins ExtraBold until a brand SVG is supplied. Google and Apple marks are SVG components in `src/components/ui/brand-icons.tsx`.
-- The glass tab bar is presentational until navigation exists. On iOS 26 it uses `expo-glass-effect`, otherwise a translucent fallback.
+- `room`'s wordmark is a typeset placeholder in Plus Jakarta Sans Bold until a brand SVG is supplied. Google and Apple marks are SVG components in `src/components/ui/brand-icons.tsx`.
+- Text over photos uses the `on-image` tone, never `text-card`, because card colors flip in dark mode. The card scrim is a `palette.imageScrim` gradient applied inline, so Tailwind never parses its `rgba()` value.
 
 ## Who owns what
 
@@ -41,6 +44,7 @@ Each tool has one job. Ask before moving a responsibility to a different tool.
 
 - **Auth:** Clerk is the source of truth. The app keeps its own custom auth screens: full name + email + password sign-up, 6-digit `email_code` verification at sign-up, and email + password sign-in, sharing `/(auth)/verify?email=…&mode=sign-up|trust`. A new-device password sign-in that needs trust reuses the verify screen (`mode=trust`). Sessions persist through `ClerkProvider`'s `tokenCache` (`expo-secure-store`). The development instance has passwords enabled with an 8-character minimum and first/last names enabled. Password reset is not offered. Google is the only social option, through browser SSO (`useSSO` from `@clerk/expo/experimental`); Apple is not offered. Set Clerk up through the Clerk CLI and use the Clerk MCP for current Expo patterns.
 - **Content:** Sanity (properties, hosts, policies, house rules). Studio is a standalone app in `studio/`. Schema deploys and content changes go through the Sanity MCP, and generated property copy uses Agent Actions.
+- **Stays (local):** `src/data/stays.ts` is the only stay source until Sanity search is wired in. Query parsing, filtering, and ranking are pure local functions; no LLM or network call is involved, and the stays are sample data.
 - **Exact constraints** (price, guests, type, amenities, pets, place): GROQ filters, with values always passed as params.
 - **Soft intent** (quiet, cozy, secluded): Dataset Embeddings via `text::semanticSimilarity()` inside `score()`.
 - **Policy knowledge:** a Sanity Context endpoint in Knowledge Base mode. Context endpoints are created in the Dashboard's Context app and read with an organization token (Context Viewer), per https://www.sanity.io/docs/ai/context-migration-guide. One endpoint serves one mode. The Context skill still describes `sanity.agentContext` Studio documents with a project token; that route is deprecated, so don't use it.

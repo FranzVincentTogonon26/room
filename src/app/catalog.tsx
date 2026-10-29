@@ -7,7 +7,9 @@ import { GlassTabBar, type GlassTabItem } from "@/components/glass-tab-bar";
 import { ListingCard } from "@/components/listing-card";
 import { PolicyCard } from "@/components/policy-card";
 import { ProfileRow, ProfileRowGroup } from "@/components/profile-row";
+import { StayCard } from "@/components/stay-card";
 import { Wordmark } from "@/components/wordmark";
+import { STAYS } from "@/data/stays";
 import {
   AppText,
   Badge,
@@ -77,9 +79,15 @@ const brandSwatches = [
 
 const typeOrder: TypeVariant[] = [
   "display",
+  "wordmark",
+  "wordmarkCompact",
   "heading",
+  "hero",
   "tagline",
+  "taglineCompact",
+  "greeting",
   "title",
+  "cardTitle",
   "body",
   "label",
   "caption",
@@ -92,9 +100,12 @@ const typeOrder: TypeVariant[] = [
 const typeSamples: Record<TypeVariant, string> = {
   display: "Find your\nnext stay",
   heading: "Modern Cabin\nwith Hot Tub",
+  hero: "Find your\nnext stay",
+  greeting: "Hey, Joanna 👋",
   tagline: "Find unforgettable stays",
   taglineCompact: "Find unforgettable stays",
   title: "Cozy A-Frame Cabin",
+  cardTitle: "Modern Cabin\nwith Hot Tub",
   body: "From mountain cabins to oceanfront villas, room helps you find unforgettable stays for every kind of trip.",
   label: "Personal info",
   caption: "Lake Arrowhead, CA",
@@ -103,6 +114,7 @@ const typeSamples: Record<TypeVariant, string> = {
   price: "$280",
   tab: "Home",
   wordmark: "room",
+  wordmarkCompact: "room",
 };
 
 const iconSamples: IconName[] = [
@@ -433,7 +445,7 @@ export default function CatalogScreen() {
             <ChipGroup />
           </Section>
 
-          <Section title="07. Listing card">
+          <Section title="07. Listing cards">
             <ListingCard
               title="Modern Cabin with Hot Tub"
               location="Lake Arrowhead, CA"
@@ -450,6 +462,8 @@ export default function CatalogScreen() {
               onPress={() => {}}
             />
             <AppText variant="caption">Sample photo · Unsplash placeholder</AppText>
+            <StayCard stay={STAYS[0]} className="mt-3" />
+            <AppText variant="caption">Home stay card · display only</AppText>
           </Section>
 
           <Section title="08. Policy card">
@@ -479,7 +493,7 @@ export default function CatalogScreen() {
 
           <Section
             title="10. Bottom navigation"
-            subtitle="Liquid glass tab bar, presentational"
+            subtitle="Catalog preview · the app uses native tabs"
           >
             <GlassTabBar items={tabItems} value={tab} onChange={setTab} />
           </Section>

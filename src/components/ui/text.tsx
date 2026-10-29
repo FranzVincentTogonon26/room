@@ -26,6 +26,7 @@ const toneClasses = {
   segmentSelectedForeground: "text-segment-selected-foreground",
   onSuccess: "text-on-success",
   onError: "text-on-error",
+  onImage: "text-on-image",
 } as const;
 
 export type TextTone = keyof typeof toneClasses;
