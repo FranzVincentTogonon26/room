@@ -1,3 +1,5 @@
+import { ClerkProvider, useAuth } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
 import "../../global.css";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -5,6 +7,14 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
 import { ThemeProvider, fontFamily, useThemeColors } from "@/theme";
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "";
+
+if (!publishableKey) {
+  throw new Error(
+    "Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY. Add your key to .env.local.\nRun: 1) clerk auth login  2) clerk link  3) clerk env pull — then restart the dev server.",
+  );
+}
 
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({ duration: 240, fade: true });
@@ -18,7 +28,26 @@ const fontAssets = {
 };
 
 function RootNavigator() {
+  const { isLoaded } = useAuth();
   const colors = useThemeColors();
+  const [fontsLoaded, fontError] = useFonts(fontAssets);
+
+  useEffect(() => {
+    if (fontError) {
+      // Keep the app usable with a system fallback instead of blocking on fonts.
+      console.warn("Failed to load Poppins fonts", fontError);
+    }
+  }, [fontError]);
+
+  useEffect(() => {
+    if ((fontsLoaded || fontError) && isLoaded) {
+      void SplashScreen.hide();
+    }
+  }, [fontsLoaded, fontError, isLoaded]);
+
+  if ((!fontsLoaded && !fontError) || !isLoaded) {
+    return null;
+  }
 
   return (
     <Stack
@@ -28,7 +57,10 @@ function RootNavigator() {
         headerStyle: { backgroundColor: colors.canvas },
         headerTintColor: colors.foreground,
         headerShadowVisible: false,
-        headerTitleStyle: { fontFamily: fontFamily.sansSemiBold, color: colors.foreground },
+        headerTitleStyle: {
+          fontFamily: fontFamily.sansSemiBold,
+          color: colors.foreground,
+        },
       }}
     >
       <Stack.Screen
@@ -44,28 +76,11 @@ function RootNavigator() {
 }
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts(fontAssets);
-
-  useEffect(() => {
-    if (error) {
-      // Keep the app usable with a system fallback instead of blocking on fonts.
-      console.warn("Failed to load Poppins fonts", error);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hide();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
-
   return (
-    <ThemeProvider>
-      <RootNavigator />
-    </ThemeProvider>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ThemeProvider>
+        <RootNavigator />
+      </ThemeProvider>
+    </ClerkProvider>
   );
 }

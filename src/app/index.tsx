@@ -1,5 +1,6 @@
+import { useAuth } from "@clerk/expo";
 import { Image } from "expo-image";
-import { Stack, useRouter } from "expo-router";
+import { Redirect, Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import {
@@ -7,16 +8,25 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   Pressable,
+  StyleSheet,
   useWindowDimensions,
   View,
 } from "react-native";
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  type SharedValue,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 
 import { AppText, Button, GoogleMark, Icon } from "@/components/ui";
 import { cn } from "@/lib/cn";
-import { fontFamily, useThemeColors } from "@/theme";
-
+import { useGoogleAuth } from "@/lib/use-google-auth";
+import { fontFamily, spacing, useThemeColors } from "@/theme";
 type OnboardingSlide = {
   id: string;
   image: string;
@@ -55,17 +65,152 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
   },
 ];
 
-export default function OnboardingScreen() {
+type OnboardingHeroImageProps = {
+  uri: string;
+  index: number;
+  width: number;
+  height: number;
+  scrollX: SharedValue<number>;
+};
+
+function OnboardingHeroImage({
+  uri,
+  index,
+  width,
+  height,
+  scrollX,
+}: OnboardingHeroImageProps) {
+  // Slight parallax on the photo so it trails the page while swiping.
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: (scrollX.value - index * width) * 0.12 },
+      { scale: 1.08 },
+    ],
+  }));
+
+  return (
+    <View style={{ width, height }} className="overflow-hidden">
+      <Animated.View style={[StyleSheet.absoluteFill, animatedStyle]}>
+        <Image
+          source={{ uri }}
+          contentFit="cover"
+          transition={200}
+          style={{ width: "100%", height: "100%" }}
+          accessibilityIgnoresInvertColors
+        />
+      </Animated.View>
+    </View>
+  );
+}
+
+type OnboardingSlideTextProps = {
+  slide: OnboardingSlide;
+  index: number;
+  width: number;
+  scrollX: SharedValue<number>;
+};
+
+function OnboardingSlideText({
+  slide,
+  index,
+  width,
+  scrollX,
+}: OnboardingSlideTextProps) {
+  // Crossfade and lift the copy as its page approaches the center.
+  const animatedStyle = useAnimatedStyle(() => {
+    const inputRange = [
+      (index - 1) * width,
+      index * width,
+      (index + 1) * width,
+    ];
+
+    return {
+      opacity: interpolate(
+        scrollX.value,
+        inputRange,
+        [0.35, 1, 0.35],
+        Extrapolation.CLAMP,
+      ),
+      transform: [
+        {
+          translateY: interpolate(
+            scrollX.value,
+            inputRange,
+            [18, 0, 18],
+            Extrapolation.CLAMP,
+          ),
+        },
+        {
+          scale: interpolate(
+            scrollX.value,
+            inputRange,
+            [0.97, 1, 0.97],
+            Extrapolation.CLAMP,
+          ),
+        },
+      ],
+    };
+  });
+
+  return (
+    <Animated.View style={animatedStyle}>
+      <AppText
+        variant="heading"
+        tone="foreground"
+        style={{
+          fontFamily: fontFamily.sansBold,
+          fontSize: 30,
+          lineHeight: 40,
+          letterSpacing: -0.6,
+        }}
+      >
+        {slide.title}
+      </AppText>
+
+      <AppText
+        variant="body"
+        tone="mutedForeground"
+        style={{
+          fontFamily: fontFamily.sans,
+          fontSize: 15,
+          lineHeight: 22,
+          marginTop: 10,
+        }}
+      >
+        {slide.description}
+      </AppText>
+    </Animated.View>
+  );
+}
+
+function OnboardingView() {
   const router = useRouter();
   const colors = useThemeColors();
   const insets = useSafeAreaInsets();
+  const {
+    signInWithGoogle,
+    isPending: isGooglePending,
+    error: googleError,
+  } = useGoogleAuth();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const scrollX = useSharedValue(0);
 
   // Split screen proportions matching the design: hero image ~58% height, card ~42%
   const heroHeight = Math.round(screenHeight * 0.58);
   const curveHeight = 44;
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollX.value = event.contentOffset.x;
+    },
+  });
+
+  // The copy row follows the photo pager pixel for pixel.
+  const textTrackStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: -scrollX.value }],
+  }));
 
   const handleMomentumScrollEnd = (
     event: NativeSyntheticEvent<NativeScrollEvent>,
@@ -94,12 +239,6 @@ export default function OnboardingScreen() {
     }
   };
 
-  const handleGoogleContinue = () => {
-    router.push("/(auth)/sign-up");
-  };
-
-  const currentSlide = ONBOARDING_SLIDES[activeIndex];
-
   // Asymmetrical organic curve for the top of the white card
   // Starts higher on the left, smooth descent to the right
   const curvePath = `
@@ -119,7 +258,7 @@ export default function OnboardingScreen() {
       <View className="flex-1 bg-card">
         {/* Swipable Hero Images */}
         <View style={{ height: heroHeight, width: screenWidth }}>
-          <FlatList
+          <Animated.FlatList
             ref={flatListRef}
             data={ONBOARDING_SLIDES}
             keyExtractor={(item) => item.id}
@@ -127,17 +266,22 @@ export default function OnboardingScreen() {
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             bounces={false}
+            scrollEventThrottle={16}
+            onScroll={scrollHandler}
             onMomentumScrollEnd={handleMomentumScrollEnd}
-            renderItem={({ item }) => (
-              <View style={{ width: screenWidth, height: heroHeight }}>
-                <Image
-                  source={{ uri: item.image }}
-                  contentFit="cover"
-                  transition={200}
-                  style={{ width: "100%", height: "100%" }}
-                  accessibilityIgnoresInvertColors
-                />
-              </View>
+            getItemLayout={(_, index) => ({
+              length: screenWidth,
+              offset: screenWidth * index,
+              index,
+            })}
+            renderItem={({ item, index }) => (
+              <OnboardingHeroImage
+                uri={item.image}
+                index={index}
+                width={screenWidth}
+                height={heroHeight}
+                scrollX={scrollX}
+              />
             )}
           />
 
@@ -175,22 +319,34 @@ export default function OnboardingScreen() {
             </Pressable>
           </View>
 
-          {/* Location Badge (pinned to bottom-left of hero photo, 48pt above card curve) */}
+          {/* Location Badge track: each location rides its own photo */}
           <View
-            style={{ bottom: 48 }}
-            className="absolute left-gutter z-10 flex-row items-center gap-1.5 rounded-pill border border-white/30 bg-black/45 px-3.5 py-1.5 backdrop-blur-md"
+            style={{ bottom: 48, width: screenWidth }}
+            className="absolute left-0 z-10 overflow-hidden"
           >
-            <Icon name="mapPin" size={14} color="#FFFFFF" />
-            <AppText
-              variant="caption"
-              style={{
-                fontFamily: fontFamily.sansMedium,
-                fontSize: 13,
-                color: "#FFFFFF",
-              }}
-            >
-              {currentSlide.location}
-            </AppText>
+            <Animated.View style={[{ flexDirection: "row" }, textTrackStyle]}>
+              {ONBOARDING_SLIDES.map((slide) => (
+                <View
+                  key={slide.id}
+                  style={{ width: screenWidth }}
+                  className="pl-gutter"
+                >
+                  <View className="flex-row items-center gap-1.5 self-start rounded-pill border border-white/30 bg-black/45 px-3.5 py-1.5 backdrop-blur-md">
+                    <Icon name="mapPin" size={14} color="#FFFFFF" />
+                    <AppText
+                      variant="caption"
+                      style={{
+                        fontFamily: fontFamily.sansMedium,
+                        fontSize: 13,
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {slide.location}
+                    </AppText>
+                  </View>
+                </View>
+              ))}
+            </Animated.View>
           </View>
         </View>
 
@@ -240,33 +396,35 @@ export default function OnboardingScreen() {
                 })}
               </View>
 
-              {/* Title */}
-              <AppText
-                variant="heading"
-                tone="foreground"
+              {/* Title + description: one page per slide, driven by the pager offset */}
+              <View
                 style={{
-                  fontFamily: fontFamily.sansBold,
-                  fontSize: 34,
-                  lineHeight: 40,
-                  letterSpacing: -0.6,
+                  width: screenWidth,
+                  marginHorizontal: -spacing.gutter,
                 }}
+                className="overflow-hidden"
               >
-                {currentSlide.title}
-              </AppText>
-
-              {/* Description */}
-              <AppText
-                variant="body"
-                tone="mutedForeground"
-                style={{
-                  fontFamily: fontFamily.sans,
-                  fontSize: 15,
-                  lineHeight: 22,
-                  marginTop: 10,
-                }}
-              >
-                {currentSlide.description}
-              </AppText>
+                <Animated.View
+                  style={[{ flexDirection: "row" }, textTrackStyle]}
+                >
+                  {ONBOARDING_SLIDES.map((slide, index) => (
+                    <View
+                      key={slide.id}
+                      style={{
+                        width: screenWidth,
+                        paddingHorizontal: spacing.gutter,
+                      }}
+                    >
+                      <OnboardingSlideText
+                        slide={slide}
+                        index={index}
+                        width={screenWidth}
+                        scrollX={scrollX}
+                      />
+                    </View>
+                  ))}
+                </Animated.View>
+              </View>
             </View>
 
             {/* Actions */}
@@ -276,6 +434,7 @@ export default function OnboardingScreen() {
                 variant="primary"
                 rightIcon="arrowRight"
                 onPress={handleGetStarted}
+                disabled={isGooglePending}
                 className="h-[54px]"
               />
 
@@ -283,9 +442,20 @@ export default function OnboardingScreen() {
                 label="Continue with Google"
                 variant="secondary"
                 leftElement={<GoogleMark size={20} />}
-                onPress={handleGoogleContinue}
+                onPress={() => void signInWithGoogle()}
+                loading={isGooglePending}
+                disabled={isGooglePending}
                 className="h-[54px]"
               />
+
+              {googleError ? (
+                <View className="flex-row items-center justify-center gap-1.5">
+                  <Icon name="circleAlert" size={15} color={colors.error} />
+                  <AppText variant="caption" tone="errorForeground">
+                    {googleError}
+                  </AppText>
+                </View>
+              ) : null}
 
               {/* Dev Shortcut to design catalog */}
               {__DEV__ ? (
@@ -300,4 +470,13 @@ export default function OnboardingScreen() {
       </View>
     </>
   );
+}
+
+export default function IndexScreen() {
+  const { isLoaded, isSignedIn } = useAuth();
+
+  if (!isLoaded) return null;
+  if (isSignedIn) return <Redirect href="/(app)/home" />;
+
+  return <OnboardingView />;
 }

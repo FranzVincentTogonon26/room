@@ -20,6 +20,7 @@ npx eas-cli@latest <cmd>    # EAS builds, submits, and updates (use instead of b
 
 - Expo ships breaking changes every SDK release, so don't trust memory. Before touching an Expo, EAS, or React Native API, check the `expo` major version in `package.json` and read `https://docs.expo.dev/versions/v<major>.0.0/`. For anything else, start from https://docs.expo.dev/llms.txt and follow its links.
 - Routes live in `src/app/`: every file is a screen and `_layout.tsx` files define navigators. API routes are `src/app/api/*+api.ts`. Keep components, hooks, and utils outside `src/app/`.
+- Route groups: `/` is public onboarding, `(auth)` holds sign-in, sign-up, and verify, and `(app)` holds protected screens (`/home`). Layout guards check `isLoaded` before `isSignedIn`: `(app)` redirects signed-out guests to `/`, `(auth)` redirects signed-in guests to `/home`. The root layout holds the splash screen until fonts and Clerk's session restore are both ready, so no screen renders while Clerk is loading.
 - `ios/` and `android/` are generated. Never create or edit them by hand; configure native behavior in `app.json` and config plugins.
 - Expo Go only includes its bundled native modules. After adding a library with native code, switch to a development build (`npx expo run:ios`).
 - Styling uses NativeWind 4.2.7 with Tailwind CSS 3: use `className`, not `StyleSheet`, for component styles. `global.css` at the root is the Tailwind entry and is imported once in `src/app/_layout.tsx`; `tailwind.config.js` `content` must cover `src/`. Keep the NativeWind preset in `babel.config.js` and `withNativeWind` in `metro.config.js`.
@@ -38,7 +39,7 @@ npx eas-cli@latest <cmd>    # EAS builds, submits, and updates (use instead of b
 
 Each tool has one job. Ask before moving a responsibility to a different tool.
 
-- **Auth:** Clerk is the source of truth. The app keeps its own custom auth screens. Set Clerk up through the Clerk CLI and use the Clerk MCP for current Expo patterns.
+- **Auth:** Clerk is the source of truth. The app keeps its own custom auth screens: full name + email + password sign-up, 6-digit `email_code` verification at sign-up, and email + password sign-in, sharing `/(auth)/verify?email=…&mode=sign-up|trust`. A new-device password sign-in that needs trust reuses the verify screen (`mode=trust`). Sessions persist through `ClerkProvider`'s `tokenCache` (`expo-secure-store`). The development instance has passwords enabled with an 8-character minimum and first/last names enabled. Password reset is not offered. Google is the only social option, through browser SSO (`useSSO` from `@clerk/expo/experimental`); Apple is not offered. Set Clerk up through the Clerk CLI and use the Clerk MCP for current Expo patterns.
 - **Content:** Sanity (properties, hosts, policies, house rules). Studio is a standalone app in `studio/`. Schema deploys and content changes go through the Sanity MCP, and generated property copy uses Agent Actions.
 - **Exact constraints** (price, guests, type, amenities, pets, place): GROQ filters, with values always passed as params.
 - **Soft intent** (quiet, cozy, secluded): Dataset Embeddings via `text::semanticSimilarity()` inside `score()`.
@@ -56,6 +57,7 @@ Each tool has one job. Ask before moving a responsibility to a different tool.
 - Embeddings rank, they don't filter, and they only see the document itself (no references). Hard constraints are always GROQ filters, and text that should affect ranking lives on the property document.
 - Policy answers show only text from the stay's data and Room's policies, word for word. If nothing answers the question, say so and point to support.
 - API routes verify the Clerk session before doing any work.
+- Auth screens and guards never render while Clerk is loading; they return `null` until `isLoaded` is true.
 - PostHog failures never block the app. Never send what guests type, tokens, or personal data in events.
 - Let Sanity generate document IDs. Model relationships as references.
 - Ask before adding a dependency or service, changing the Sanity schema once content exists, or deleting data. Prefer Expo modules over third-party libraries.
