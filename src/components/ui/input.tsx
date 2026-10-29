@@ -16,6 +16,7 @@ import { Icon, type IconName } from "./icon";
 import { AppText } from "./text";
 
 export type InputProps = Omit<TextInputProps, "style"> & {
+  label?: string;
   leftIcon?: IconName;
   rightIcon?: IconName;
   onRightIconPress?: () => void;
@@ -26,6 +27,7 @@ export type InputProps = Omit<TextInputProps, "style"> & {
 };
 
 export function Input({
+  label,
   leftIcon,
   rightIcon,
   onRightIconPress,
@@ -50,7 +52,8 @@ export function Input({
     <View className={cn("gap-1.5", disabled && "opacity-40", className)}>
       <View
         className={cn(
-          "h-control flex-row items-center gap-3 rounded-field border-2 px-4",
+          "flex-row items-center gap-3 rounded-field border-2 px-4",
+          label ? "h-[64px]" : "h-control",
           error
             ? "border-error bg-muted"
             : focused
@@ -60,35 +63,75 @@ export function Input({
       >
         {leftIcon ? <Icon name={leftIcon} size="md" color={colors.foreground} /> : null}
 
-        <TextInput
-          {...props}
-          accessibilityState={{ disabled }}
-          editable={!disabled}
-          secureTextEntry={showPasswordToggle ? !revealed : false}
-          placeholderTextColor={colors.placeholder}
-          selectionColor={colors.accent}
-          onFocus={(event) => {
-            setFocused(true);
-            onFocus?.(event);
-          }}
-          onBlur={(event) => {
-            setFocused(false);
-            onBlur?.(event);
-          }}
-          style={[
-            {
-              flex: 1,
-              paddingVertical: 0,
-              fontFamily: type.fontFamily,
-              fontSize: type.fontSize,
-              lineHeight: type.lineHeight,
-              letterSpacing: type.letterSpacing,
-              color: colors.foreground,
-            },
-            style,
-          ]}
-          className="h-full"
-        />
+        {label ? (
+          <View className="flex-1 justify-center py-1">
+            <AppText
+              variant="caption"
+              tone={error ? "errorForeground" : "foreground"}
+              className="font-sans-medium text-[12px] leading-[16px]"
+            >
+              {label}
+            </AppText>
+            <TextInput
+              {...props}
+              accessibilityState={{ disabled }}
+              editable={!disabled}
+              secureTextEntry={showPasswordToggle ? !revealed : false}
+              placeholderTextColor={colors.placeholder}
+              selectionColor={colors.accent}
+              onFocus={(event) => {
+                setFocused(true);
+                onFocus?.(event);
+              }}
+              onBlur={(event) => {
+                setFocused(false);
+                onBlur?.(event);
+              }}
+              style={[
+                {
+                  paddingVertical: 0,
+                  fontFamily: type.fontFamily,
+                  fontSize: 14,
+                  lineHeight: 18,
+                  letterSpacing: type.letterSpacing,
+                  color: colors.foreground,
+                },
+                style,
+              ]}
+              className="w-full"
+            />
+          </View>
+        ) : (
+          <TextInput
+            {...props}
+            accessibilityState={{ disabled }}
+            editable={!disabled}
+            secureTextEntry={showPasswordToggle ? !revealed : false}
+            placeholderTextColor={colors.placeholder}
+            selectionColor={colors.accent}
+            onFocus={(event) => {
+              setFocused(true);
+              onFocus?.(event);
+            }}
+            onBlur={(event) => {
+              setFocused(false);
+              onBlur?.(event);
+            }}
+            style={[
+              {
+                flex: 1,
+                paddingVertical: 0,
+                fontFamily: type.fontFamily,
+                fontSize: type.fontSize,
+                lineHeight: type.lineHeight,
+                letterSpacing: type.letterSpacing,
+                color: colors.foreground,
+              },
+              style,
+            ]}
+            className="h-full"
+          />
+        )}
 
         {trailingIcon ? (
           <Pressable

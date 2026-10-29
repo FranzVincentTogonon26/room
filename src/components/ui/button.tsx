@@ -21,6 +21,7 @@ export type ButtonProps = Omit<PressableProps, "children" | "style"> & {
   variant?: keyof typeof variantClasses;
   size?: keyof typeof heightClasses;
   leftIcon?: IconName;
+  leftElement?: React.ReactNode;
   rightIcon?: IconName;
   loading?: boolean;
   className?: string;
@@ -32,6 +33,7 @@ export function Button({
   variant = "primary",
   size = "md",
   leftIcon,
+  leftElement,
   rightIcon,
   loading = false,
   disabled = false,
@@ -62,7 +64,8 @@ export function Button({
     >
       <View className="flex-row items-center justify-center gap-3">
         {loading ? <ActivityIndicator size="small" color={iconColor} /> : null}
-        {leftIcon && !loading ? <Icon name={leftIcon} size="md" color={iconColor} /> : null}
+        {leftElement && !loading ? leftElement : null}
+        {!leftElement && leftIcon && !loading ? <Icon name={leftIcon} size="md" color={iconColor} /> : null}
         <AppText variant="button" tone={isPrimary ? "primaryForeground" : "foreground"}>
           {label}
         </AppText>

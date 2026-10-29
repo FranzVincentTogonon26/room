@@ -95,14 +95,14 @@ const typeSamples: Record<TypeVariant, string> = {
   tagline: "Find unforgettable stays",
   taglineCompact: "Find unforgettable stays",
   title: "Cozy A-Frame Cabin",
-  body: "From mountain cabins to oceanfront villas, roam helps you find unforgettable stays for every kind of trip.",
+  body: "From mountain cabins to oceanfront villas, room helps you find unforgettable stays for every kind of trip.",
   label: "Personal info",
   caption: "Lake Arrowhead, CA",
   button: "Book this stay",
   badge: "Guest favorite",
   price: "$280",
   tab: "Home",
-  wordmark: "roam",
+  wordmark: "room",
 };
 
 const iconSamples: IconName[] = [

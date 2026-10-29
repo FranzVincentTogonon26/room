@@ -23,13 +23,23 @@ function RootNavigator() {
   return (
     <Stack
       screenOptions={{
+        headerShown: false,
         contentStyle: { backgroundColor: colors.canvas },
         headerStyle: { backgroundColor: colors.canvas },
         headerTintColor: colors.foreground,
         headerShadowVisible: false,
         headerTitleStyle: { fontFamily: fontFamily.sansSemiBold, color: colors.foreground },
       }}
-    />
+    >
+      <Stack.Screen
+        name="catalog"
+        options={{
+          headerShown: true,
+          title: "Design system",
+          headerBackButtonDisplayMode: "minimal",
+        }}
+      />
+    </Stack>
   );
 }
 

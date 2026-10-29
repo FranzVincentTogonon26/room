@@ -1,5 +1,6 @@
 export * from "./badge";
 export * from "./banner";
+export * from "./brand-icons";
 export * from "./button";
 export * from "./card";
 export * from "./chip";

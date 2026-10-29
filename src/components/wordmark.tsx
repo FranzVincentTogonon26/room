@@ -22,7 +22,7 @@ export function Wordmark({
 
   return (
     <View className={cn("gap-2", className)}>
-      <AppText variant="wordmark">roam</AppText>
+      <AppText variant="wordmark">room</AppText>
       <AppText variant={taglineVariant}>{tagline}</AppText>
     </View>
   );

@@ -1,4 +1,4 @@
-# 02 · Roam design system
+# 02 · Room design system
 
 Status: approved
 
@@ -14,7 +14,7 @@ Room has one visual source of truth taken from `/Users/franz/Downloads/source-fi
 - **Scope: every section of the sheet.** Tokens + type + Button, IconButton, Input, Chip, Badge, Banner, Card, ListingCard, PolicyCard, ProfileRow group, SegmentedControl, Toggle, Stepper, Wordmark, and a presentational GlassTabBar. The tab bar is not wired to Expo Router navigation; the app has one screen.
 - **Dark mode: authored pairs.** The sheet is light-only; dark values below are new and derived for contrast. Semantic tokens only. A provider applies CSS variables at runtime; `useThemeColors()` supplies JS values for props that cannot take classes (icons, `placeholderTextColor`, `ActivityIndicator`, native header options). System-following by default.
 - **Token architecture.** `src/theme/tokens.json` is the single source, read by `tailwind.config.js` and TypeScript. Tailwind exposes classes (`bg-canvas`, `text-muted-foreground`, `rounded-card`, `shadow-card`); the light variables are injected into `:root` from the same JSON, and the provider swaps in the dark variables. There is no second `StyleSheet` theme.
-- **Wordmark placeholder.** `roam` is typeset in Poppins ExtraBold (64/64, -3 tracking) and visibly marked as a placeholder in `/catalog`. Replace with the brand SVG when supplied.
+- **Wordmark placeholder.** `room` is typeset in Poppins ExtraBold (64/64, -3 tracking) and visibly marked as a placeholder in `/catalog`. Replace with the brand SVG when supplied.
 - **Google mark placeholder.** The sheet's “Continue with Google” button uses the official four-color G, which is not in `assets/`. The catalog shows the secondary variant with a neutral `Globe` icon and a note. The button API supports a left icon so the real asset can drop in.
 - **Listing photo placeholder.** Remote Unsplash images are allowed sample photos. `expo-image` is already installed.
 - **Fidelity vs. accessibility.** The sheet's success/error text on mint/pink is ~3.7:1. Text uses darker `success-foreground` / `error-foreground` tokens (5:1+) while the icon circles keep the sampled colors. Everything else matches the sampled/labeled values.
@@ -26,7 +26,7 @@ Room has one visual source of truth taken from `/Users/franz/Downloads/source-fi
 - Wiring the glass tab bar into Expo Router `Tabs` and building Explore/Search/Trips/Profile screens.
 - Clerk auth, Sanity content, API routes, PostHog, listing data, wishlist persistence.
 - Form validation logic and error handling beyond the Input's error presentation.
-- App icon, splash artwork, real `roam` wordmark, official Google mark, real property photography.
+- App icon, splash artwork, real `room` wordmark, official Google mark, real property photography.
 - Persisting a user theme preference (system + catalog-only manual preview).
 - Android visual verification and web font polish (best-effort; report what was checked).
 - Replacing the welcome screen with the real home screen.
@@ -304,7 +304,7 @@ Add a **Design system** section after **Expo**:
 - Use `AppText` for all text and `Icon` for Lucide icons. Poppins weights are separate families (`font-sans`, `font-sans-medium`, `font-sans-semibold`, `font-sans-bold`, `font-sans-extrabold`); never use `fontWeight`.
 - Shared primitives live in `src/components/ui/`, domain cards in `src/components/`. `/catalog` is the living preview; update it when adding a primitive.
 - Light/dark is semantic: use `useThemeColors()` for non-class props (icons, `placeholderTextColor`, ActivityIndicator, native header options). Never hardcode white/black.
-- The `roam` wordmark is a typeset placeholder until a brand SVG is supplied; the Google mark is not bundled.
+- The `room` wordmark is a typeset placeholder until a brand SVG is supplied; the Google mark is not bundled.
 - The glass tab bar is presentational until navigation exists; on iOS 26 it uses `expo-glass-effect`, otherwise a translucent fallback.
 
 No existing rule is replaced; the NativeWind styling rule stays and gains the token/AppText/Icon conventions.

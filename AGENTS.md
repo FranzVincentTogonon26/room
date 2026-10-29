@@ -31,7 +31,7 @@ npx eas-cli@latest <cmd>    # EAS builds, submits, and updates (use instead of b
 - Use `AppText` for all text and `Icon` for Lucide icons. Poppins weights are separate families (`font-sans`, `font-sans-medium`, `font-sans-semibold`, `font-sans-bold`, `font-sans-extrabold`); never use `fontWeight`.
 - Primitives live in `src/components/ui/`, domain cards in `src/components/`. `/catalog` is the living preview; update it when adding a primitive. The brand tagline uses `taglineCompact` below 480 dp so its two-line phrase break survives on phones.
 - Light/dark is semantic. Use classes for styling and `useThemeColors()` for non-class props (icons, `placeholderTextColor`, spinners, native header options), never hardcoded white or black.
-- `roam`'s wordmark is a typeset placeholder until a brand SVG is supplied; the Google mark is not bundled (Globe stands in).
+- `room`'s wordmark is a typeset placeholder in Poppins ExtraBold until a brand SVG is supplied. Google and Apple marks are SVG components in `src/components/ui/brand-icons.tsx`.
 - The glass tab bar is presentational until navigation exists. On iOS 26 it uses `expo-glass-effect`, otherwise a translucent fallback.
 
 ## Who owns what
