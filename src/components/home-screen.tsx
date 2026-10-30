@@ -21,9 +21,10 @@ import { StaySearchField } from "@/components/stay-search-field";
 import { AppText, Chip, Icon } from "@/components/ui";
 import { UserAvatar } from "@/components/user-avatar";
 import {
-  filterStays,
+  getFeaturedStays,
   STAY_CATEGORIES,
   type StayCategoryId,
+  type StayCategoryOption,
 } from "@/data/stays";
 import { usePressScale } from "@/lib/use-press-scale";
 import { firstNameFor } from "@/lib/user-name";
@@ -34,6 +35,54 @@ const enter = (step: number) =>
     .delay(step * 40)
     .easing(Easing.out(Easing.cubic))
     .reduceMotion(ReduceMotion.System);
+
+const chipEnter = (index: number) =>
+  FadeInDown.duration(motion.base)
+    .delay(index * 40)
+    .easing(Easing.out(Easing.cubic))
+    .reduceMotion(ReduceMotion.System);
+
+const cardEnter = (index: number) =>
+  FadeInDown.duration(motion.base)
+    .delay(index * 40)
+    .easing(Easing.out(Easing.cubic))
+    .reduceMotion(ReduceMotion.System);
+
+function CategoryChip({
+  item,
+  selected,
+  index,
+  onPress,
+}: {
+  item: StayCategoryOption;
+  selected: boolean;
+  index: number;
+  onPress: () => void;
+}) {
+  const chipPress = usePressScale();
+
+  return (
+    <Animated.View entering={chipEnter(index)}>
+      <Animated.View style={chipPress.animatedStyle}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={item.label}
+          onPress={onPress}
+          onPressIn={chipPress.onPressIn}
+          onPressOut={chipPress.onPressOut}
+        >
+          <Chip
+            label={item.label}
+            icon={item.icon}
+            variant={selected ? "yellow" : "neutral"}
+            selected={selected}
+            onPress={onPress}
+          />
+        </Pressable>
+      </Animated.View>
+    </Animated.View>
+  );
+}
 
 export function HomeScreen() {
   const { user } = useUser();
@@ -47,7 +96,7 @@ export function HomeScreen() {
   const searchButtonPress = usePressScale();
 
   const firstName = firstNameFor(user);
-  const stays = filterStays(category);
+  const featuredStays = getFeaturedStays(category);
 
   const submitSearch = () => {
     const trimmed = query.trim();
@@ -55,7 +104,7 @@ export function HomeScreen() {
 
     router.navigate({
       pathname: "/search",
-      params: { q: trimmed, t: String(Date.now()) },
+      params: { q: trimmed, category, t: String(Date.now()) },
     });
   };
 
@@ -134,16 +183,15 @@ export function HomeScreen() {
           entering={enter(4)}
           className="mt-5 flex-row flex-wrap gap-2.5"
         >
-          {STAY_CATEGORIES.map((item) => {
+          {STAY_CATEGORIES.map((item, index) => {
             const selected = item.id === category;
 
             return (
-              <Chip
+              <CategoryChip
                 key={item.id}
-                label={item.label}
-                icon={item.icon}
-                variant={selected ? "yellow" : "neutral"}
+                item={item}
                 selected={selected}
+                index={index}
                 onPress={() => setCategory(item.id)}
               />
             );
@@ -158,8 +206,10 @@ export function HomeScreen() {
             )}
             className="gap-4"
           >
-            {stays.map((stay) => (
-              <StayCard key={stay.id} stay={stay} />
+            {featuredStays.map((stay, index) => (
+              <Animated.View key={stay.id} entering={cardEnter(index)}>
+                <StayCard stay={stay} />
+              </Animated.View>
             ))}
           </Animated.View>
         </Animated.View>

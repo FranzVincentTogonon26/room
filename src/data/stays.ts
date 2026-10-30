@@ -397,3 +397,9 @@ export function searchStays(
 export function filterStays(category: StayCategoryId = "all"): Stay[] {
   return searchStays("", category);
 }
+
+export function getFeaturedStays(category: StayCategoryId = "all"): Stay[] {
+  return STAYS.filter(
+    (stay) => (category === "all" || stay.category === category) && stay.featured === true,
+  ).sort((a, b) => b.rating - a.rating);
+}

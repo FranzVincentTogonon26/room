@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { FlatList, Keyboard, View } from "react-native";
+import { FlatList, Keyboard, Pressable, View } from "react-native";
 import Animated, {
   Easing,
   FadeIn,
@@ -17,7 +17,9 @@ import {
   searchStays,
   STAY_CATEGORIES,
   type StayCategoryId,
+  type StayCategoryOption,
 } from "@/data/stays";
+import { usePressScale } from "@/lib/use-press-scale";
 import { motion, useThemeColors } from "@/theme";
 
 function Separator() {
@@ -48,25 +50,73 @@ function EmptyState({ onClear }: { onClear: () => void }) {
   );
 }
 
-export function SearchScreen() {
-  const params = useLocalSearchParams<{ q?: string; t?: string }>();
-  const formKey = `${params.q ?? ""}|${params.t ?? ""}`;
+function SearchCategoryChip({
+  item,
+  selected,
+  index,
+  onPress,
+}: {
+  item: StayCategoryOption;
+  selected: boolean;
+  index: number;
+  onPress: () => void;
+}) {
+  const chipPress = usePressScale();
 
-  return <SearchContent key={formKey} initialQuery={params.q ?? ""} />;
+  return (
+    <Animated.View
+      entering={FadeInDown.duration(motion.base)
+        .delay(index * 40)
+        .easing(Easing.out(Easing.cubic))
+        .reduceMotion(ReduceMotion.System)}
+    >
+      <Animated.View style={chipPress.animatedStyle}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={item.label}
+          onPress={onPress}
+          onPressIn={chipPress.onPressIn}
+          onPressOut={chipPress.onPressOut}
+        >
+          <Chip
+            label={item.label}
+            icon={item.icon}
+            variant={selected ? "yellow" : "neutral"}
+            selected={selected}
+            onPress={onPress}
+          />
+        </Pressable>
+      </Animated.View>
+    </Animated.View>
+  );
 }
 
-function SearchContent({ initialQuery }: { initialQuery: string }) {
+export function SearchScreen() {
+  const params = useLocalSearchParams<{ q?: string; category?: StayCategoryId; t?: string }>();
+  const formKey = `${params.q ?? ""}|${params.category ?? "all"}|${params.t ?? ""}`;
+
+  return (
+    <SearchContent
+      key={formKey}
+      initialQuery={params.q ?? ""}
+      initialCategory={(params.category as StayCategoryId) ?? "all"}
+    />
+  );
+}
+
+function SearchContent({ initialQuery, initialCategory }: { initialQuery: string; initialCategory: StayCategoryId }) {
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState(initialQuery);
   const [submittedQuery, setSubmittedQuery] = useState(initialQuery);
-  const [category, setCategory] = useState<StayCategoryId>("all");
+  const [category, setCategory] = useState<StayCategoryId>(initialCategory);
 
   const results = searchStays(submittedQuery, category);
   const { maxPrice } = parseStayQuery(submittedQuery);
   const countLabel = `${results.length} ${results.length === 1 ? "stay" : "stays"}`;
   const filterNote = [
-    submittedQuery ? `for “${submittedQuery}”` : null,
+    submittedQuery ? `for "${submittedQuery}"` : null,
     maxPrice ? `under $${maxPrice}` : null,
+    category !== "all" ? `in ${category}` : null,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -82,6 +132,8 @@ function SearchContent({ initialQuery }: { initialQuery: string }) {
     setCategory("all");
     Keyboard.dismiss();
   };
+
+  const listEnter = FadeIn.duration(motion.base).reduceMotion(ReduceMotion.System);
 
   return (
     <View
@@ -108,20 +160,15 @@ function SearchContent({ initialQuery }: { initialQuery: string }) {
         />
 
         <View className="mt-3 flex-row flex-wrap gap-2.5">
-          {STAY_CATEGORIES.map((item) => {
-            const selected = item.id === category;
-
-            return (
-              <Chip
-                key={item.id}
-                label={item.label}
-                icon={item.icon}
-                variant={selected ? "yellow" : "neutral"}
-                selected={selected}
-                onPress={() => setCategory(item.id)}
-              />
-            );
-          })}
+          {STAY_CATEGORIES.map((item, index) => (
+            <SearchCategoryChip
+              key={item.id}
+              item={item}
+              selected={item.id === category}
+              index={index}
+              onPress={() => setCategory(item.id)}
+            />
+          ))}
         </View>
 
         <View className="mt-5">
@@ -141,15 +188,22 @@ function SearchContent({ initialQuery }: { initialQuery: string }) {
 
       <Animated.View
         key={`${submittedQuery}|${category}`}
-        entering={FadeIn.duration(motion.base).reduceMotion(
-          ReduceMotion.System,
-        )}
+        entering={listEnter}
         className="mt-4 flex-1"
       >
         <FlatList
           data={results}
           keyExtractor={(stay) => stay.id}
-          renderItem={({ item }) => <StayCard stay={item} />}
+          renderItem={({ item, index }) => (
+            <Animated.View
+              entering={FadeInDown.duration(motion.base)
+                .delay(index * 40)
+                .easing(Easing.out(Easing.cubic))
+                .reduceMotion(ReduceMotion.System)}
+            >
+              <StayCard stay={item} />
+            </Animated.View>
+          )}
           ItemSeparatorComponent={Separator}
           ListEmptyComponent={<EmptyState onClear={clearSearch} />}
           contentContainerStyle={{

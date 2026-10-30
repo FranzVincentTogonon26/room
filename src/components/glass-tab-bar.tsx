@@ -21,6 +21,8 @@ import { AppText } from "@/components/ui/text";
 import { cn } from "@/lib/cn";
 import { spacing, useThemeColors, useThemeScheme } from "@/theme";
 
+const SIMPLE_FALLBACK = Platform.OS !== "ios";
+
 export type GlassTabItem = {
   value: string;
   label: string;
@@ -71,7 +73,7 @@ export function GlassTabBarSurface({
   const colors = useThemeColors();
   const scheme = useThemeScheme();
   const glassAvailable =
-    isLiquidGlassAvailable() && isGlassEffectAPIAvailable();
+    !SIMPLE_FALLBACK && isLiquidGlassAvailable() && isGlassEffectAPIAvailable();
 
   return (
     <View
@@ -107,16 +109,18 @@ export function GlassTabBarSurface({
             backgroundColor: colors.glassBar,
           }}
         >
-          <BlurView
-            intensity={55}
-            tint={scheme === "dark" ? "dark" : "light"}
-            blurTarget={blurTarget}
-            blurMethod={
-              Platform.OS === "android" ? "dimezisBlurView" : undefined
-            }
-            pointerEvents="none"
-            style={StyleSheet.absoluteFill}
-          />
+          {!SIMPLE_FALLBACK && (
+            <BlurView
+              intensity={55}
+              tint={scheme === "dark" ? "dark" : "light"}
+              blurTarget={blurTarget}
+              blurMethod={
+                Platform.OS === "android" ? "dimezisBlurView" : undefined
+              }
+              pointerEvents="none"
+              style={StyleSheet.absoluteFill}
+            />
+          )}
           <View className="flex-1 flex-row items-center px-2">{children}</View>
         </View>
       )}
