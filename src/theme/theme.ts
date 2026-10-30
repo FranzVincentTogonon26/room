@@ -29,7 +29,7 @@ export const motion = rawTokens.motion;
 export const iconTokens = rawTokens.icon;
 export const fontFamily = rawTokens.fontFamily;
 
-const RAW_COLOR_KEYS = new Set(["glass", "glassBorder"]);
+const RAW_COLOR_KEYS = new Set(["glass", "glassBorder", "glassBar", "glassBarBorder"]);
 
 const kebab = (key: string) => key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
 

@@ -15,7 +15,7 @@ export function TripsScreen() {
       className="flex-1 bg-card px-5"
       style={{
         paddingTop: insets.top + 8,
-        paddingBottom: insets.bottom + 24,
+        paddingBottom: insets.bottom + 100,
       }}
     >
       <AppText variant="heading">Trips</AppText>

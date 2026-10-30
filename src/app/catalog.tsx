@@ -1,6 +1,14 @@
+import { BlurTargetView } from "expo-blur";
+import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { useEffect, useState, type PropsWithChildren } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentRef,
+  type PropsWithChildren,
+} from "react";
 import { ScrollView, View } from "react-native";
 
 import { GlassTabBar, type GlassTabItem } from "@/components/glass-tab-bar";
@@ -65,6 +73,8 @@ const semanticKeys = [
   "errorForeground",
   "errorSurface",
   "segmentSelected",
+  "glassBar",
+  "glassBarBorder",
 ] as const;
 
 const brandSwatches = [
@@ -261,6 +271,7 @@ export default function CatalogScreen() {
   const [instantBook, setInstantBook] = useState(true);
   const [guests, setGuests] = useState(1);
   const [tab, setTab] = useState("home");
+  const tabBlurTargetRef = useRef<ComponentRef<typeof View>>(null);
   const [showSuccess, setShowSuccess] = useState(true);
   const [showError, setShowError] = useState(true);
 
@@ -493,9 +504,26 @@ export default function CatalogScreen() {
 
           <Section
             title="10. Bottom navigation"
-            subtitle="Catalog preview · the app uses native tabs"
+            subtitle="Same floating glass bar as the app"
           >
-            <GlassTabBar items={tabItems} value={tab} onChange={setTab} />
+            <View className="h-[360px] overflow-hidden rounded-card border border-border">
+              <BlurTargetView ref={tabBlurTargetRef} style={{ flex: 1 }}>
+                <Image
+                  source={{ uri: LISTING_IMAGE }}
+                  contentFit="cover"
+                  transition={200}
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <View className="absolute inset-x-4" style={{ bottom: 120 }}>
+                  <GlassTabBar
+                    items={tabItems}
+                    value={tab}
+                    onChange={setTab}
+                    blurTarget={tabBlurTargetRef}
+                  />
+                </View>
+              </BlurTargetView>
+            </View>
           </Section>
 
           <Section

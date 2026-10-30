@@ -155,7 +155,7 @@ function SearchContent({ initialQuery }: { initialQuery: string }) {
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: 20,
-            paddingBottom: insets.bottom + 24,
+            paddingBottom: insets.bottom + 100,
           }}
           contentInsetAdjustmentBehavior="never"
           automaticallyAdjustContentInsets={false}

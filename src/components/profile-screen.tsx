@@ -21,7 +21,7 @@ export function ProfileScreen() {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         paddingTop: insets.top + 8,
-        paddingBottom: insets.bottom + 24,
+        paddingBottom: insets.bottom + 100,
         paddingHorizontal: 20,
       }}
     >

@@ -68,8 +68,8 @@ export function HomeScreen() {
       keyboardDismissMode="on-drag"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
-        paddingTop: 8,
-        paddingBottom: insets.bottom + 24,
+        paddingTop: insets.top + 8,
+        paddingBottom: insets.bottom + 100,
       }}
     >
       <View className="px-5">

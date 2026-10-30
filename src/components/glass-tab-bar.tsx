@@ -4,7 +4,17 @@ import {
   isGlassEffectAPIAvailable,
   isLiquidGlassAvailable,
 } from "expo-glass-effect";
-import { Pressable, StyleSheet, View } from "react-native";
+import { BlurView } from "expo-blur";
+import type { ComponentRef, PropsWithChildren, RefObject } from "react";
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+  type StyleProp,
+  type ViewProps,
+  type ViewStyle,
+} from "react-native";
 
 import { Icon, type IconName } from "@/components/ui/icon";
 import { AppText } from "@/components/ui/text";
@@ -17,26 +27,155 @@ export type GlassTabItem = {
   icon: IconName;
 };
 
+export type GlassTabBarSurfaceProps = PropsWithChildren<{
+  className?: string;
+  style?: StyleProp<ViewStyle>;
+  blurTarget?: RefObject<ComponentRef<typeof View> | null>;
+  pointerEvents?: ViewProps["pointerEvents"];
+}>;
+
+export type GlassTabBarItemProps = {
+  icon: IconName;
+  label: string;
+  active: boolean;
+};
+
 export type GlassTabBarProps = {
   items: GlassTabItem[];
   value: string;
   onChange: (value: string) => void;
   className?: string;
+  blurTarget?: RefObject<ComponentRef<typeof View> | null>;
 };
 
-export function GlassTabBar({
-  items,
-  value,
-  onChange,
+const pillShape = {
+  height: spacing.tabbar,
+  borderRadius: spacing.tabbar / 2,
+  borderCurve: "continuous",
+} as const;
+
+/**
+ * The floating pill behind both the app tabs and the catalog preview.
+ *
+ * iOS 26 gets the native Liquid Glass material. Every other platform gets a
+ * real frosted blur of the screen behind the bar, tinted with the bar tokens
+ * so Android and older iOS look like the design.
+ */
+export function GlassTabBarSurface({
+  children,
   className,
-}: GlassTabBarProps) {
+  style,
+  blurTarget,
+  pointerEvents,
+}: GlassTabBarSurfaceProps) {
   const colors = useThemeColors();
   const scheme = useThemeScheme();
   const glassAvailable =
     isLiquidGlassAvailable() && isGlassEffectAPIAvailable();
 
-  const content = (
-    <>
+  return (
+    <View
+      className={cn("shadow-floating", className)}
+      pointerEvents={pointerEvents}
+      style={[pillShape, style]}
+    >
+      {glassAvailable ? (
+        <GlassContainer spacing={8} style={{ flex: 1 }}>
+          <GlassView
+            colorScheme={scheme}
+            glassEffectStyle="regular"
+            isInteractive
+            style={{
+              flex: 1,
+              borderRadius: spacing.tabbar / 2,
+              borderCurve: "continuous",
+              borderWidth: StyleSheet.hairlineWidth,
+              borderColor: colors.glassBarBorder,
+            }}
+          >
+            <View className="flex-1 flex-row items-center px-2">{children}</View>
+          </GlassView>
+        </GlassContainer>
+      ) : (
+        <View
+          className="flex-1 overflow-hidden"
+          style={{
+            borderRadius: spacing.tabbar / 2,
+            borderCurve: "continuous",
+            borderWidth: StyleSheet.hairlineWidth,
+            borderColor: colors.glassBarBorder,
+            backgroundColor: colors.glassBar,
+          }}
+        >
+          <BlurView
+            intensity={55}
+            tint={scheme === "dark" ? "dark" : "light"}
+            blurTarget={blurTarget}
+            blurMethod={
+              Platform.OS === "android" ? "dimezisBlurView" : undefined
+            }
+            pointerEvents="none"
+            style={StyleSheet.absoluteFill}
+          />
+          <View className="flex-1 flex-row items-center px-2">{children}</View>
+        </View>
+      )}
+    </View>
+  );
+}
+
+/**
+ * One tab inside the bar. The selected tab is a yellow circle with a soft
+ * yellow halo; everything inside it is the brand black.
+ */
+export function GlassTabBarItem({
+  icon,
+  label,
+  active,
+}: GlassTabBarItemProps) {
+  const colors = useThemeColors();
+  const contentColor = active ? colors.primaryForeground : colors.foreground;
+
+  return (
+    <View className="h-16 w-16 items-center justify-center">
+      {active ? (
+        <View className="absolute h-18 w-18 rounded-full bg-primary/25" />
+      ) : null}
+
+      <View
+        className="h-16 w-16 items-center justify-center gap-1 rounded-full"
+        style={active ? { backgroundColor: colors.primary } : undefined}
+      >
+        <Icon
+          name={icon}
+          size="lg"
+          color={contentColor}
+          fill={active && icon === "house" ? contentColor : "none"}
+        />
+        <AppText
+          variant="tab"
+          tone={active ? "primaryForeground" : "foreground"}
+        >
+          {label}
+        </AppText>
+      </View>
+    </View>
+  );
+}
+
+/**
+ * Controlled preview used by `/catalog`. The app renders its own
+ * `TabTrigger`s inside `GlassTabBarSurface` so routing stays in the layout.
+ */
+export function GlassTabBar({
+  items,
+  value,
+  onChange,
+  className,
+  blurTarget,
+}: GlassTabBarProps) {
+  return (
+    <GlassTabBarSurface className={className} blurTarget={blurTarget}>
       {items.map((item) => {
         const active = item.value === value;
 
@@ -47,127 +186,17 @@ export function GlassTabBar({
             accessibilityLabel={item.label}
             accessibilityState={{ selected: active }}
             onPress={() => onChange(item.value)}
-            className="h-full flex-1 items-center justify-center gap-1"
+            className="h-full flex-1 items-center justify-center"
             style={({ pressed }) => (pressed ? { opacity: 0.75 } : null)}
           >
-            {active && glassAvailable ? (
-              /* Liquid glass pill: tinted with primary on selection */
-              <GlassView
-                glassEffectStyle="regular"
-                tintColor={colors.primary}
-                isInteractive
-                colorScheme={scheme}
-                style={{
-                  width: 64,
-                  height: 64,
-                  borderRadius: 32,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 4,
-                  borderCurve: "continuous",
-                }}
-              >
-                {/* Subtle primary tint overlay to make the active selection clearly visible.
-                    tintColor on glass material alone can be very subtle, especially with yellow. */}
-                <View
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    borderRadius: 32,
-                    backgroundColor: "rgba(255, 198, 41, 0.18)",
-                    borderCurve: "continuous",
-                  }}
-                />
-                <Icon
-                  name={item.icon}
-                  size="lg"
-                  color={colors.segmentSelectedForeground}
-                  fill={
-                    item.icon === "house"
-                      ? colors.segmentSelectedForeground
-                      : "none"
-                  }
-                />
-                <AppText
-                  variant="tab"
-                  tone="segmentSelectedForeground"
-                >
-                  {item.label}
-                </AppText>
-              </GlassView>
-            ) : (
-              <View
-                className={cn(
-                  "h-16 w-16 items-center justify-center gap-1 rounded-full",
-                  active && "bg-primary",
-                )}
-              >
-                <Icon
-                  name={item.icon}
-                  size="lg"
-                  color={
-                    active
-                      ? colors.segmentSelectedForeground
-                      : colors.mutedForeground
-                  }
-                  fill={
-                    active && item.icon === "house"
-                      ? colors.segmentSelectedForeground
-                      : "none"
-                  }
-                />
-                <AppText
-                  variant="tab"
-                  tone={active ? "segmentSelectedForeground" : "mutedForeground"}
-                >
-                  {item.label}
-                </AppText>
-              </View>
-            )}
+            <GlassTabBarItem
+              icon={item.icon}
+              label={item.label}
+              active={active}
+            />
           </Pressable>
         );
       })}
-    </>
-  );
-
-  if (glassAvailable) {
-    // GlassView is a native component without NativeWind support, so this one
-    // container uses a style object from tokens. Children still use className.
-    // GlassContainer provides the native compositor layer that lets child
-    // GlassView instances render interactive liquid glass and tint properly.
-    return (
-      <View className={className}>
-        <GlassContainer spacing={8}>
-          <GlassView
-            colorScheme={scheme}
-            glassEffectStyle="regular"
-            style={{
-              width: "100%",
-              height: spacing.tabbar,
-              flexDirection: "row",
-              alignItems: "center",
-              borderRadius: spacing.tabbar / 2,
-              borderCurve: "continuous",
-              paddingHorizontal: 8,
-              borderWidth: StyleSheet.hairlineWidth,
-              borderColor: colors.glassBorder,
-            }}
-          >
-            {content}
-          </GlassView>
-        </GlassContainer>
-      </View>
-    );
-  }
-
-  return (
-    <View
-      className={cn(
-        "h-tabbar flex-row items-center rounded-pill border border-glass-border bg-glass px-2 shadow-floating",
-        className,
-      )}
-    >
-      {content}
-    </View>
+    </GlassTabBarSurface>
   );
 }

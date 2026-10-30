@@ -2,7 +2,7 @@ const tokens = require("./src/theme/tokens.json");
 
 const kebab = (key) => key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
 const cssVar = (key) => `--color-${kebab(key)}`;
-const RAW_COLOR_KEYS = new Set(["glass", "glassBorder"]);
+const RAW_COLOR_KEYS = new Set(["glass", "glassBorder", "glassBar", "glassBarBorder"]);
 
 const channels = (hex) => {
   const value = hex.replace("#", "");

@@ -57,7 +57,14 @@ export const STAYS: Stay[] = [
     guests: 6,
     bedrooms: 2,
     baths: 2,
-    amenities: ["Hot tub", "Pet friendly", "Fireplace", "Wi-Fi", "Full kitchen", "Free parking"],
+    amenities: [
+      "Hot tub",
+      "Pet friendly",
+      "Fireplace",
+      "Wi-Fi",
+      "Full kitchen",
+      "Free parking",
+    ],
     tags: ["quiet", "pet friendly", "hot tub", "fireplace", "forest"],
     description:
       "A cedar-and-glass cabin tucked into the pines, with a private hot tub on the deck and tall windows facing the lake.",
@@ -109,7 +116,14 @@ export const STAYS: Stay[] = [
     guests: 8,
     bedrooms: 4,
     baths: 3,
-    amenities: ["Ocean view", "Steps to sand", "Patio", "Wi-Fi", "Kitchen", "Free parking"],
+    amenities: [
+      "Ocean view",
+      "Steps to sand",
+      "Patio",
+      "Wi-Fi",
+      "Kitchen",
+      "Free parking",
+    ],
     tags: ["ocean view", "steps to sand", "patio", "bright"],
     description:
       "A bright Malibu beach house with floor-to-ceiling glass, a sunny deck, and a private path down to the sand.",
@@ -211,7 +225,14 @@ export const STAYS: Stay[] = [
     guests: 8,
     bedrooms: 4,
     baths: 3,
-    amenities: ["Pool", "Mountain view", "Outdoor shower", "Wi-Fi", "Kitchen", "Free parking"],
+    amenities: [
+      "Pool",
+      "Mountain view",
+      "Outdoor shower",
+      "Wi-Fi",
+      "Kitchen",
+      "Free parking",
+    ],
     tags: ["pool", "mountain view", "quiet", "sunny"],
     description:
       "A walled desert villa with a saltwater pool, shaded lounge, and mountain views from every room.",
@@ -228,7 +249,14 @@ export const STAYS: Stay[] = [
     guests: 6,
     bedrooms: 3,
     baths: 2,
-    amenities: ["Hot tub", "Garden", "Secluded", "Wi-Fi", "Kitchen", "Fireplace"],
+    amenities: [
+      "Hot tub",
+      "Garden",
+      "Secluded",
+      "Wi-Fi",
+      "Kitchen",
+      "Fireplace",
+    ],
     tags: ["secluded", "garden", "hot tub", "quiet"],
     description:
       "A stucco villa folded into an Ojai hillside, surrounded by olive trees, with a garden hot tub and long valley views.",
@@ -245,7 +273,14 @@ export const STAYS: Stay[] = [
     guests: 6,
     bedrooms: 3,
     baths: 2,
-    amenities: ["Pool", "Mountain view", "Secluded", "Wi-Fi", "Kitchen", "Patio"],
+    amenities: [
+      "Pool",
+      "Mountain view",
+      "Secluded",
+      "Wi-Fi",
+      "Kitchen",
+      "Patio",
+    ],
     tags: ["pool", "secluded", "mountain view", "sunny"],
     description:
       "A low-slung adobe-style home at the edge of the Preserve, with a pool, a shaded portal, and saguaros at sunset.",
@@ -334,7 +369,9 @@ export function searchStays(
 ): Stay[] {
   const { tokens, maxPrice } = parseStayQuery(query);
 
-  return STAYS.filter((stay) => category === "all" || stay.category === category)
+  return STAYS.filter(
+    (stay) => category === "all" || stay.category === category,
+  )
     .filter((stay) => maxPrice === undefined || stay.price <= maxPrice)
     .map((stay) => {
       if (tokens.length === 0) return { stay, score: 0 };
