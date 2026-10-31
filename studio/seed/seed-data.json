@@ -1,0 +1,2254 @@
+{
+  "hosts": [
+    {
+      "seedKey": "host-maya-chen",
+      "name": "Maya Chen",
+      "photoUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Maya Chen",
+      "bio": "Maya grew up in the Cascades and has hosted design-forward cabins since 2016. She leaves a local trail map and a bag of coffee at every check-in.",
+      "superhost": true,
+      "responseTime": "Within an hour",
+      "joinedYear": 2016,
+      "languages": [
+        "English",
+        "Mandarin"
+      ]
+    },
+    {
+      "seedKey": "host-daniel-reyes",
+      "name": "Daniel Reyes",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Daniel Reyes",
+      "bio": "Daniel is a third-generation Californian who restored his family's beach cottages. He surfs, cooks, and knows the best taco stands from Malibu to Mendocino.",
+      "superhost": true,
+      "responseTime": "Within a few hours",
+      "joinedYear": 2015,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    {
+      "seedKey": "host-priya-natarajan",
+      "name": "Priya Natarajan",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Priya Natarajan",
+      "bio": "Priya is a structural engineer who spends weekends skiing and trail-running. She hosts mountain homes with boot dryers, good coffee, and honest trail advice.",
+      "superhost": true,
+      "responseTime": "Within an hour",
+      "joinedYear": 2018,
+      "languages": [
+        "English",
+        "Hindi",
+        "Tamil"
+      ]
+    },
+    {
+      "seedKey": "host-grace-whitfield",
+      "name": "Grace Whitfield",
+      "photoUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Grace Whitfield",
+      "bio": "Grace is a preservation architect in Boston. She restored a Back Bay row house and a Cape Cod dune cottage, and she knows the quietest beaches on the Cape.",
+      "superhost": true,
+      "responseTime": "Within a day",
+      "joinedYear": 2017,
+      "languages": [
+        "English",
+        "French"
+      ]
+    },
+    {
+      "seedKey": "host-marcus-bell",
+      "name": "Marcus Bell",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Marcus Bell",
+      "bio": "Marcus is a former park ranger who hosts homes across the Southeast. He answers questions fast and keeps a list of the best barbecue, hikes, and rainy-day museums.",
+      "superhost": true,
+      "responseTime": "Within a few hours",
+      "joinedYear": 2014,
+      "languages": [
+        "English"
+      ]
+    },
+    {
+      "seedKey": "host-sofia-alvarez",
+      "name": "Sofia Alvarez",
+      "photoUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Sofia Alvarez",
+      "bio": "Sofia is a landscape designer in the Southwest. Her homes are full of shade, native plants, and cold drinks in the fridge; ask her for a sunset spot.",
+      "superhost": true,
+      "responseTime": "Within an hour",
+      "joinedYear": 2019,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    {
+      "seedKey": "host-kenji-watanabe",
+      "name": "Kenji Watanabe",
+      "photoUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Kenji Watanabe",
+      "bio": "Kenji splits his time between Seattle and Kauai. He is a photographer and a good source for sunrise hikes, quiet beaches, and the best poke on the island.",
+      "superhost": false,
+      "responseTime": "Within a few hours",
+      "joinedYear": 2020,
+      "languages": [
+        "English",
+        "Japanese"
+      ]
+    },
+    {
+      "seedKey": "host-olivia-brooks",
+      "name": "Olivia Brooks",
+      "photoUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "photoAlt": "Portrait of Olivia Brooks",
+      "bio": "Olivia has lived in six cities and hosts walkable flats in four of them. She leaves a neighborhood guide with coffee, transit, and the best place to work for an afternoon.",
+      "superhost": true,
+      "responseTime": "Within an hour",
+      "joinedYear": 2013,
+      "languages": [
+        "English",
+        "French"
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "seedKey": "policy-cancellation-flexible",
+      "title": "Flexible cancellation",
+      "policyType": "cancellation",
+      "summary": "Full refund up to 48 hours before check-in",
+      "body": "Cancel up to 48 hours before check-in for a full refund. Cancel within 48 hours of check-in and the first night is non-refundable."
+    },
+    {
+      "seedKey": "policy-cancellation-moderate",
+      "title": "Moderate cancellation",
+      "policyType": "cancellation",
+      "summary": "Full refund up to 5 days before check-in",
+      "body": "Cancel up to 5 days before check-in for a full refund. Cancel within 5 days of check-in and the first night is non-refundable, plus 50% of the remaining nights."
+    },
+    {
+      "seedKey": "policy-cancellation-strict",
+      "title": "Strict cancellation",
+      "policyType": "cancellation",
+      "summary": "50% refund up to 7 days before check-in",
+      "body": "Cancel up to 7 days before check-in for a 50% refund. Cancel within 7 days of check-in and the reservation is non-refundable."
+    },
+    {
+      "seedKey": "policy-house-rules-standard",
+      "title": "House rules",
+      "policyType": "houseRules",
+      "summary": "No parties or events; max occupancy enforced",
+      "body": "No parties or events. The number of guests must not exceed the reservation. No unregistered visitors overnight. Please respect the neighbors and keep noise down."
+    },
+    {
+      "seedKey": "policy-house-rules-family",
+      "title": "Family house rules",
+      "policyType": "houseRules",
+      "summary": "Families welcome; no parties or events",
+      "body": "Families welcome. No parties or events. Maximum occupancy is strictly enforced. A crib and high chair may be available on request."
+    },
+    {
+      "seedKey": "policy-check-in-standard",
+      "title": "Check-in and checkout",
+      "policyType": "checkInOut",
+      "summary": "Check-in 4 PM · Checkout 11 AM",
+      "body": "Self check-in with a lockbox or smart lock. Check-in after 4 PM. Checkout by 11 AM. Early check-in and late checkout may be available on request."
+    },
+    {
+      "seedKey": "policy-check-in-early",
+      "title": "Check-in and checkout",
+      "policyType": "checkInOut",
+      "summary": "Check-in 3 PM · Checkout 11 AM",
+      "body": "Self check-in with a lockbox or smart lock. Check-in after 3 PM. Checkout by 11 AM. Luggage storage may be available on request."
+    },
+    {
+      "seedKey": "policy-check-in-late",
+      "title": "Check-in and checkout",
+      "policyType": "checkInOut",
+      "summary": "Check-in 4 PM · Checkout 12 PM",
+      "body": "Self check-in with a lockbox or smart lock. Check-in after 4 PM. Checkout by 12 PM. Early check-in may be available on request."
+    },
+    {
+      "seedKey": "policy-pets-welcome",
+      "title": "Pets welcome",
+      "policyType": "pets",
+      "summary": "Up to 2 dogs; keep off furniture",
+      "body": "Up to 2 dogs are welcome. Pets must be kept off furniture and beds. Please pick up after your dog and do not leave pets unattended."
+    },
+    {
+      "seedKey": "policy-pets-not-allowed",
+      "title": "No pets",
+      "policyType": "pets",
+      "summary": "Service animals welcome",
+      "body": "Pets are not allowed. Service animals are always welcome. Please let us know in advance if you are traveling with a service animal."
+    },
+    {
+      "seedKey": "policy-smoking-none",
+      "title": "No smoking",
+      "policyType": "smoking",
+      "summary": "No smoking or vaping indoors",
+      "body": "No smoking or vaping inside the home. Smoking is allowed outdoors only, away from doors and windows. Please dispose of butts safely."
+    },
+    {
+      "seedKey": "policy-quiet-hours-10-8",
+      "title": "Quiet hours",
+      "policyType": "quietHours",
+      "summary": "10 PM – 8 AM",
+      "body": "Quiet hours are 10 PM to 8 AM. Please keep music and voices low during this time. Outdoor spaces close at 10 PM."
+    },
+    {
+      "seedKey": "policy-safety-standard",
+      "title": "Safety",
+      "policyType": "safety",
+      "summary": "Smoke and CO alarms; first aid kit",
+      "body": "Smoke and carbon monoxide alarms are installed. A fire extinguisher and first aid kit are in the home. Exterior cameras may be present at the entrance."
+    },
+    {
+      "seedKey": "policy-safety-pool",
+      "title": "Pool and water safety",
+      "policyType": "safety",
+      "summary": "No lifeguard; supervise children",
+      "body": "The pool has no lifeguard. Children must be supervised at all times. No diving. Pool heating may be available on request."
+    }
+  ],
+  "stays": [
+    {
+      "seedKey": "modern-cabin-hot-tub",
+      "title": "Modern Cabin with Hot Tub",
+      "category": "cabins",
+      "pricePerNight": 280,
+      "maxGuests": 6,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 2,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Free parking"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": true,
+      "location": {
+        "city": "Lake Arrowhead",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 34.2483,
+          "lng": -117.1892
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Cabin among tall pine trees"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin in a snowy forest"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin with a wall of windows"
+        }
+      ],
+      "summary": "A cedar-and-glass cabin in the pines with a private hot tub and lake views from the great room.",
+      "description": "Cedar walls and a wall of glass frame the pines in the main room, with a stone fireplace at one end and a low sectional at the other. The kitchen opens to the dining table and the deck, where the hot tub sits under a string of lights. Two bedrooms are downstairs and a loft sleeps two more.",
+      "vibe": [
+        "quiet",
+        "wooded",
+        "cozy",
+        "lake"
+      ],
+      "setting": "The cabin sits on a wooded slope above Lake Arrowhead, with pine branches close to the deck and a glimpse of water through the trees.",
+      "nearby": "Lake Arrowhead Village is a ten-minute drive for groceries and boat rentals. Trailheads for the Pinnacles and Heaps Peak are close by, and Snow Valley is about 25 minutes up the road.",
+      "neighborhoodDescription": "The street is a quiet loop of second homes and rentals, with no through traffic and little light at night. Neighbors are spread out enough that the deck feels private, but the village is still an easy drive.",
+      "rating": 4.9,
+      "reviewCount": 342,
+      "hostSeedKey": "host-maya-chen",
+      "slug": "modern-cabin-with-hot-tub",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "cedar-ridge-cabin",
+      "title": "Cedar Ridge Retreat",
+      "category": "cabins",
+      "pricePerNight": 215,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Big Bear Lake",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 34.2439,
+          "lng": -116.9114
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        "alt": "A-frame cabin in a snowy forest"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin with a wall of windows"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin on a lake at dusk"
+        }
+      ],
+      "summary": "A quiet A-frame on a wooded ridge with a wood stove, a wraparound deck, and trails from the door.",
+      "description": "The A-frame's main room rises two stories, with a wood stove at the center and windows on three sides. A compact kitchen and a dining nook sit behind the living area, and the wraparound deck catches sun most of the day. Two bedrooms and a bath are tucked under the slope.",
+      "vibe": [
+        "secluded",
+        "cozy",
+        "wooded",
+        "quiet"
+      ],
+      "setting": "The house is on a ridge above Big Bear Lake, surrounded by mature cedars and manzanita, with no neighbors in direct view.",
+      "nearby": "Trails leave from the end of the street, and the lake's north shore is a short drive for kayaking. Big Bear Village has groceries, restaurants, and the nearest coffee.",
+      "neighborhoodDescription": "This is a sparsely built ridge of cabins and full-time homes, quiet in every season. Snowplows clear the main road in winter, and the last stretch is steep enough that all-wheel drive helps.",
+      "rating": 4.8,
+      "reviewCount": 186,
+      "hostSeedKey": "host-priya-natarajan",
+      "slug": "cedar-ridge-retreat",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "pine-a-frame",
+      "title": "Pine A-Frame Hideaway",
+      "category": "cabins",
+      "pricePerNight": 245,
+      "maxGuests": 5,
+      "bedrooms": 2,
+      "beds": 4,
+      "bathrooms": 2,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Ski storage"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Tahoe City",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 39.1667,
+          "lng": -120.1458
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        "alt": "A-frame cabin with a wall of windows"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin on a lake at dusk"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Modern cabin with a wooden deck in the forest"
+        }
+      ],
+      "summary": "A classic Tahoe A-frame with a soaring window wall, a wood-burning fireplace, and a hot tub under the stars.",
+      "description": "The two-story window wall is the first thing you see, with the pines rising behind it and the fireplace centered in the living room. A wide deck wraps the front of the house, and the hot tub is set into it just off the kitchen. Two bedrooms sit upstairs under the steep roofline.",
+      "vibe": [
+        "cozy",
+        "snowy",
+        "romantic",
+        "wooded"
+      ],
+      "setting": "The A-frame is set among tall pines on Tahoe's west shore, a few minutes from the water and the ski shuttle.",
+      "nearby": "Tahoe City's restaurants and the lakefront are five minutes away. Palisades Tahoe and Homewood are both within a half-hour drive, and the bike path runs along the highway.",
+      "neighborhoodDescription": "The neighborhood is a mix of old Tahoe cabins and newer rentals, with quiet streets and tall trees. It is close enough to town for dinner but far enough that the nights are dark and silent.",
+      "rating": 4.7,
+      "reviewCount": 214,
+      "hostSeedKey": "host-priya-natarajan",
+      "slug": "pine-a-frame-hideaway",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "ocean-view-beach-house",
+      "title": "Ocean View Beach House",
+      "category": "beach",
+      "pricePerNight": 420,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 5,
+      "bathrooms": 3,
+      "amenities": [
+        "Ocean view",
+        "Steps to sand",
+        "Patio",
+        "Wi-Fi",
+        "Full kitchen",
+        "Free parking"
+      ],
+      "petsAllowed": false,
+      "quiet": false,
+      "featured": true,
+      "location": {
+        "city": "Malibu",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 34.0259,
+          "lng": -118.7798
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Beach house with ocean views"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sandy beach and turquoise water"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Coastal cottage near the water"
+        }
+      ],
+      "summary": "A bright Malibu beach house with floor-to-ceiling glass, a sunny deck, and a private path to the sand.",
+      "description": "The living room opens completely to a deck above the beach, with glass on two sides and white oak floors throughout. Four bedrooms are spread across two levels, including a primary suite with its own sitting area. The kitchen is built for a crowd, with a long island and a second sink.",
+      "vibe": [
+        "bright",
+        "ocean",
+        "sunny",
+        "open"
+      ],
+      "setting": "The house sits on a bluff above a wide stretch of Malibu sand, with the Pacific filling the windows from the living room and deck.",
+      "nearby": "A private path leads down to the beach in about two minutes. Malibu Country Mart is ten minutes south, and the Getty Villa is a short drive down the coast.",
+      "neighborhoodDescription": "The street is a quiet residential stretch off the highway, with hedges and gates keeping it private. Traffic on PCH is the main sound, and the beach is the main destination.",
+      "rating": 4.9,
+      "reviewCount": 508,
+      "hostSeedKey": "host-daniel-reyes",
+      "slug": "ocean-view-beach-house",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-late",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "gullwing-cottage",
+      "title": "Gullwing Beach Cottage",
+      "category": "beach",
+      "pricePerNight": 265,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 1,
+      "amenities": [
+        "Walk to beach",
+        "Full kitchen",
+        "Wi-Fi",
+        "Patio"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Santa Cruz",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 36.9741,
+          "lng": -122.0308
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Sandy beach and turquoise water"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Coastal cottage near the water"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Waves breaking on a sandy shore"
+        }
+      ],
+      "summary": "A small, sun-filled cottage a few blocks from the water, with a fenced yard and an easy walk to town.",
+      "description": "The cottage keeps its original beadboard walls and painted floors, with a bright living room and a kitchen that opens to the yard. Two bedrooms share a single bath, and the fenced back garden has a table for breakfast outside. A washer and dryer are tucked into the back hall.",
+      "vibe": [
+        "cozy",
+        "walkable",
+        "sunny",
+        "quiet"
+      ],
+      "setting": "It sits on a flat block of small beach cottages on Santa Cruz's west side, a few streets back from the water.",
+      "nearby": "The beach and the wharf are a ten-minute walk, and downtown Santa Cruz is about fifteen minutes on foot. The West Cliff Drive path is close for a morning run or bike ride.",
+      "neighborhoodDescription": "This is a lived-in neighborhood of cottages, bungalows, and a few small apartment buildings. It is quiet at night but busy on weekend mornings, when everyone walks to the beach.",
+      "rating": 4.7,
+      "reviewCount": 173,
+      "hostSeedKey": "host-daniel-reyes",
+      "slug": "gullwing-beach-cottage",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "mendocino-coast-cottage",
+      "title": "Mendocino Coast Cottage",
+      "category": "beach",
+      "pricePerNight": 295,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 2,
+      "amenities": [
+        "Ocean view",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Mendocino",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 39.3077,
+          "lng": -123.7995
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Coastal cottage near the water"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Waves breaking on a sandy shore"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunset over the surf at the beach"
+        }
+      ],
+      "summary": "A weathered cedar cottage on the headlands with a fireplace, a wind-sheltered deck, and big Pacific views.",
+      "description": "The cottage is small and warm, with a fireplace in the living room and windows that face the water. A wind-sheltered deck off the kitchen is the best spot for coffee, and the two bedrooms are simple and quiet. The second bath was added recently, with a deep tub.",
+      "vibe": [
+        "quiet",
+        "ocean",
+        "romantic",
+        "cozy"
+      ],
+      "setting": "It sits on a grassy headland north of Mendocino village, with open ocean to the west and cypress trees behind the house.",
+      "nearby": "The village is five minutes away for bakeries and the headlands trail. Van Damme State Park and its pygmy forest are a short drive south, and the lighthouse is north.",
+      "neighborhoodDescription": "The headlands are sparsely built, with a few rentals and farmhouses along the road. Fog rolls in most evenings, and the nearest neighbor is far enough that the deck feels completely private.",
+      "rating": 4.8,
+      "reviewCount": 261,
+      "hostSeedKey": "host-daniel-reyes",
+      "slug": "mendocino-coast-cottage",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "downtown-arts-loft",
+      "title": "Downtown Arts Loft",
+      "category": "city",
+      "pricePerNight": 185,
+      "maxGuests": 2,
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1,
+      "amenities": [
+        "Workspace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Coffee maker",
+        "Walkable"
+      ],
+      "petsAllowed": false,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Portland",
+        "region": "OR",
+        "country": "United States",
+        "coordinates": {
+          "lat": 45.5152,
+          "lng": -122.6784
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Loft with exposed brick and large windows"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Bright apartment living room"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Row house interior with original details"
+        }
+      ],
+      "summary": "An open brick-and-timber loft above a coffee bar, with a dedicated desk and galleries downstairs.",
+      "description": "The loft is one open room with exposed brick, timber beams, and tall windows facing the street. A queen bed sits behind a half-wall, and the desk is set up for a full day of work. The kitchen is compact but complete, with a gas range and a coffee setup.",
+      "vibe": [
+        "walkable",
+        "lively",
+        "industrial",
+        "urban"
+      ],
+      "setting": "It is on the second floor of a converted warehouse in Portland's Central Eastside, above a coffee bar and around the corner from a gallery.",
+      "nearby": "The riverfront, Saturday Market, and the streetcar are within a ten-minute walk. Dozens of coffee shops, breweries, and galleries are in the surrounding blocks.",
+      "neighborhoodDescription": "The Central Eastside is a working district that turns into a nightlife neighborhood after dark. Streets are busy during the day and lively on weekends, with some noise from the bar below.",
+      "rating": 4.8,
+      "reviewCount": 402,
+      "hostSeedKey": "host-maya-chen",
+      "slug": "downtown-arts-loft",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "skyline-studio",
+      "title": "Skyline Studio",
+      "category": "city",
+      "pricePerNight": 230,
+      "maxGuests": 2,
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1,
+      "amenities": [
+        "Skyline view",
+        "Gym",
+        "Workspace",
+        "Wi-Fi"
+      ],
+      "petsAllowed": true,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Seattle",
+        "region": "WA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 47.6062,
+          "lng": -122.3321
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Bright apartment living room"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Row house interior with original details"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with a blue sofa and herringbone floors"
+        }
+      ],
+      "summary": "A compact high-rise studio with a wall of windows, a proper desk, and a shared rooftop gym.",
+      "description": "The studio is efficient and bright, with a wall of windows facing Puget Sound and the downtown skyline. A queen bed, a sofa, and a real desk fit without feeling crowded, and the kitchenette covers the basics. The building has a shared rooftop gym and a laundry room on each floor.",
+      "vibe": [
+        "urban",
+        "bright",
+        "compact",
+        "walkable"
+      ],
+      "setting": "It is on the 18th floor of a Belltown apartment building, with water and city views from the living area.",
+      "nearby": "Pike Place Market is a fifteen-minute walk, and the Space Needle is about the same. Light rail and the waterfront ferry terminal are close for longer trips.",
+      "neighborhoodDescription": "Belltown is dense and walkable, with restaurants and bars on nearly every block. The building is on a quieter side street, but the neighborhood is lively late into the evening.",
+      "rating": 4.6,
+      "reviewCount": 328,
+      "hostSeedKey": "host-kenji-watanabe",
+      "slug": "skyline-studio",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "brick-rowhouse-suite",
+      "title": "Brick Rowhouse Suite",
+      "category": "city",
+      "pricePerNight": 210,
+      "maxGuests": 3,
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1,
+      "amenities": [
+        "Workspace",
+        "Wi-Fi",
+        "Kitchenette",
+        "Walkable",
+        "Historic"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Boston",
+        "region": "MA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 42.3601,
+          "lng": -71.0589
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Row house interior with original details"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with a blue sofa and herringbone floors"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Open living room with a city view and fireplace"
+        }
+      ],
+      "summary": "A quiet suite in a restored Back Bay row house with original moldings, a kitchenette, and the T a block away.",
+      "description": "The suite occupies the parlor level of a restored row house, with 12-foot ceilings, original moldings, and a marble fireplace that is no longer working. A kitchenette is set into one wall, and the bedroom is in the back, away from the street. The bathroom has a walk-in shower and heated floors.",
+      "vibe": [
+        "historic",
+        "walkable",
+        "quiet",
+        "elegant"
+      ],
+      "setting": "It is on a tree-lined Back Bay street of brownstones, a block from Commonwealth Avenue and the T.",
+      "nearby": "Newbury Street shopping is around the corner, and the Public Garden is a ten-minute walk. The Green Line is a block away, and South Station is two stops down.",
+      "neighborhoodDescription": "Back Bay is quiet and residential, with students, long-time residents, and a steady stream of visitors. The street is one-way and lightly traveled, so the suite stays calm even on weekends.",
+      "rating": 4.7,
+      "reviewCount": 197,
+      "hostSeedKey": "host-grace-whitfield",
+      "slug": "brick-rowhouse-suite",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "palm-springs-pool-villa",
+      "title": "Palm Springs Pool Villa",
+      "category": "villas",
+      "pricePerNight": 395,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 4,
+      "bathrooms": 3,
+      "amenities": [
+        "Pool",
+        "Mountain view",
+        "Outdoor shower",
+        "Wi-Fi",
+        "Full kitchen",
+        "Free parking"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": true,
+      "location": {
+        "city": "Palm Springs",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 33.8303,
+          "lng": -116.5453
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Pool villa with mountain views"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Hillside villa surrounded by trees"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Desert adobe villa with a patio"
+        }
+      ],
+      "summary": "A walled desert villa with a saltwater pool, shaded lounge, and mountain views from every room.",
+      "description": "The villa is built around a central pool courtyard, with sliding glass doors from every living space. A shaded lounge runs along one side, and the kitchen opens to an outdoor dining table. Four bedrooms are spaced for privacy, each with its own bath access.",
+      "vibe": [
+        "sunny",
+        "private",
+        "desert",
+        "pool"
+      ],
+      "setting": "It sits behind a wall on a quiet street in south Palm Springs, with the San Jacinto Mountains rising directly behind the pool.",
+      "nearby": "Downtown Palm Springs is a ten-minute drive for restaurants and the aerial tramway. The Indian Canyons trails are close, and Joshua Tree is about an hour east.",
+      "neighborhoodDescription": "The neighborhood is a grid of walled villas and mid-century homes, with wide streets and little foot traffic. It is quiet and private, though summer afternoons are hot enough that the pool is the main plan.",
+      "rating": 4.9,
+      "reviewCount": 286,
+      "hostSeedKey": "host-sofia-alvarez",
+      "slug": "palm-springs-pool-villa",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-pool"
+      ]
+    },
+    {
+      "seedKey": "hillside-garden-villa",
+      "title": "Hillside Garden Villa",
+      "category": "villas",
+      "pricePerNight": 340,
+      "maxGuests": 6,
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2,
+      "amenities": [
+        "Hot tub",
+        "Garden",
+        "Wi-Fi",
+        "Full kitchen",
+        "Fireplace"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Ojai",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 34.448,
+          "lng": -119.2429
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Hillside villa surrounded by trees"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Desert adobe villa with a patio"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with glass walls opening to a pool"
+        }
+      ],
+      "summary": "A stucco villa folded into an Ojai hillside, surrounded by olive trees, with a garden hot tub and valley views.",
+      "description": "The villa is built in two wings around a gravel courtyard, with thick stucco walls and deep window seats. The living room opens to a covered porch, and the kitchen has a long tiled counter and a pantry. The primary suite has its own patio, and the hot tub sits in the garden below the house.",
+      "vibe": [
+        "secluded",
+        "garden",
+        "quiet",
+        "warm"
+      ],
+      "setting": "It is on a hillside east of Ojai, surrounded by olive groves and chaparral, with the Topatopa Mountains across the valley.",
+      "nearby": "Ojai's arcade and restaurants are ten minutes down the hill. The Punchbowl Trail and Lake Casitas are close, and the beach at Ventura is about 40 minutes away.",
+      "neighborhoodDescription": "The road climbs past a handful of gated properties and ends in oak and olive groves. Neighbors are out of sight, and the only regular sound is the wind in the trees.",
+      "rating": 4.8,
+      "reviewCount": 152,
+      "hostSeedKey": "host-sofia-alvarez",
+      "slug": "hillside-garden-villa",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "saguaro-desert-villa",
+      "title": "Saguaro Desert Villa",
+      "category": "villas",
+      "pricePerNight": 310,
+      "maxGuests": 6,
+      "bedrooms": 3,
+      "beds": 3,
+      "bathrooms": 2,
+      "amenities": [
+        "Pool",
+        "Mountain view",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Scottsdale",
+        "region": "AZ",
+        "country": "United States",
+        "coordinates": {
+          "lat": 33.4942,
+          "lng": -111.9261
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Desert adobe villa with a patio"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with glass walls opening to a pool"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Dining room with a black table and sliding glass doors"
+        }
+      ],
+      "summary": "A low-slung adobe-style home at the edge of the Preserve with a pool, a shaded portal, and saguaros at sunset.",
+      "description": "The house is a single story of thick adobe walls and deep shaded openings, built around a pool and a covered portal. The living room and kitchen share one long space, with a kiva fireplace at the end. Three bedrooms open directly to the courtyard.",
+      "vibe": [
+        "desert",
+        "sunny",
+        "private",
+        "quiet"
+      ],
+      "setting": "It borders the McDowell Sonoran Preserve in north Scottsdale, with open desert and saguaro-covered hills behind the pool.",
+      "nearby": "Trailheads into the Preserve are a short walk from the driveway. Scottsdale's Old Town is 25 minutes south, and the Musical Instrument Museum is about 20 minutes away.",
+      "neighborhoodDescription": "This is a low-density edge of Scottsdale where the streets end at the Preserve. It is quiet and dark at night, with coyotes and quail more common than cars.",
+      "rating": 4.8,
+      "reviewCount": 219,
+      "hostSeedKey": "host-sofia-alvarez",
+      "slug": "saguaro-desert-villa",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-pool"
+      ]
+    },
+    {
+      "seedKey": "aspen-grove-cabin",
+      "title": "Aspen Grove Cabin",
+      "category": "cabins",
+      "pricePerNight": 240,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Ski storage",
+        "Fire pit"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Bend",
+        "region": "OR",
+        "country": "United States",
+        "coordinates": {
+          "lat": 44.0582,
+          "lng": -121.3153
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Cabin on a lake at dusk"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Modern cabin with a wooden deck in the forest"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin among tall pine trees"
+        }
+      ],
+      "summary": "A timber cabin in an aspen grove with a hot tub, a stone fireplace, and ski storage for a Bend weekend.",
+      "description": "The cabin is built of local timber, with a stone fireplace in the living room and a wall of windows facing the aspens. A mudroom with ski storage and a bench connects to the kitchen, and the hot tub sits on a private deck. Two bedrooms and a sleeping loft share one bath.",
+      "vibe": [
+        "wooded",
+        "cozy",
+        "quiet",
+        "snowy"
+      ],
+      "setting": "It sits in a stand of aspens on the western edge of Bend, with the Three Sisters visible through the trees on clear days.",
+      "nearby": "Mt. Bachelor is about 35 minutes up Century Drive, and the Deschutes River trail is a short drive. Downtown Bend is 15 minutes for breweries and groceries.",
+      "neighborhoodDescription": "The street is a quiet cul-de-sac of cabins and full-time homes, with ponderosa pines and little traffic. In winter the road is plowed, and the drive to the mountain is straightforward.",
+      "rating": 4.8,
+      "reviewCount": 164,
+      "hostSeedKey": "host-maya-chen",
+      "slug": "aspen-grove-cabin",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "blue-spruce-chalet",
+      "title": "Blue Spruce Chalet",
+      "category": "cabins",
+      "pricePerNight": 320,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 6,
+      "bathrooms": 3,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Ski storage",
+        "Sauna",
+        "Free parking",
+        "Mountain view"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Breckenridge",
+        "region": "CO",
+        "country": "United States",
+        "coordinates": {
+          "lat": 39.4817,
+          "lng": -106.0384
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Modern cabin with a wooden deck in the forest"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin among tall pine trees"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin in a snowy forest"
+        }
+      ],
+      "summary": "A spacious chalet in Breckenridge with a hot tub, sauna, and room for eight near the ski shuttle.",
+      "description": "The chalet has three levels, with a double-height living room, a stone fireplace, and windows facing the ski runs. A large kitchen and dining table anchor the main floor, and the lower level has a sauna and a second lounge. Four bedrooms and six beds sleep eight comfortably.",
+      "vibe": [
+        "snowy",
+        "spacious",
+        "cozy",
+        "mountain"
+      ],
+      "setting": "It is on a wooded street above Breckenridge, with spruce trees around the deck and peaks visible from the upper windows.",
+      "nearby": "The ski shuttle stops at the end of the street, and the gondola is a five-minute drive. Main Street's restaurants and shops are close, and the Nordic center is just down the valley.",
+      "neighborhoodDescription": "This is a quiet residential street of large chalets and second homes, busy during ski season and calm in the shoulder months. Snow removal is reliable, and the shuttle makes it easy to skip parking.",
+      "rating": 4.9,
+      "reviewCount": 287,
+      "hostSeedKey": "host-priya-natarajan",
+      "slug": "blue-spruce-chalet",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "smoky-mountain-hideaway",
+      "title": "Smoky Mountain Hideaway",
+      "category": "cabins",
+      "pricePerNight": 195,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 2,
+      "amenities": [
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "BBQ grill",
+        "Fire pit",
+        "Mountain view"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Gatlinburg",
+        "region": "TN",
+        "country": "United States",
+        "coordinates": {
+          "lat": 35.7143,
+          "lng": -83.5102
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Cabin among tall pine trees"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin in a snowy forest"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin with a wall of windows"
+        }
+      ],
+      "summary": "A wood-sided hideaway near Gatlinburg with a hot tub, a fire pit, and ridge views from the porch.",
+      "description": "The cabin is all wood inside, with a fireplace in the living room and a porch that runs the length of the house. A hot tub and a fire pit sit at the edge of the deck, facing the ridge. Two bedrooms and two baths make it easy to share with another couple.",
+      "vibe": [
+        "wooded",
+        "cozy",
+        "quiet",
+        "mountain"
+      ],
+      "setting": "It is on a wooded ridge above Gatlinburg, with layered mountain views through the trees and a steep, paved driveway.",
+      "nearby": "The national park's Roaring Fork Motor Nature Trail is close, and downtown Gatlinburg is ten minutes down the hill. Pigeon Forge is about 20 minutes for groceries and attractions.",
+      "neighborhoodDescription": "The ridge is a mix of rental cabins and family homes, spread far enough apart for privacy. It is quiet at night, though the driveway is steep and the nearest grocery is a drive.",
+      "rating": 4.7,
+      "reviewCount": 412,
+      "hostSeedKey": "host-marcus-bell",
+      "slug": "smoky-mountain-hideaway",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "lakeside-cedar-cabin",
+      "title": "Lakeside Cedar Cabin",
+      "category": "cabins",
+      "pricePerNight": 275,
+      "maxGuests": 6,
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2,
+      "amenities": [
+        "Lake access",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Free parking",
+        "Fire pit"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Coeur d'Alene",
+        "region": "ID",
+        "country": "United States",
+        "coordinates": {
+          "lat": 47.6777,
+          "lng": -116.7805
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        "alt": "A-frame cabin in a snowy forest"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+          "alt": "A-frame cabin with a wall of windows"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin on a lake at dusk"
+        }
+      ],
+      "summary": "A cedar cabin on Coeur d'Alene's west shore with a private dock, a fire pit, and lake views.",
+      "description": "The cabin is cedar inside and out, with a living room that faces the water through a wall of windows. A covered porch runs along the lake side, and the fire pit is set into the bank above the dock. Three bedrooms and two baths sleep six.",
+      "vibe": [
+        "lake",
+        "quiet",
+        "wooded",
+        "cozy"
+      ],
+      "setting": "It sits on a wooded lot with 60 feet of lake frontage on Coeur d'Alene, facing east for morning sun on the water.",
+      "nearby": "The lake is at the end of the path, and the nearest boat launch is five minutes away. Coeur d'Alene's downtown is 20 minutes south for restaurants and groceries.",
+      "neighborhoodDescription": "The west shore is a quiet stretch of cabins and year-round homes, with the highway behind the trees. Boat traffic is the main activity in summer, and winters are still and dark.",
+      "rating": 4.8,
+      "reviewCount": 198,
+      "hostSeedKey": "host-maya-chen",
+      "slug": "lakeside-cedar-cabin",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "redwood-creek-cabin",
+      "title": "Redwood Creek Cabin",
+      "category": "cabins",
+      "pricePerNight": 230,
+      "maxGuests": 4,
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1,
+      "amenities": [
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Fire pit",
+        "Free parking"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Mendocino",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 39.3077,
+          "lng": -123.7995
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        "alt": "A-frame cabin with a wall of windows"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Cabin on a lake at dusk"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Modern cabin with a wooden deck in the forest"
+        }
+      ],
+      "summary": "A small cabin under the redwoods with a creek, a fire pit, and a short drive to the Mendocino coast.",
+      "description": "The cabin is compact and warm, with a wood stove, a small kitchen, and windows that look into the redwoods. A bedroom and a sleeping nook share one bath, and the deck overlooks the creek. The fire pit is a few steps down the bank.",
+      "vibe": [
+        "wooded",
+        "quiet",
+        "cozy",
+        "creek"
+      ],
+      "setting": "It sits under second-growth redwoods in a narrow creek canyon east of Mendocino, with ferns and moss on every surface.",
+      "nearby": "The coast and Mendocino village are 15 minutes west. Jackson State Forest's logging roads and trails are close, and the Anderson Valley wineries are about 40 minutes east.",
+      "neighborhoodDescription": "The canyon road passes a handful of cabins and disappears into the forest. It is damp, green, and very quiet, with the creek audible from the deck.",
+      "rating": 4.7,
+      "reviewCount": 126,
+      "hostSeedKey": "host-priya-natarajan",
+      "slug": "redwood-creek-cabin",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "cape-cod-dune-house",
+      "title": "Cape Cod Dune House",
+      "category": "beach",
+      "pricePerNight": 350,
+      "maxGuests": 6,
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2,
+      "amenities": [
+        "Ocean view",
+        "Walk to beach",
+        "Outdoor shower",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio",
+        "BBQ grill"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": true,
+      "location": {
+        "city": "Wellfleet",
+        "region": "MA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 41.9376,
+          "lng": -70.0328
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Waves breaking on a sandy shore"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunset over the surf at the beach"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Beach house with ocean views"
+        }
+      ],
+      "summary": "A shingled dune house in Wellfleet with ocean views, an outdoor shower, and a path toward the beach.",
+      "description": "The house is classic Cape Cod: cedar shingles, white trim, and a wide covered porch facing the dunes. Inside, the living room and kitchen share an open space with a fireplace at one end. Three bedrooms are upstairs, and the outdoor shower is off the back porch.",
+      "vibe": [
+        "ocean",
+        "quiet",
+        "coastal",
+        "family"
+      ],
+      "setting": "It sits on a sandy lane behind the dunes in Wellfleet, with the Atlantic visible from the upper windows and a path toward the beach.",
+      "nearby": "The beach path is a five-minute walk, and Wellfleet's harbor and oyster bars are a short drive. The Cape Cod National Seashore's trails and ponds are close.",
+      "neighborhoodDescription": "The lane is a mix of seasonal cottages and year-round homes, quiet except in July and August. It is a short walk to the sand but far enough from the road to feel removed.",
+      "rating": 4.9,
+      "reviewCount": 231,
+      "hostSeedKey": "host-grace-whitfield",
+      "slug": "cape-cod-dune-house",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "outer-banks-bungalow",
+      "title": "Outer Banks Beach Bungalow",
+      "category": "beach",
+      "pricePerNight": 225,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1,
+      "amenities": [
+        "Walk to beach",
+        "Outdoor shower",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio",
+        "BBQ grill"
+      ],
+      "petsAllowed": true,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Nags Head",
+        "region": "NC",
+        "country": "United States",
+        "coordinates": {
+          "lat": 35.9574,
+          "lng": -75.6241
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Sunset over the surf at the beach"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Beach house with ocean views"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sandy beach and turquoise water"
+        }
+      ],
+      "summary": "A bright bungalow in Nags Head with a screened porch, an outdoor shower, and the beach a short walk away.",
+      "description": "The bungalow is open and bright, with white walls, wood floors, and a screened porch that runs the length of the house. Two bedrooms share a bath, and the kitchen opens to a dining table for six. Beach chairs, umbrellas, and a cart are in the shed.",
+      "vibe": [
+        "beach",
+        "bright",
+        "family",
+        "casual"
+      ],
+      "setting": "It is on a quiet sand road in Nags Head, two streets back from the beach and close to Jockey's Ridge.",
+      "nearby": "The beach access is a five-minute walk, and Jockey's Ridge State Park is a short drive. Nags Head's restaurants and the Wright Brothers memorial are close.",
+      "neighborhoodDescription": "The neighborhood is a grid of beach cottages and rentals, with sandy shoulders instead of sidewalks. It is busy in summer and nearly empty in winter, when the pace slows to walks on the beach.",
+      "rating": 4.6,
+      "reviewCount": 348,
+      "hostSeedKey": "host-marcus-bell",
+      "slug": "outer-banks-beach-bungalow",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "santa-monica-sun-suite",
+      "title": "Santa Monica Sun Suite",
+      "category": "beach",
+      "pricePerNight": 310,
+      "maxGuests": 3,
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1,
+      "amenities": [
+        "Walk to beach",
+        "Wi-Fi",
+        "Kitchenette",
+        "Air conditioning",
+        "Workspace",
+        "Bikes"
+      ],
+      "petsAllowed": false,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Santa Monica",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 34.0195,
+          "lng": -118.4912
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Beach house with ocean views"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sandy beach and turquoise water"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Coastal cottage near the water"
+        }
+      ],
+      "summary": "A one-bedroom suite in Santa Monica with a kitchenette, a workspace, and the beach a short walk away.",
+      "description": "The suite is on the second floor of a small apartment building, with windows on two sides and a compact kitchenette. A queen bed and a sofa bed sleep three, and the desk faces the window. The bathroom has a walk-in shower and a skylight.",
+      "vibe": [
+        "beach",
+        "walkable",
+        "bright",
+        "urban"
+      ],
+      "setting": "It is a few blocks from the beach in Santa Monica, on a quiet residential street north of Wilshire.",
+      "nearby": "The beach and the Santa Monica Pier are a 15-minute walk, and the Expo Line is close for downtown. Montana Avenue's shops and cafes are a few blocks north.",
+      "neighborhoodDescription": "The street is a mix of small apartment buildings and single-family homes, with tree cover and little through traffic. It is walkable and busy during the day, and quiet at night.",
+      "rating": 4.7,
+      "reviewCount": 405,
+      "hostSeedKey": "host-kenji-watanabe",
+      "slug": "santa-monica-sun-suite",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "hanalei-bay-cottage",
+      "title": "Hanalei Bay Cottage",
+      "category": "beach",
+      "pricePerNight": 480,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 2,
+      "amenities": [
+        "Ocean view",
+        "Walk to beach",
+        "Outdoor shower",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio",
+        "Garden"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": true,
+      "location": {
+        "city": "Hanalei",
+        "region": "HI",
+        "country": "United States",
+        "coordinates": {
+          "lat": 22.2017,
+          "lng": -159.5007
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Sandy beach and turquoise water"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Coastal cottage near the water"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Waves breaking on a sandy shore"
+        }
+      ],
+      "summary": "A plantation-style cottage in Hanalei with a garden, an outdoor shower, and a short walk to the bay.",
+      "description": "The cottage has high ceilings, louvered windows, and a covered lanai that looks into the garden. Two bedrooms and two baths are arranged for privacy, and the kitchen opens to the dining lanai. An outdoor shower is tucked behind the house for after the beach.",
+      "vibe": [
+        "tropical",
+        "quiet",
+        "garden",
+        "romantic"
+      ],
+      "setting": "It sits on a lush lot a few streets back from Hanalei Bay, surrounded by palms, ti plants, and banana trees.",
+      "nearby": "Hanalei Bay and the pier are a ten-minute walk, and the town's shops and food trucks are close. The Kalalau Trail and Ke'e Beach are about 20 minutes up the coast.",
+      "neighborhoodDescription": "Hanalei is a small town of plantation cottages, farms, and surfers, with one main road and a slow pace. The street is quiet, and rain showers pass through often, keeping everything green.",
+      "rating": 4.9,
+      "reviewCount": 186,
+      "hostSeedKey": "host-kenji-watanabe",
+      "slug": "hanalei-bay-cottage",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-standard",
+        "policy-check-in-late",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "cannon-beach-cottage",
+      "title": "Cannon Beach Cottage",
+      "category": "beach",
+      "pricePerNight": 260,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1,
+      "amenities": [
+        "Walk to beach",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Cannon Beach",
+        "region": "OR",
+        "country": "United States",
+        "coordinates": {
+          "lat": 45.8918,
+          "lng": -123.9615
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Coastal cottage near the water"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Waves breaking on a sandy shore"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunset over the surf at the beach"
+        }
+      ],
+      "summary": "A cedar cottage in Cannon Beach with a fireplace, a covered porch, and Haystack Rock a short walk away.",
+      "description": "The cottage is cedar-sided and simple, with a fireplace in the living room and a kitchen that opens to the porch. Two bedrooms share a bath, and there is a fold-out sofa for a fifth guest. Beach chairs and a wagon are in the entry closet.",
+      "vibe": [
+        "coastal",
+        "cozy",
+        "quiet",
+        "walkable"
+      ],
+      "setting": "It is on a quiet street a few blocks from the sand in Cannon Beach, with Haystack Rock visible down the beach.",
+      "nearby": "The beach and Haystack Rock are a ten-minute walk, and downtown's galleries and bakeries are close. Ecola State Park is a short drive north for longer trails.",
+      "neighborhoodDescription": "The neighborhood is a mix of cottages, larger homes, and a few inns, all within walking distance of town. It is quiet in the evenings, with the sound of the surf carrying inland.",
+      "rating": 4.8,
+      "reviewCount": 274,
+      "hostSeedKey": "host-maya-chen",
+      "slug": "cannon-beach-cottage",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "soho-loft",
+      "title": "SoHo Loft",
+      "category": "city",
+      "pricePerNight": 390,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 2,
+      "amenities": [
+        "Skyline view",
+        "Wi-Fi",
+        "Full kitchen",
+        "Workspace",
+        "Air conditioning",
+        "Walkable",
+        "Historic"
+      ],
+      "petsAllowed": false,
+      "quiet": false,
+      "featured": true,
+      "location": {
+        "city": "New York",
+        "region": "NY",
+        "country": "United States",
+        "coordinates": {
+          "lat": 40.7128,
+          "lng": -74.006
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Living room with a blue sofa and herringbone floors"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Open living room with a city view and fireplace"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Loft with exposed brick and large windows"
+        }
+      ],
+      "summary": "A cast-iron SoHo loft with skyline views, a chef's kitchen, and two bedrooms above the neighborhood.",
+      "description": "The loft has 12-foot ceilings, cast-iron columns, and oversized windows facing south. The kitchen is a full chef's setup with a long island, and the living area opens to a small balcony. Two bedrooms are separated by a hallway, each with its own bath.",
+      "vibe": [
+        "urban",
+        "bright",
+        "walkable",
+        "stylish"
+      ],
+      "setting": "It is on the fourth floor of a cast-iron building in SoHo, with skyline views from the living room and balcony.",
+      "nearby": "The subway is a block away, and Washington Square Park is a ten-minute walk. The shops on Broadway and the restaurants on Prince Street are close.",
+      "neighborhoodDescription": "SoHo is busy at all hours, with shoppers, residents, and delivery bikes on every block. The loft is high enough that the street noise fades, but the neighborhood is never quiet.",
+      "rating": 4.8,
+      "reviewCount": 391,
+      "hostSeedKey": "host-olivia-brooks",
+      "slug": "soho-loft",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "mission-district-flat",
+      "title": "Mission District Flat",
+      "category": "city",
+      "pricePerNight": 275,
+      "maxGuests": 4,
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1,
+      "amenities": [
+        "Wi-Fi",
+        "Full kitchen",
+        "Workspace",
+        "Walkable",
+        "Washer",
+        "Dryer"
+      ],
+      "petsAllowed": true,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "San Francisco",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 37.7749,
+          "lng": -122.4194
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Open living room with a city view and fireplace"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Loft with exposed brick and large windows"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Bright apartment living room"
+        }
+      ],
+      "summary": "A sunny Mission flat with a big kitchen, a shared garden, and the best of Valencia Street nearby.",
+      "description": "The flat is on the ground floor of a Victorian, with bay windows in the living room and a large kitchen at the back. One bedroom and a study sleep four, and the shared garden has a table and a lemon tree. Original details mix with a renovated bath and a washer-dryer.",
+      "vibe": [
+        "walkable",
+        "sunny",
+        "urban",
+        "lively"
+      ],
+      "setting": "It is on a quiet side street in the Mission, a block from Valencia and a short walk from Dolores Park.",
+      "nearby": "Valencia Street's restaurants and bookstores are around the corner, and Dolores Park is a ten-minute walk. BART is close for downtown and the airport.",
+      "neighborhoodDescription": "The Mission is dense and lively, with murals, taquerias, and a constant stream of people. The side street is calmer than Valencia, but the neighborhood stays busy into the evening.",
+      "rating": 4.7,
+      "reviewCount": 258,
+      "hostSeedKey": "host-olivia-brooks",
+      "slug": "mission-district-flat",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "capitol-hill-rowhouse",
+      "title": "Capitol Hill Rowhouse",
+      "category": "city",
+      "pricePerNight": 245,
+      "maxGuests": 4,
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 2,
+      "amenities": [
+        "Wi-Fi",
+        "Full kitchen",
+        "Workspace",
+        "Walkable",
+        "Historic",
+        "Air conditioning"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Washington",
+        "region": "DC",
+        "country": "United States",
+        "coordinates": {
+          "lat": 38.9072,
+          "lng": -77.0369
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Loft with exposed brick and large windows"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Bright apartment living room"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Row house interior with original details"
+        }
+      ],
+      "summary": "A brick rowhouse on Capitol Hill with a private patio, a workspace, and the Metro a short walk away.",
+      "description": "The rowhouse is narrow and tall, with a living room at the front, a kitchen in the middle, and two bedrooms upstairs. A private patio sits behind the kitchen, and the second bedroom doubles as a workspace. Original pine floors and a restored staircase give it character.",
+      "vibe": [
+        "historic",
+        "walkable",
+        "quiet",
+        "urban"
+      ],
+      "setting": "It is on a tree-lined block of brick rowhouses on Capitol Hill, close to Eastern Market and the Metro.",
+      "nearby": "Eastern Market is a ten-minute walk, and the Capitol and Library of Congress are about 20 minutes. The Metro is close for trips across the city.",
+      "neighborhoodDescription": "Capitol Hill is residential and walkable, with families, staffers, and long-time residents. The block is quiet at night, and the weekend market draws a crowd.",
+      "rating": 4.8,
+      "reviewCount": 213,
+      "hostSeedKey": "host-olivia-brooks",
+      "slug": "capitol-hill-rowhouse",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "wicker-park-studio",
+      "title": "Wicker Park Studio",
+      "category": "city",
+      "pricePerNight": 165,
+      "maxGuests": 2,
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1,
+      "amenities": [
+        "Wi-Fi",
+        "Kitchenette",
+        "Workspace",
+        "Walkable",
+        "Air conditioning",
+        "Coffee maker"
+      ],
+      "petsAllowed": true,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Chicago",
+        "region": "IL",
+        "country": "United States",
+        "coordinates": {
+          "lat": 41.8781,
+          "lng": -87.6298
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Bright apartment living room"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Row house interior with original details"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with a blue sofa and herringbone floors"
+        }
+      ],
+      "summary": "A compact Wicker Park studio with a kitchenette, a workspace, and the Blue Line around the corner.",
+      "description": "The studio is bright and efficiently laid out, with a queen bed, a sofa, and a desk by the window. A kitchenette covers coffee, breakfast, and simple meals, and the bathroom was recently renovated. The building has a shared laundry room and a bike rack.",
+      "vibe": [
+        "urban",
+        "walkable",
+        "compact",
+        "lively"
+      ],
+      "setting": "It is on the second floor of a brick walk-up in Wicker Park, a block from the Blue Line and the neighborhood's main strip.",
+      "nearby": "The Blue Line is a two-minute walk, and Milwaukee Avenue's shops and bars are close. The 606 trail and Humboldt Park are within a 15-minute walk.",
+      "neighborhoodDescription": "Wicker Park is busy and walkable, with coffee shops, record stores, and late-night restaurants. The street is lively on weekends, and the train can be heard from the front windows.",
+      "rating": 4.6,
+      "reviewCount": 446,
+      "hostSeedKey": "host-olivia-brooks",
+      "slug": "wicker-park-studio",
+      "policySeedKeys": [
+        "policy-cancellation-flexible",
+        "policy-house-rules-standard",
+        "policy-check-in-standard",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "sonoma-vineyard-villa",
+      "title": "Sonoma Vineyard Villa",
+      "category": "villas",
+      "pricePerNight": 450,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 5,
+      "bathrooms": 4,
+      "amenities": [
+        "Pool",
+        "Hot tub",
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Garden",
+        "Patio",
+        "Free parking"
+      ],
+      "petsAllowed": false,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Sonoma",
+        "region": "CA",
+        "country": "United States",
+        "coordinates": {
+          "lat": 38.2919,
+          "lng": -122.458
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Living room with glass walls opening to a pool"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Dining room with a black table and sliding glass doors"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Pool villa with mountain views"
+        }
+      ],
+      "summary": "A vineyard villa in Sonoma with a pool, a hot tub, and four bedrooms opening to the garden.",
+      "description": "The villa is built around a courtyard with a pool and a hot tub, with sliding doors from the living room and kitchen. A long dining table seats ten, and the kitchen has a professional range and a pantry. Four bedrooms open to the garden, each with its own bath.",
+      "vibe": [
+        "private",
+        "garden",
+        "sunny",
+        "wine"
+      ],
+      "setting": "It sits at the edge of a working vineyard in Sonoma Valley, with rows of vines on three sides and the Mayacamas in the distance.",
+      "nearby": "Sonoma Plaza is ten minutes away for restaurants and tasting rooms. Several wineries are within a short drive, and the coast is about 45 minutes west.",
+      "neighborhoodDescription": "The road passes a few vineyards and estate homes before ending at the property, so traffic is minimal. Mornings are quiet and cool, and the afternoons fill with light.",
+      "rating": 4.9,
+      "reviewCount": 178,
+      "hostSeedKey": "host-sofia-alvarez",
+      "slug": "sonoma-vineyard-villa",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-late",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-pool"
+      ]
+    },
+    {
+      "seedKey": "santa-fe-adobe-villa",
+      "title": "Santa Fe Adobe Villa",
+      "category": "villas",
+      "pricePerNight": 330,
+      "maxGuests": 6,
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 3,
+      "amenities": [
+        "Fireplace",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio",
+        "Garden",
+        "Fire pit",
+        "Mountain view"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Santa Fe",
+        "region": "NM",
+        "country": "United States",
+        "coordinates": {
+          "lat": 35.687,
+          "lng": -105.9378
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Dining room with a black table and sliding glass doors"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Pool villa with mountain views"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Hillside villa surrounded by trees"
+        }
+      ],
+      "summary": "An adobe villa in Santa Fe with a kiva fireplace, a walled garden, and mountain views from the patio.",
+      "description": "The villa is true adobe, with thick walls, vigas, and a kiva fireplace in the living room. A walled garden and patio run along the south side, with a fire pit and a shaded portal. Three bedrooms and three baths are arranged around two courtyards.",
+      "vibe": [
+        "desert",
+        "quiet",
+        "warm",
+        "historic"
+      ],
+      "setting": "It is on the edge of Santa Fe's east side, where the city meets the foothills of the Sangre de Cristo Mountains.",
+      "nearby": "The Plaza and Canyon Road galleries are a ten-minute drive. The Dale Ball trails and Ski Santa Fe are close, and Meow Wolf is about 15 minutes away.",
+      "neighborhoodDescription": "The neighborhood is a quiet mix of adobe homes and newer Pueblo-style houses, with dirt shoulders and low walls. It is dark at night and close enough to town for dinner.",
+      "rating": 4.8,
+      "reviewCount": 242,
+      "hostSeedKey": "host-sofia-alvarez",
+      "slug": "santa-fe-adobe-villa",
+      "policySeedKeys": [
+        "policy-cancellation-moderate",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-standard"
+      ]
+    },
+    {
+      "seedKey": "austin-hill-country-villa",
+      "title": "Austin Hill Country Villa",
+      "category": "villas",
+      "pricePerNight": 365,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 6,
+      "bathrooms": 3,
+      "amenities": [
+        "Pool",
+        "Hot tub",
+        "Wi-Fi",
+        "Full kitchen",
+        "BBQ grill",
+        "Patio",
+        "Free parking",
+        "Air conditioning"
+      ],
+      "petsAllowed": true,
+      "quiet": true,
+      "featured": false,
+      "location": {
+        "city": "Austin",
+        "region": "TX",
+        "country": "United States",
+        "coordinates": {
+          "lat": 30.2672,
+          "lng": -97.7431
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Pool villa with mountain views"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Hillside villa surrounded by trees"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Desert adobe villa with a patio"
+        }
+      ],
+      "summary": "A hill country villa near Austin with a pool, a covered patio, and space for eight.",
+      "description": "The villa is low and wide, with a living room that opens to a covered patio and a pool. A large kitchen and dining area anchor the center of the house, and four bedrooms are split between two wings. A fire pit and a grill sit beyond the pool.",
+      "vibe": [
+        "sunny",
+        "private",
+        "pool",
+        "family"
+      ],
+      "setting": "It sits on a wooded lot in the hills west of Austin, with live oaks around the pool and a long view toward the valley.",
+      "nearby": "Downtown Austin is about 25 minutes east, and the Barton Creek greenbelt is close. Lake Travis and the Hill Country wineries are a short drive.",
+      "neighborhoodDescription": "The neighborhood is a sparse collection of large lots and gated drives, with deer and birds more common than traffic. It is quiet, dark, and a drive from groceries.",
+      "rating": 4.9,
+      "reviewCount": 319,
+      "hostSeedKey": "host-marcus-bell",
+      "slug": "austin-hill-country-villa",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-early",
+        "policy-pets-welcome",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-pool"
+      ]
+    },
+    {
+      "seedKey": "miami-beach-villa",
+      "title": "Miami Beach Villa",
+      "category": "villas",
+      "pricePerNight": 425,
+      "maxGuests": 8,
+      "bedrooms": 4,
+      "beds": 5,
+      "bathrooms": 4,
+      "amenities": [
+        "Pool",
+        "Walk to beach",
+        "Outdoor shower",
+        "Wi-Fi",
+        "Full kitchen",
+        "Patio",
+        "Air conditioning",
+        "Free parking"
+      ],
+      "petsAllowed": false,
+      "quiet": false,
+      "featured": false,
+      "location": {
+        "city": "Miami Beach",
+        "region": "FL",
+        "country": "United States",
+        "coordinates": {
+          "lat": 25.7907,
+          "lng": -80.13
+        }
+      },
+      "coverPhoto": {
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Hillside villa surrounded by trees"
+      },
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Desert adobe villa with a patio"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Living room with glass walls opening to a pool"
+        }
+      ],
+      "summary": "A Miami Beach villa with a pool, a tropical garden, and the beach a short walk away.",
+      "description": "The villa is bright and open, with a living room that opens to a pool deck and a tropical garden. Four bedrooms and four baths are arranged for groups, and the kitchen has a long island and a wine fridge. A covered outdoor table seats eight.",
+      "vibe": [
+        "tropical",
+        "pool",
+        "bright",
+        "beach"
+      ],
+      "setting": "It is on a quiet residential street in Miami Beach, a few blocks from the ocean and the boardwalk.",
+      "nearby": "The beach is a ten-minute walk, and Lincoln Road's shops and restaurants are close. South Beach and the Design District are a short drive.",
+      "neighborhoodDescription": "The street is a mix of restored apartments and single-family homes, with palm trees and little through traffic. It is walkable to the beach but away from the loudest blocks of South Beach.",
+      "rating": 4.7,
+      "reviewCount": 367,
+      "hostSeedKey": "host-marcus-bell",
+      "slug": "miami-beach-villa",
+      "policySeedKeys": [
+        "policy-cancellation-strict",
+        "policy-house-rules-family",
+        "policy-check-in-late",
+        "policy-pets-not-allowed",
+        "policy-smoking-none",
+        "policy-quiet-hours-10-8",
+        "policy-safety-pool"
+      ]
+    }
+  ]
+}
