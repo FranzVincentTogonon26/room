@@ -15,6 +15,7 @@ import { GlassTabBar, type GlassTabItem } from "@/components/glass-tab-bar";
 import { ListingCard } from "@/components/listing-card";
 import { PolicyCard } from "@/components/policy-card";
 import { ProfileRow, ProfileRowGroup } from "@/components/profile-row";
+import { SearchStayCard } from "@/components/search-stay-card";
 import { StayCard } from "@/components/stay-card";
 import { Wordmark } from "@/components/wordmark";
 import { STAYS } from "@/data/stays";
@@ -98,6 +99,7 @@ const typeOrder: TypeVariant[] = [
   "greeting",
   "title",
   "cardTitle",
+  "cardTitleCompact",
   "body",
   "label",
   "caption",
@@ -116,6 +118,7 @@ const typeSamples: Record<TypeVariant, string> = {
   taglineCompact: "Find unforgettable stays",
   title: "Cozy A-Frame Cabin",
   cardTitle: "Modern Cabin\nwith Hot Tub",
+  cardTitleCompact: "124 stays",
   body: "From mountain cabins to oceanfront villas, room helps you find unforgettable stays for every kind of trip.",
   label: "Personal info",
   caption: "Lake Arrowhead, CA",
@@ -141,6 +144,8 @@ const iconSamples: IconName[] = [
   "bookmark",
   "bath",
   "pawPrint",
+  "flame",
+  "mountain",
   "treePine",
   "waves",
   "globe",
@@ -216,10 +221,10 @@ function ChipGroup() {
   return (
     <View className="gap-3">
       <View className="flex-row flex-wrap gap-2">
-        <Chip label="Cabins" variant="lavender" selected />
-        <Chip label="Under $300" />
-        <Chip label="Pet Friendly" />
-        <Chip label="Quiet" />
+        <Chip label="Cabins" size="sm" variant="lavender" selected />
+        <Chip label="Under $300" size="sm" />
+        <Chip label="Pet Friendly" size="sm" />
+        <Chip label="Quiet" size="sm" />
       </View>
 
       <View className="flex-row flex-wrap gap-2">
@@ -451,7 +456,7 @@ export default function CatalogScreen() {
 
           <Section
             title="06. Filter chips"
-            subtitle="Tap a place"
+            subtitle="Compact search chips, then category chips"
           >
             <ChipGroup />
           </Section>
@@ -475,6 +480,13 @@ export default function CatalogScreen() {
             <AppText variant="caption">Sample photo · Unsplash placeholder</AppText>
             <StayCard stay={STAYS[0]} className="mt-3" />
             <AppText variant="caption">Home stay card · display only</AppText>
+            <SearchStayCard
+              stay={STAYS[0]}
+              saved={saved}
+              onToggleSave={() => setSaved((current) => !current)}
+              className="mt-3"
+            />
+            <AppText variant="caption">Search result row · session-only save</AppText>
           </Section>
 
           <Section title="08. Policy card">

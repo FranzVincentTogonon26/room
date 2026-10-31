@@ -12,6 +12,11 @@ const variantClasses = {
   yellow: "bg-primary",
 } as const;
 
+const sizeClasses = {
+  md: "h-chip px-5",
+  sm: "h-[30px] px-[13px]",
+} as const;
+
 const toneByVariant: Record<keyof typeof variantClasses, TextTone> = {
   neutral: "foreground",
   lavender: "lavenderForeground",
@@ -21,6 +26,7 @@ const toneByVariant: Record<keyof typeof variantClasses, TextTone> = {
 export type ChipProps = Omit<PressableProps, "children" | "style"> & {
   label: string;
   variant?: keyof typeof variantClasses;
+  size?: keyof typeof sizeClasses;
   icon?: IconName;
   selected?: boolean;
   className?: string;
@@ -30,6 +36,7 @@ export type ChipProps = Omit<PressableProps, "children" | "style"> & {
 export function Chip({
   label,
   variant = "neutral",
+  size = "md",
   icon,
   selected,
   disabled = false,
@@ -49,7 +56,8 @@ export function Chip({
       accessibilityState={selected === undefined ? { disabled } : { disabled, selected }}
       disabled={disabled}
       className={cn(
-        "h-chip flex-row items-center justify-center gap-2 rounded-pill px-5",
+        "flex-row items-center justify-center gap-2 rounded-pill",
+        sizeClasses[size],
         variantClasses[variant],
         disabled && "opacity-40",
         className,
@@ -57,7 +65,11 @@ export function Chip({
       style={({ pressed }) => [pressed && !disabled ? { opacity: 0.8 } : null, style]}
     >
       {icon ? <Icon name={icon} size="md" color={iconColor} /> : null}
-      <AppText variant="label" tone={tone}>
+      <AppText
+        variant={size === "sm" ? "badge" : "label"}
+        tone={tone}
+        className={size === "sm" ? "font-sans-semibold" : undefined}
+      >
         {label}
       </AppText>
     </Pressable>

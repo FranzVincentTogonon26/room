@@ -1,13 +1,7 @@
 import { useUser } from "@clerk/expo";
 import { useRouter } from "expo-router";
 import { useRef, useState, type ComponentRef } from "react";
-import {
-  Keyboard,
-  Pressable,
-  ScrollView,
-  TextInput,
-  View,
-} from "react-native";
+import { Keyboard, Pressable, ScrollView, TextInput, View } from "react-native";
 import Animated, {
   Easing,
   FadeIn,
@@ -18,17 +12,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { StayCard } from "@/components/stay-card";
 import { StaySearchField } from "@/components/stay-search-field";
-import { AppText, Chip, Icon } from "@/components/ui";
+import { AppText } from "@/components/ui";
+import { DraggableChip } from "@/components/ui/draggable-chip";
 import { UserAvatar } from "@/components/user-avatar";
 import {
-  getFeaturedStays,
+  filterStays,
   STAY_CATEGORIES,
   type StayCategoryId,
   type StayCategoryOption,
 } from "@/data/stays";
 import { usePressScale } from "@/lib/use-press-scale";
 import { firstNameFor } from "@/lib/user-name";
-import { motion, useThemeColors } from "@/theme";
+import { motion } from "@/theme";
 
 const enter = (step: number) =>
   FadeInDown.duration(motion.slow)
@@ -59,27 +54,15 @@ function CategoryChip({
   index: number;
   onPress: () => void;
 }) {
-  const chipPress = usePressScale();
-
   return (
     <Animated.View entering={chipEnter(index)}>
-      <Animated.View style={chipPress.animatedStyle}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={item.label}
-          onPress={onPress}
-          onPressIn={chipPress.onPressIn}
-          onPressOut={chipPress.onPressOut}
-        >
-          <Chip
-            label={item.label}
-            icon={item.icon}
-            variant={selected ? "yellow" : "neutral"}
-            selected={selected}
-            onPress={onPress}
-          />
-        </Pressable>
-      </Animated.View>
+      <DraggableChip
+        label={item.label}
+        variant={selected ? "yellow" : "neutral"}
+        icon={item.icon}
+        selected={selected}
+        onSelect={onPress}
+      />
     </Animated.View>
   );
 }
@@ -87,16 +70,14 @@ function CategoryChip({
 export function HomeScreen() {
   const { user } = useUser();
   const router = useRouter();
-  const colors = useThemeColors();
   const insets = useSafeAreaInsets();
   const inputRef = useRef<ComponentRef<typeof TextInput>>(null);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<StayCategoryId>("all");
   const avatarPress = usePressScale();
-  const searchButtonPress = usePressScale();
 
   const firstName = firstNameFor(user);
-  const featuredStays = getFeaturedStays(category);
+  const allStays = filterStays(category);
 
   const submitSearch = () => {
     const trimmed = query.trim();
@@ -114,11 +95,10 @@ export function HomeScreen() {
       contentInsetAdjustmentBehavior="never"
       automaticallyAdjustContentInsets={false}
       keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
-        paddingTop: insets.top + 8,
-        paddingBottom: insets.bottom + 100,
+        paddingTop: 8,
+        paddingBottom: insets.bottom + 24,
       }}
     >
       <View className="px-5">
@@ -154,19 +134,6 @@ export function HomeScreen() {
           <AppText variant="hero" className="flex-1 pr-3">
             {"Find your\nnext stay"}
           </AppText>
-
-          <Animated.View style={searchButtonPress.animatedStyle}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Focus search"
-              onPress={() => inputRef.current?.focus()}
-              onPressIn={searchButtonPress.onPressIn}
-              onPressOut={searchButtonPress.onPressOut}
-              className="mt-1 h-22 w-18 items-center justify-center rounded-field bg-muted"
-            >
-              <Icon name="search" size={24} color={colors.foreground} />
-            </Pressable>
-          </Animated.View>
         </Animated.View>
 
         <Animated.View entering={enter(3)} className="mt-4">
@@ -206,7 +173,7 @@ export function HomeScreen() {
             )}
             className="gap-4"
           >
-            {featuredStays.map((stay, index) => (
+            {allStays.map((stay, index) => (
               <Animated.View key={stay.id} entering={cardEnter(index)}>
                 <StayCard stay={stay} />
               </Animated.View>

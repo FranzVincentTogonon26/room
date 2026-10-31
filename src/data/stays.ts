@@ -359,43 +359,103 @@ function searchTextFor(stay: Stay) {
     .toLowerCase();
 }
 
+export type StaySort = "best" | "price-asc" | "price-desc" | "rating";
+
+export type StaySearchOptions = {
+  category?: StayCategoryId;
+  maxPrice?: number;
+  petFriendly?: boolean;
+  quiet?: boolean;
+  sort?: StaySort;
+};
+
+export const SORT_LABELS: Record<StaySort, string> = {
+  best: "Best match",
+  "price-asc": "Price: low to high",
+  "price-desc": "Price: high to low",
+  rating: "Top rated",
+};
+
+function isPetFriendly(stay: Stay) {
+  return (
+    stay.tags.some((tag) => tag === "pet friendly" || tag === "dog friendly") ||
+    stay.amenities.some((amenity) => /pet|dog/i.test(amenity))
+  );
+}
+
 /**
- * Ranks locally seeded stays for a natural-language query. Tokens are matched
- * against the stay's own text, so no network or model call is involved.
+ * Ranks locally seeded stays for a natural-language query and the Search tab's
+ * filters. Tokens are matched against the stay's own text, so no network or
+ * model call is involved.
  */
 export function searchStays(
   query: string,
-  category: StayCategoryId = "all",
+  options: StaySearchOptions = {},
 ): Stay[] {
-  const { tokens, maxPrice } = parseStayQuery(query);
+  const {
+    category = "all",
+    maxPrice,
+    petFriendly = false,
+    quiet = false,
+    sort = "best",
+  } = options;
+  const parsed = parseStayQuery(query);
+  const priceCaps = [parsed.maxPrice, maxPrice].filter(
+    (cap): cap is number => cap !== undefined,
+  );
+  const priceCap = priceCaps.length > 0 ? Math.min(...priceCaps) : undefined;
 
-  return STAYS.filter(
+  const scored = STAYS.filter(
     (stay) => category === "all" || stay.category === category,
   )
-    .filter((stay) => maxPrice === undefined || stay.price <= maxPrice)
+    .filter((stay) => priceCap === undefined || stay.price <= priceCap)
+    .filter((stay) => !petFriendly || isPetFriendly(stay))
+    .filter((stay) => !quiet || stay.tags.includes("quiet"))
     .map((stay) => {
-      if (tokens.length === 0) return { stay, score: 0 };
+      if (parsed.tokens.length === 0) return { stay, score: 0 };
 
       const haystack = searchTextFor(stay);
-      const score = tokens.reduce(
+      const score = parsed.tokens.reduce(
         (total, token) => total + (haystack.includes(token) ? 1 : 0),
         0,
       );
 
       return { stay, score };
     })
-    .filter(({ score }) => tokens.length === 0 || score > 0)
-    .sort(
-      (a, b) =>
-        b.score - a.score ||
-        Number(b.stay.featured ?? false) - Number(a.stay.featured ?? false) ||
-        b.stay.rating - a.stay.rating,
-    )
-    .map(({ stay }) => stay);
+    .filter(({ score }) => parsed.tokens.length === 0 || score > 0);
+
+  switch (sort) {
+    case "price-asc":
+      scored.sort(
+        (a, b) => a.stay.price - b.stay.price || b.stay.rating - a.stay.rating,
+      );
+      break;
+    case "price-desc":
+      scored.sort(
+        (a, b) => b.stay.price - a.stay.price || b.stay.rating - a.stay.rating,
+      );
+      break;
+    case "rating":
+      scored.sort(
+        (a, b) =>
+          b.stay.rating - a.stay.rating ||
+          b.stay.reviewCount - a.stay.reviewCount,
+      );
+      break;
+    default:
+      scored.sort(
+        (a, b) =>
+          b.score - a.score ||
+          Number(b.stay.featured ?? false) - Number(a.stay.featured ?? false) ||
+          b.stay.rating - a.stay.rating,
+      );
+  }
+
+  return scored.map(({ stay }) => stay);
 }
 
 export function filterStays(category: StayCategoryId = "all"): Stay[] {
-  return searchStays("", category);
+  return searchStays("", { category });
 }
 
 export function getFeaturedStays(category: StayCategoryId = "all"): Stay[] {

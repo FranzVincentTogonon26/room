@@ -49,15 +49,16 @@ export function StaySearchField({
         placeholderTextColor={colors.lavenderForeground}
         selectionColor={colors.accent}
         returnKeyType="search"
+        multiline={false}
         autoCapitalize="none"
         underlineColorAndroid="transparent"
         accessibilityLabel="Describe your stay"
-        className="flex-1"
+        className="flex-1 self-stretch"
         style={{
           paddingVertical: 0,
+          textAlignVertical: "center",
           fontFamily: typography.caption.fontFamily,
           fontSize: typography.caption.fontSize,
-          lineHeight: typography.caption.lineHeight,
           letterSpacing: typography.caption.letterSpacing,
           color: colors.lavenderForeground,
         }}

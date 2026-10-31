@@ -4,6 +4,7 @@ export * from "./brand-icons";
 export * from "./button";
 export * from "./card";
 export * from "./chip";
+export * from "./draggable-chip";
 export * from "./icon";
 export * from "./icon-button";
 export * from "./input";
