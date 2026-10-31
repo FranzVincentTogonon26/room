@@ -1,0 +1,141 @@
+{
+  "modern-cabin-hot-tub": [
+    "Lake Arrowhead",
+    "Lake Arrowhead Village",
+    "Pinnacles",
+    "Heaps Peak",
+    "Snow Valley"
+  ],
+  "cedar-ridge-cabin": ["Big Bear Lake", "Big Bear Village"],
+  "pine-a-frame": ["Tahoe", "Tahoe City", "Palisades Tahoe", "Homewood"],
+  "ocean-view-beach-house": [
+    "Malibu",
+    "Pacific",
+    "Malibu Country Mart",
+    "Getty Villa",
+    "PCH"
+  ],
+  "gullwing-cottage": ["Santa Cruz", "West Cliff Drive"],
+  "mendocino-coast-cottage": ["Mendocino", "Van Damme State Park"],
+  "downtown-arts-loft": ["Portland", "Central Eastside", "Saturday Market"],
+  "skyline-studio": ["Belltown", "Pike Place Market", "Space Needle"],
+  "brick-rowhouse-suite": [
+    "Back Bay",
+    "Commonwealth Avenue",
+    "Newbury Street",
+    "Public Garden",
+    "Green Line",
+    "South Station",
+    "T"
+  ],
+  "palm-springs-pool-villa": [
+    "Palm Springs",
+    "San Jacinto Mountains",
+    "Downtown Palm Springs",
+    "Indian Canyons",
+    "Joshua Tree"
+  ],
+  "hillside-garden-villa": [
+    "Ojai",
+    "Topatopa Mountains",
+    "Punchbowl Trail",
+    "Lake Casitas",
+    "Ventura"
+  ],
+  "saguaro-desert-villa": [
+    "McDowell Sonoran Preserve",
+    "Scottsdale",
+    "Old Town",
+    "Musical Instrument Museum"
+  ],
+  "aspen-grove-cabin": [
+    "Bend",
+    "Three Sisters",
+    "Mt. Bachelor",
+    "Century Drive",
+    "Deschutes River",
+    "Downtown Bend"
+  ],
+  "blue-spruce-chalet": ["Breckenridge", "Main Street"],
+  "smoky-mountain-hideaway": [
+    "Gatlinburg",
+    "Roaring Fork Motor Nature Trail",
+    "Pigeon Forge"
+  ],
+  "lakeside-cedar-cabin": ["Coeur d'Alene"],
+  "redwood-creek-cabin": [
+    "Mendocino",
+    "Jackson State Forest",
+    "Anderson Valley"
+  ],
+  "cape-cod-dune-house": [
+    "Wellfleet",
+    "Atlantic",
+    "Cape Cod National Seashore"
+  ],
+  "outer-banks-bungalow": [
+    "Nags Head",
+    "Jockey's Ridge",
+    "Jockey's Ridge State Park",
+    "Wright Brothers"
+  ],
+  "santa-monica-sun-suite": [
+    "Santa Monica",
+    "Wilshire",
+    "Santa Monica Pier",
+    "Expo Line",
+    "Montana Avenue"
+  ],
+  "hanalei-bay-cottage": [
+    "Hanalei",
+    "Hanalei Bay",
+    "Kalalau Trail",
+    "Ke'e Beach"
+  ],
+  "cannon-beach-cottage": ["Cannon Beach", "Haystack Rock", "Ecola State Park"],
+  "soho-loft": ["SoHo", "Washington Square Park", "Broadway", "Prince Street"],
+  "mission-district-flat": [
+    "Mission",
+    "Valencia",
+    "Valencia Street",
+    "Dolores Park",
+    "BART"
+  ],
+  "capitol-hill-rowhouse": [
+    "Capitol Hill",
+    "Eastern Market",
+    "Metro",
+    "Capitol",
+    "Library of Congress"
+  ],
+  "wicker-park-studio": [
+    "Wicker Park",
+    "Blue Line",
+    "Milwaukee Avenue",
+    "606",
+    "Humboldt Park"
+  ],
+  "sonoma-vineyard-villa": ["Sonoma Valley", "Mayacamas", "Sonoma Plaza"],
+  "santa-fe-adobe-villa": [
+    "Santa Fe",
+    "Sangre de Cristo Mountains",
+    "Plaza",
+    "Canyon Road",
+    "Dale Ball",
+    "Ski Santa Fe",
+    "Meow Wolf"
+  ],
+  "austin-hill-country-villa": [
+    "Austin",
+    "Downtown Austin",
+    "Barton Creek",
+    "Lake Travis",
+    "Hill Country"
+  ],
+  "miami-beach-villa": [
+    "Miami Beach",
+    "Lincoln Road",
+    "South Beach",
+    "Design District"
+  ]
+}

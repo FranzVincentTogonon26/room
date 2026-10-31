@@ -12,15 +12,22 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { StayCard } from "@/components/stay-card";
 import { StaySearchField } from "@/components/stay-search-field";
+import {
+  StaysEmpty,
+  StaysError,
+  StaysLoading,
+  StaysRefreshNotice,
+} from "@/components/stays-state";
 import { AppText } from "@/components/ui";
 import { DraggableChip } from "@/components/ui/draggable-chip";
 import { UserAvatar } from "@/components/user-avatar";
 import {
-  filterStays,
+  filterStaysIn,
   STAY_CATEGORIES,
   type StayCategoryId,
   type StayCategoryOption,
 } from "@/data/stays";
+import { useRefreshStaysOnFocus, useStays } from "@/data/stays-provider";
 import { usePressScale } from "@/lib/use-press-scale";
 import { firstNameFor } from "@/lib/user-name";
 import { motion } from "@/theme";
@@ -75,9 +82,11 @@ export function HomeScreen() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<StayCategoryId>("all");
   const avatarPress = usePressScale();
+  const { stays, status, error, refreshError, retry } = useStays();
+  useRefreshStaysOnFocus();
 
   const firstName = firstNameFor(user);
-  const allStays = filterStays(category);
+  const allStays = filterStaysIn(stays, category);
 
   const submitSearch = () => {
     const trimmed = query.trim();
@@ -166,19 +175,41 @@ export function HomeScreen() {
         </Animated.View>
 
         <Animated.View entering={enter(5)} className="mt-5">
-          <Animated.View
-            key={category}
-            entering={FadeIn.duration(motion.fast).reduceMotion(
-              ReduceMotion.System,
-            )}
-            className="gap-4"
-          >
-            {allStays.map((stay, index) => (
-              <Animated.View key={stay.id} entering={cardEnter(index)}>
-                <StayCard stay={stay} />
-              </Animated.View>
-            ))}
-          </Animated.View>
+          {status === "loading" ? (
+            <StaysLoading />
+          ) : status === "error" ? (
+            <StaysError message={error} onRetry={retry} />
+          ) : (
+            <>
+              {refreshError ? (
+                <View className="mb-4">
+                  <StaysRefreshNotice message={refreshError} onRetry={retry} />
+                </View>
+              ) : null}
+
+              {allStays.length === 0 ? (
+                <StaysEmpty
+                  icon="house"
+                  title="No stays in this category yet."
+                  message="Try another category."
+                />
+              ) : (
+                <Animated.View
+                  key={category}
+                  entering={FadeIn.duration(motion.fast).reduceMotion(
+                    ReduceMotion.System,
+                  )}
+                  className="gap-4"
+                >
+                  {allStays.map((stay, index) => (
+                    <Animated.View key={stay.id} entering={cardEnter(index)}>
+                      <StayCard stay={stay} />
+                    </Animated.View>
+                  ))}
+                </Animated.View>
+              )}
+            </>
+          )}
         </Animated.View>
       </View>
     </ScrollView>

@@ -19,6 +19,10 @@ export type Stay = {
   description: string;
   image: string;
   featured?: boolean;
+  petsAllowed?: boolean;
+  quiet?: boolean;
+  /** Precomputed lowercase haystack for live Sanity stays. */
+  searchText?: string;
 };
 
 export type StayCategoryOption = {
@@ -347,6 +351,8 @@ export function parseStayQuery(query: string): StayQuery {
 }
 
 function searchTextFor(stay: Stay) {
+  if (stay.searchText) return stay.searchText;
+
   return [
     stay.title,
     stay.location,
@@ -377,18 +383,25 @@ export const SORT_LABELS: Record<StaySort, string> = {
 };
 
 function isPetFriendly(stay: Stay) {
+  if (stay.petsAllowed !== undefined) return stay.petsAllowed;
+
   return (
     stay.tags.some((tag) => tag === "pet friendly" || tag === "dog friendly") ||
     stay.amenities.some((amenity) => /pet|dog/i.test(amenity))
   );
 }
 
+function isQuiet(stay: Stay) {
+  return stay.quiet ?? stay.tags.includes("quiet");
+}
+
 /**
- * Ranks locally seeded stays for a natural-language query and the Search tab's
- * filters. Tokens are matched against the stay's own text, so no network or
+ * Ranks a list of stays for a natural-language query and the Search tab's
+ * filters. Tokens are matched against each stay's own text, so no network or
  * model call is involved.
  */
-export function searchStays(
+export function searchStaysIn(
+  stays: Stay[],
   query: string,
   options: StaySearchOptions = {},
 ): Stay[] {
@@ -405,12 +418,11 @@ export function searchStays(
   );
   const priceCap = priceCaps.length > 0 ? Math.min(...priceCaps) : undefined;
 
-  const scored = STAYS.filter(
-    (stay) => category === "all" || stay.category === category,
-  )
+  const scored = stays
+    .filter((stay) => category === "all" || stay.category === category)
     .filter((stay) => priceCap === undefined || stay.price <= priceCap)
     .filter((stay) => !petFriendly || isPetFriendly(stay))
-    .filter((stay) => !quiet || stay.tags.includes("quiet"))
+    .filter((stay) => !quiet || isQuiet(stay))
     .map((stay) => {
       if (parsed.tokens.length === 0) return { stay, score: 0 };
 
@@ -454,8 +466,31 @@ export function searchStays(
   return scored.map(({ stay }) => stay);
 }
 
+/** Local sample stays only; the app uses `searchStaysIn` with live data. */
+export function searchStays(
+  query: string,
+  options: StaySearchOptions = {},
+): Stay[] {
+  return searchStaysIn(STAYS, query, options);
+}
+
+/** Filters and orders a list of stays: featured first, then rating. */
+export function filterStaysIn(
+  stays: Stay[],
+  category: StayCategoryId = "all",
+): Stay[] {
+  return stays
+    .filter((stay) => category === "all" || stay.category === category)
+    .sort(
+      (a, b) =>
+        Number(b.featured ?? false) - Number(a.featured ?? false) ||
+        b.rating - a.rating ||
+        b.reviewCount - a.reviewCount,
+    );
+}
+
 export function filterStays(category: StayCategoryId = "all"): Stay[] {
-  return searchStays("", { category });
+  return filterStaysIn(STAYS, category);
 }
 
 export function getFeaturedStays(category: StayCategoryId = "all"): Stay[] {

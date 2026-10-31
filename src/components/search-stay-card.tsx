@@ -29,7 +29,8 @@ function amenityIcon(label: string): IconName {
 
 /**
  * Amenities that read well as two pills: the design shows the stay's most
- * distinctive features, not necessarily the first two listed.
+ * distinctive features, not necessarily the first two listed. Live stays keep
+ * pet and quiet as booleans, so those become pills of their own.
  */
 const AMENITY_PRIORITY = [
   { pattern: /hot tub/i, rank: 0 },
@@ -37,14 +38,33 @@ const AMENITY_PRIORITY = [
   { pattern: /pool/i, rank: 2 },
   { pattern: /view/i, rank: 3 },
   { pattern: /fireplace/i, rank: 4 },
-  { pattern: /wi-fi/i, rank: 5 },
+  { pattern: /quiet/i, rank: 5 },
+  { pattern: /wi-fi/i, rank: 6 },
 ] as const;
 
-function featuredAmenities(amenities: string[]) {
+function featuredAmenities(stay: Stay) {
   const rank = (label: string) =>
-    AMENITY_PRIORITY.find(({ pattern }) => pattern.test(label))?.rank ?? 6;
+    AMENITY_PRIORITY.find(({ pattern }) => pattern.test(label))?.rank ?? 7;
 
-  return [...amenities].sort((a, b) => rank(a) - rank(b)).slice(0, 2);
+  const candidates = [
+    ...stay.amenities.map((amenity) => ({
+      icon: amenityIcon(amenity),
+      label: titleCase(amenity),
+    })),
+    ...(stay.petsAllowed ? [{ icon: "pawPrint" as const, label: "Pet Friendly" }] : []),
+    ...(stay.quiet ? [{ icon: "moon" as const, label: "Quiet" }] : []),
+  ];
+  const seen = new Set<string>();
+
+  return candidates
+    .sort((a, b) => rank(a.label) - rank(b.label))
+    .filter((pill) => {
+      const key = pill.label.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 2);
 }
 
 /** Title-cases each word while leaving already-uppercase parts (Wi-Fi) alone. */
@@ -63,10 +83,7 @@ export function SearchStayCard({
   className,
 }: SearchStayCardProps) {
   const colors = useThemeColors();
-  const amenities = featuredAmenities(stay.amenities).map((amenity) => ({
-    icon: amenityIcon(amenity),
-    label: titleCase(amenity),
-  }));
+  const amenities = featuredAmenities(stay);
 
   return (
     <View className={cn("flex-row", className)} style={{ gap: 12 }}>

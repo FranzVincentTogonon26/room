@@ -256,17 +256,16 @@
           "alt": "A-frame cabin with a wall of windows"
         }
       ],
-      "summary": "A cedar-and-glass cabin in the pines with a private hot tub and lake views from the great room.",
-      "description": "Cedar walls and a wall of glass frame the pines in the main room, with a stone fireplace at one end and a low sectional at the other. The kitchen opens to the dining table and the deck, where the hot tub sits under a string of lights. Two bedrooms are downstairs and a loft sleeps two more.",
+      "summary": "A private hot tub anchors this cabin's deck, with lake views from the great room.",
+      "description": "Cedar walls and a wall of glass enclose the main room, where a stone fireplace faces a low sectional. The kitchen connects to the dining table and the deck, with string lights above the hot tub. Two bedrooms sit downstairs, while the loft has sleeping space for two.",
       "vibe": [
         "quiet",
         "wooded",
-        "cozy",
-        "lake"
+        "cozy"
       ],
-      "setting": "The cabin sits on a wooded slope above Lake Arrowhead, with pine branches close to the deck and a glimpse of water through the trees.",
-      "nearby": "Lake Arrowhead Village is a ten-minute drive for groceries and boat rentals. Trailheads for the Pinnacles and Heaps Peak are close by, and Snow Valley is about 25 minutes up the road.",
-      "neighborhoodDescription": "The street is a quiet loop of second homes and rentals, with no through traffic and little light at night. Neighbors are spread out enough that the deck feels private, but the village is still an easy drive.",
+      "setting": "On a wooded slope above Lake Arrowhead, the cabin has pine branches reaching close to its deck. Water is visible through gaps in the trees.",
+      "nearby": "Drive ten minutes to Lake Arrowhead Village for groceries and boat rentals, or head to the nearby Pinnacles and Heaps Peak trailheads. Snow Valley is about 25 minutes away by road.",
+      "neighborhoodDescription": "Second homes and rentals line a loop street without through traffic. There is little light at night, and the spacing between neighbors gives the deck a sense of privacy.",
       "rating": 4.9,
       "reviewCount": 342,
       "hostSeedKey": "host-maya-chen",
@@ -322,17 +321,17 @@
           "alt": "Cabin on a lake at dusk"
         }
       ],
-      "summary": "A quiet A-frame on a wooded ridge with a wood stove, a wraparound deck, and trails from the door.",
-      "description": "The A-frame's main room rises two stories, with a wood stove at the center and windows on three sides. A compact kitchen and a dining nook sit behind the living area, and the wraparound deck catches sun most of the day. Two bedrooms and a bath are tucked under the slope.",
+      "summary": "Set on a cedar-covered ridge, this A-frame has a wraparound deck that receives sun through much of the day.",
+      "description": "The ridge-top A-frame opens into a two-story main room with windows on three sides. Behind the living area, a compact kitchen sits alongside a dining nook. The bedrooms and bathroom fit beneath the sloping roof.",
       "vibe": [
         "secluded",
         "cozy",
-        "wooded",
-        "quiet"
+        "quiet",
+        "wooded"
       ],
-      "setting": "The house is on a ridge above Big Bear Lake, surrounded by mature cedars and manzanita, with no neighbors in direct view.",
-      "nearby": "Trails leave from the end of the street, and the lake's north shore is a short drive for kayaking. Big Bear Village has groceries, restaurants, and the nearest coffee.",
-      "neighborhoodDescription": "This is a sparsely built ridge of cabins and full-time homes, quiet in every season. Snowplows clear the main road in winter, and the last stretch is steep enough that all-wheel drive helps.",
+      "setting": "Mature cedars and manzanita surround the house above Big Bear Lake. Neighboring homes are not in direct sight.",
+      "nearby": "Drive a short distance to the north shore of Big Bear Lake for kayaking. Big Bear Village offers groceries, restaurants, and the closest coffee.",
+      "neighborhoodDescription": "Cabins and full-time homes are spread out along the ridge, and the area stays quiet throughout the year. Trail access is at the end of the street. In winter, snowplows clear the main road, though all-wheel drive helps on the steep final stretch.",
       "rating": 4.8,
       "reviewCount": 186,
       "hostSeedKey": "host-priya-natarajan",
@@ -388,17 +387,16 @@
           "alt": "Modern cabin with a wooden deck in the forest"
         }
       ],
-      "summary": "A classic Tahoe A-frame with a soaring window wall, a wood-burning fireplace, and a hot tub under the stars.",
-      "description": "The two-story window wall is the first thing you see, with the pines rising behind it and the fireplace centered in the living room. A wide deck wraps the front of the house, and the hot tub is set into it just off the kitchen. Two bedrooms sit upstairs under the steep roofline.",
+      "summary": "This A-frame has a wood-burning fireplace at the center of the living room.",
+      "description": "A window wall rises through two stories of the A-frame. Upstairs, two bedrooms sit beneath the steep roofline. A wide deck extends around the front of the house, with a hot tub built into it just off the kitchen.",
       "vibe": [
         "cozy",
-        "snowy",
         "romantic",
         "wooded"
       ],
-      "setting": "The A-frame is set among tall pines on Tahoe's west shore, a few minutes from the water and the ski shuttle.",
-      "nearby": "Tahoe City's restaurants and the lakefront are five minutes away. Palisades Tahoe and Homewood are both within a half-hour drive, and the bike path runs along the highway.",
-      "neighborhoodDescription": "The neighborhood is a mix of old Tahoe cabins and newer rentals, with quiet streets and tall trees. It is close enough to town for dinner but far enough that the nights are dark and silent.",
+      "setting": "Tall pines surround the house on Tahoe's west shore. The water and ski shuttle are a few minutes away.",
+      "nearby": "Tahoe City's restaurants and lakefront are five minutes away. Both Palisades Tahoe and Homewood are within a half-hour drive.",
+      "neighborhoodDescription": "Older Tahoe cabins share the neighborhood with newer rentals along quiet, tree-lined streets. A bike path follows the highway, and town is close enough for dinner. Nights here are dark and quiet.",
       "rating": 4.7,
       "reviewCount": 214,
       "hostSeedKey": "host-priya-natarajan",
@@ -456,17 +454,16 @@
           "alt": "Coastal cottage near the water"
         }
       ],
-      "summary": "A bright Malibu beach house with floor-to-ceiling glass, a sunny deck, and a private path to the sand.",
-      "description": "The living room opens completely to a deck above the beach, with glass on two sides and white oak floors throughout. Four bedrooms are spread across two levels, including a primary suite with its own sitting area. The kitchen is built for a crowd, with a long island and a second sink.",
+      "summary": "Ocean views define this Malibu beach house, with floor-to-ceiling glass bringing in daylight.",
+      "description": "The living room opens fully onto a deck with an ocean view. Glass lines two sides of the room, and white oak flooring runs throughout the house. Four bedrooms occupy two levels, with a separate sitting area in the primary suite. The kitchen has a long island and a second sink.",
       "vibe": [
         "bright",
-        "ocean",
         "sunny",
         "open"
       ],
-      "setting": "The house sits on a bluff above a wide stretch of Malibu sand, with the Pacific filling the windows from the living room and deck.",
-      "nearby": "A private path leads down to the beach in about two minutes. Malibu Country Mart is ten minutes south, and the Getty Villa is a short drive down the coast.",
-      "neighborhoodDescription": "The street is a quiet residential stretch off the highway, with hedges and gates keeping it private. Traffic on PCH is the main sound, and the beach is the main destination.",
+      "setting": "A bluff places the house above a broad stretch of Malibu beach, with the Pacific below.",
+      "nearby": "Malibu Country Mart is ten minutes to the south. The Getty Villa is a short drive along the coast.",
+      "neighborhoodDescription": "Hedges and gates give the residential street a private feel, though traffic on PCH is the main sound. A private path reaches the sand in about two minutes on foot.",
       "rating": 4.9,
       "reviewCount": 508,
       "hostSeedKey": "host-daniel-reyes",
@@ -522,17 +519,17 @@
           "alt": "Waves breaking on a sandy shore"
         }
       ],
-      "summary": "A small, sun-filled cottage a few blocks from the water, with a fenced yard and an easy walk to town.",
-      "description": "The cottage keeps its original beadboard walls and painted floors, with a bright living room and a kitchen that opens to the yard. Two bedrooms share a single bath, and the fenced back garden has a table for breakfast outside. A washer and dryer are tucked into the back hall.",
+      "summary": "This beach cottage has a fenced back garden.",
+      "description": "Original beadboard walls and painted floors remain throughout the beach cottage. The living room receives plenty of daylight, and the kitchen opens to the yard. Two bedrooms share one bathroom.",
       "vibe": [
         "cozy",
-        "walkable",
         "sunny",
-        "quiet"
+        "quiet",
+        "walkable"
       ],
-      "setting": "It sits on a flat block of small beach cottages on Santa Cruz's west side, a few streets back from the water.",
-      "nearby": "The beach and the wharf are a ten-minute walk, and downtown Santa Cruz is about fifteen minutes on foot. The West Cliff Drive path is close for a morning run or bike ride.",
-      "neighborhoodDescription": "This is a lived-in neighborhood of cottages, bungalows, and a few small apartment buildings. It is quiet at night but busy on weekend mornings, when everyone walks to the beach.",
+      "setting": "On Santa Cruz's west side, the cottage occupies a flat block of small beach homes a few streets inland from the water.",
+      "nearby": "Walk to the beach or wharf in about ten minutes, or reach downtown Santa Cruz in roughly fifteen minutes on foot. The nearby West Cliff Drive path offers a route for running or biking.",
+      "neighborhoodDescription": "Cottages, bungalows, and small apartment buildings make up this residential neighborhood. Nights are quiet, while weekend mornings bring people walking toward the beach.",
       "rating": 4.7,
       "reviewCount": 173,
       "hostSeedKey": "host-daniel-reyes",
@@ -588,17 +585,16 @@
           "alt": "Sunset over the surf at the beach"
         }
       ],
-      "summary": "A weathered cedar cottage on the headlands with a fireplace, a wind-sheltered deck, and big Pacific views.",
-      "description": "The cottage is small and warm, with a fireplace in the living room and windows that face the water. A wind-sheltered deck off the kitchen is the best spot for coffee, and the two bedrooms are simple and quiet. The second bath was added recently, with a deep tub.",
+      "summary": "This coastal cottage is clad in weathered cedar, with broad views of the Pacific.",
+      "description": "Inside, the cottage is small, with a fireplace in the living room. Windows face the water. The kitchen opens onto a deck sheltered from the wind, with space to sit over coffee. The two bedrooms are simply furnished and quiet.",
       "vibe": [
         "quiet",
-        "ocean",
-        "romantic",
-        "cozy"
+        "cozy",
+        "romantic"
       ],
-      "setting": "It sits on a grassy headland north of Mendocino village, with open ocean to the west and cypress trees behind the house.",
-      "nearby": "The village is five minutes away for bakeries and the headlands trail. Van Damme State Park and its pygmy forest are a short drive south, and the lighthouse is north.",
-      "neighborhoodDescription": "The headlands are sparsely built, with a few rentals and farmhouses along the road. Fog rolls in most evenings, and the nearest neighbor is far enough that the deck feels completely private.",
+      "setting": "The cottage occupies a grassy headland north of Mendocino village. Cypress trees stand behind the house.",
+      "nearby": "Mendocino is five minutes away for bakeries and the headlands trail. A short drive south brings you to Van Damme State Park and its pygmy forest.",
+      "neighborhoodDescription": "A few rentals and farmhouses are scattered along the road. The nearest neighbor is distant enough for the deck to feel private. Evening fog is common.",
       "rating": 4.8,
       "reviewCount": 261,
       "hostSeedKey": "host-daniel-reyes",
@@ -655,17 +651,16 @@
           "alt": "Row house interior with original details"
         }
       ],
-      "summary": "An open brick-and-timber loft above a coffee bar, with a dedicated desk and galleries downstairs.",
-      "description": "The loft is one open room with exposed brick, timber beams, and tall windows facing the street. A queen bed sits behind a half-wall, and the desk is set up for a full day of work. The kitchen is compact but complete, with a gas range and a coffee setup.",
+      "summary": "An arts loft with galleries downstairs offers a dedicated desk for working.",
+      "description": "The loft's open layout combines exposed brick and timber beams with tall, street-facing windows. A half-wall separates the queen bed from the rest of the space. The compact kitchen has a full setup for cooking and making coffee.",
       "vibe": [
-        "walkable",
-        "lively",
         "industrial",
-        "urban"
+        "urban",
+        "lively"
       ],
-      "setting": "It is on the second floor of a converted warehouse in Portland's Central Eastside, above a coffee bar and around the corner from a gallery.",
-      "nearby": "The riverfront, Saturday Market, and the streetcar are within a ten-minute walk. Dozens of coffee shops, breweries, and galleries are in the surrounding blocks.",
-      "neighborhoodDescription": "The Central Eastside is a working district that turns into a nightlife neighborhood after dark. Streets are busy during the day and lively on weekends, with some noise from the bar below.",
+      "setting": "The home occupies the second floor of a converted warehouse in Central Eastside, above a coffee bar.",
+      "nearby": "Saturday Market, the riverfront, and the streetcar are each within a ten-minute walk. The surrounding blocks also have breweries to visit.",
+      "neighborhoodDescription": "Central Eastside shifts from a working district by day to a nightlife area after dark. Coffee shops and galleries are close enough to reach on foot. Expect busy daytime streets, lively weekends, and some noise from the bar below.",
       "rating": 4.8,
       "reviewCount": 402,
       "hostSeedKey": "host-maya-chen",
@@ -721,17 +716,17 @@
           "alt": "Living room with a blue sofa and herringbone floors"
         }
       ],
-      "summary": "A compact high-rise studio with a wall of windows, a proper desk, and a shared rooftop gym.",
-      "description": "The studio is efficient and bright, with a wall of windows facing Puget Sound and the downtown skyline. A queen bed, a sofa, and a real desk fit without feeling crowded, and the kitchenette covers the basics. The building has a shared rooftop gym and a laundry room on each floor.",
+      "summary": "Skyline views define this studio, with a shared rooftop gym in the building.",
+      "description": "A wall of windows brings daylight into the studio and frames the downtown skyline. The layout accommodates a queen bed and a sofa without feeling crowded. A dedicated desk provides space to work.",
       "vibe": [
         "urban",
         "bright",
         "compact",
-        "walkable"
+        "lively"
       ],
-      "setting": "It is on the 18th floor of a Belltown apartment building, with water and city views from the living area.",
-      "nearby": "Pike Place Market is a fifteen-minute walk, and the Space Needle is about the same. Light rail and the waterfront ferry terminal are close for longer trips.",
-      "neighborhoodDescription": "Belltown is dense and walkable, with restaurants and bars on nearly every block. The building is on a quieter side street, but the neighborhood is lively late into the evening.",
+      "setting": "The apartment sits on the 18th floor of a Belltown building, with water visible from the living area.",
+      "nearby": "Pike Place Market and the Space Needle are each about a 15-minute walk away. Light rail and the waterfront ferry terminal are also close for trips farther afield.",
+      "neighborhoodDescription": "Belltown is densely built and easy to explore on foot, with restaurants and bars on nearly every block. The building sits on a quieter side street, though the surrounding neighborhood stays active late into the evening.",
       "rating": 4.6,
       "reviewCount": 328,
       "hostSeedKey": "host-kenji-watanabe",
@@ -788,17 +783,16 @@
           "alt": "Open living room with a city view and fireplace"
         }
       ],
-      "summary": "A quiet suite in a restored Back Bay row house with original moldings, a kitchenette, and the T a block away.",
-      "description": "The suite occupies the parlor level of a restored row house, with 12-foot ceilings, original moldings, and a marble fireplace that is no longer working. A kitchenette is set into one wall, and the bedroom is in the back, away from the street. The bathroom has a walk-in shower and heated floors.",
+      "summary": "This restored row house suite has a kitchenette built into one wall.",
+      "description": "The suite sits on the parlor level of the restored row house. Original moldings frame rooms with 12-foot ceilings. The bedroom is at the rear, set away from the street.",
       "vibe": [
         "historic",
-        "walkable",
         "quiet",
-        "elegant"
+        "residential"
       ],
-      "setting": "It is on a tree-lined Back Bay street of brownstones, a block from Commonwealth Avenue and the T.",
-      "nearby": "Newbury Street shopping is around the corner, and the Public Garden is a ten-minute walk. The Green Line is a block away, and South Station is two stops down.",
-      "neighborhoodDescription": "Back Bay is quiet and residential, with students, long-time residents, and a steady stream of visitors. The street is one-way and lightly traveled, so the suite stays calm even on weekends.",
+      "setting": "Brownstones and trees line the surrounding Back Bay street. Commonwealth Avenue is one block away.",
+      "nearby": "Shops on Newbury Street are just around the corner, and the Public Garden is ten minutes away on foot. The Green Line is one block away, with South Station two stops down.",
+      "neighborhoodDescription": "Students, long-time residents, and visitors share this residential neighborhood. Light traffic on the one-way street helps keep the suite quiet through the weekend.",
       "rating": 4.7,
       "reviewCount": 197,
       "hostSeedKey": "host-grace-whitfield",
@@ -856,17 +850,17 @@
           "alt": "Desert adobe villa with a patio"
         }
       ],
-      "summary": "A walled desert villa with a saltwater pool, shaded lounge, and mountain views from every room.",
-      "description": "The villa is built around a central pool courtyard, with sliding glass doors from every living space. A shaded lounge runs along one side, and the kitchen opens to an outdoor dining table. Four bedrooms are spaced for privacy, each with its own bath access.",
+      "summary": "A saltwater pool anchors this villa, with a shaded lounge along one side.",
+      "description": "The home's layout wraps around a central pool courtyard. Sliding glass doors connect every living space to the courtyard. The kitchen opens toward an outdoor dining table. The four bedrooms are separated for privacy, each with access to a bathroom.",
       "vibe": [
         "sunny",
         "private",
-        "desert",
-        "pool"
+        "quiet",
+        "desert"
       ],
-      "setting": "It sits behind a wall on a quiet street in south Palm Springs, with the San Jacinto Mountains rising directly behind the pool.",
-      "nearby": "Downtown Palm Springs is a ten-minute drive for restaurants and the aerial tramway. The Indian Canyons trails are close, and Joshua Tree is about an hour east.",
-      "neighborhoodDescription": "The neighborhood is a grid of walled villas and mid-century homes, with wide streets and little foot traffic. It is quiet and private, though summer afternoons are hot enough that the pool is the main plan.",
+      "setting": "The villa sits behind a wall in south Palm Springs, with the San Jacinto Mountains rising behind the pool. Mountain views extend to every room.",
+      "nearby": "Downtown Palm Springs is a ten-minute drive for restaurants and the aerial tramway. Trails in Indian Canyons are close by, while Joshua Tree is about an hour east.",
+      "neighborhoodDescription": "Wide streets form a grid of walled villas and mid-century homes, with little foot traffic. The area is quiet and private, and hot summer afternoons tend to center on the pool.",
       "rating": 4.9,
       "reviewCount": 286,
       "hostSeedKey": "host-sofia-alvarez",
@@ -923,17 +917,16 @@
           "alt": "Living room with glass walls opening to a pool"
         }
       ],
-      "summary": "A stucco villa folded into an Ojai hillside, surrounded by olive trees, with a garden hot tub and valley views.",
-      "description": "The villa is built in two wings around a gravel courtyard, with thick stucco walls and deep window seats. The living room opens to a covered porch, and the kitchen has a long tiled counter and a pantry. The primary suite has its own patio, and the hot tub sits in the garden below the house.",
+      "summary": "This hillside villa has a garden hot tub below the house.",
+      "description": "The villa's two wings frame a gravel courtyard, with thick stucco walls and deep window seats. A covered porch connects to the living room. The kitchen includes a long tiled counter and a pantry, while the primary suite opens onto its own patio.",
       "vibe": [
         "secluded",
-        "garden",
         "quiet",
         "warm"
       ],
-      "setting": "It is on a hillside east of Ojai, surrounded by olive groves and chaparral, with the Topatopa Mountains across the valley.",
-      "nearby": "Ojai's arcade and restaurants are ten minutes down the hill. The Punchbowl Trail and Lake Casitas are close, and the beach at Ventura is about 40 minutes away.",
-      "neighborhoodDescription": "The road climbs past a handful of gated properties and ends in oak and olive groves. Neighbors are out of sight, and the only regular sound is the wind in the trees.",
+      "setting": "Olive groves and chaparral surround the hillside east of Ojai. The Topatopa Mountains rise across the valley.",
+      "nearby": "Ojai's arcade and restaurants are a ten-minute trip downhill, with Punchbowl Trail and Lake Casitas also close by. The beach at Ventura is about 40 minutes away.",
+      "neighborhoodDescription": "The approach climbs past a few gated properties before ending among oaks and olive groves. Neighbors remain out of sight, and wind through the trees is the area's regular sound.",
       "rating": 4.8,
       "reviewCount": 152,
       "hostSeedKey": "host-sofia-alvarez",
@@ -990,17 +983,17 @@
           "alt": "Dining room with a black table and sliding glass doors"
         }
       ],
-      "summary": "A low-slung adobe-style home at the edge of the Preserve with a pool, a shaded portal, and saguaros at sunset.",
-      "description": "The house is a single story of thick adobe walls and deep shaded openings, built around a pool and a covered portal. The living room and kitchen share one long space, with a kiva fireplace at the end. Three bedrooms open directly to the courtyard.",
+      "summary": "Saguaros stand outside this desert home at sunset, with a pool at the center of the layout.",
+      "description": "The single-story desert home has thick adobe walls and deeply shaded openings. The living room and kitchen occupy one long, shared space. Three bedrooms open straight onto the courtyard.",
       "vibe": [
         "desert",
         "sunny",
         "private",
         "quiet"
       ],
-      "setting": "It borders the McDowell Sonoran Preserve in north Scottsdale, with open desert and saguaro-covered hills behind the pool.",
-      "nearby": "Trailheads into the Preserve are a short walk from the driveway. Scottsdale's Old Town is 25 minutes south, and the Musical Instrument Museum is about 20 minutes away.",
-      "neighborhoodDescription": "This is a low-density edge of Scottsdale where the streets end at the Preserve. It is quiet and dark at night, with coyotes and quail more common than cars.",
+      "setting": "The property borders the McDowell Sonoran Preserve in north Scottsdale. Open desert and hills dotted with saguaros extend behind the pool.",
+      "nearby": "Old Town is 25 minutes south, while the Musical Instrument Museum is about 20 minutes away.",
+      "neighborhoodDescription": "Streets reach their end at the McDowell Sonoran Preserve in this sparsely developed part of Scottsdale, with trailheads a short walk from the driveway. Nights are dark and quiet, and coyotes and quail are more common than passing cars.",
       "rating": 4.8,
       "reviewCount": 219,
       "hostSeedKey": "host-sofia-alvarez",
@@ -1058,17 +1051,17 @@
           "alt": "Cabin among tall pine trees"
         }
       ],
-      "summary": "A timber cabin in an aspen grove with a hot tub, a stone fireplace, and ski storage for a Bend weekend.",
-      "description": "The cabin is built of local timber, with a stone fireplace in the living room and a wall of windows facing the aspens. A mudroom with ski storage and a bench connects to the kitchen, and the hot tub sits on a private deck. Two bedrooms and a sleeping loft share one bath.",
+      "summary": "An aspen grove surrounds this cabin, where a hot tub sits on a private deck.",
+      "description": "Built from local timber, the cabin has a living room with a stone fireplace and a wall of windows looking toward the aspens. A mudroom provides ski storage and connects to the kitchen. The layout includes two bedrooms and a sleeping loft that share one bathroom.",
       "vibe": [
         "wooded",
         "cozy",
         "quiet",
         "snowy"
       ],
-      "setting": "It sits in a stand of aspens on the western edge of Bend, with the Three Sisters visible through the trees on clear days.",
-      "nearby": "Mt. Bachelor is about 35 minutes up Century Drive, and the Deschutes River trail is a short drive. Downtown Bend is 15 minutes for breweries and groceries.",
-      "neighborhoodDescription": "The street is a quiet cul-de-sac of cabins and full-time homes, with ponderosa pines and little traffic. In winter the road is plowed, and the drive to the mountain is straightforward.",
+      "setting": "On Bend's western edge, the trees frame glimpses of the Three Sisters when skies are clear.",
+      "nearby": "Reach Mt. Bachelor in about 35 minutes via Century Drive, or take a short drive to the Deschutes River trail. Downtown Bend is 15 minutes away for breweries and groceries.",
+      "neighborhoodDescription": "The cabin sits on a low-traffic cul-de-sac shared by other cabins and full-time homes, among ponderosa pines. The road is plowed in winter.",
       "rating": 4.8,
       "reviewCount": 164,
       "hostSeedKey": "host-maya-chen",
@@ -1128,17 +1121,17 @@
           "alt": "A-frame cabin in a snowy forest"
         }
       ],
-      "summary": "A spacious chalet in Breckenridge with a hot tub, sauna, and room for eight near the ski shuttle.",
-      "description": "The chalet has three levels, with a double-height living room, a stone fireplace, and windows facing the ski runs. A large kitchen and dining table anchor the main floor, and the lower level has a sauna and a second lounge. Four bedrooms and six beds sleep eight comfortably.",
+      "summary": "Spruce trees surround the chalet's deck, and a sauna sits on the lower level.",
+      "description": "The chalet spans three levels, with a double-height living room and a stone fireplace. The main floor brings together a large kitchen and dining table, while a second lounge occupies the lower level. Living room windows face the ski runs.",
       "vibe": [
         "snowy",
         "spacious",
         "cozy",
         "mountain"
       ],
-      "setting": "It is on a wooded street above Breckenridge, with spruce trees around the deck and peaks visible from the upper windows.",
-      "nearby": "The ski shuttle stops at the end of the street, and the gondola is a five-minute drive. Main Street's restaurants and shops are close, and the Nordic center is just down the valley.",
-      "neighborhoodDescription": "This is a quiet residential street of large chalets and second homes, busy during ski season and calm in the shoulder months. Snow removal is reliable, and the shuttle makes it easy to skip parking.",
+      "setting": "A wooded street above Breckenridge surrounds the home, with mountain peaks visible from the upper windows.",
+      "nearby": "The gondola is a five-minute drive away, and Main Street offers nearby restaurants and shops. The Nordic center is down the valley.",
+      "neighborhoodDescription": "Large chalets and second homes line this quiet residential street, which gets busier during ski season and settles down in the shoulder months. The ski shuttle stops at the end of the street, offering an alternative to driving and parking. Snow removal is reliable.",
       "rating": 4.9,
       "reviewCount": 287,
       "hostSeedKey": "host-priya-natarajan",
@@ -1197,17 +1190,17 @@
           "alt": "A-frame cabin with a wall of windows"
         }
       ],
-      "summary": "A wood-sided hideaway near Gatlinburg with a hot tub, a fire pit, and ridge views from the porch.",
-      "description": "The cabin is all wood inside, with a fireplace in the living room and a porch that runs the length of the house. A hot tub and a fire pit sit at the edge of the deck, facing the ridge. Two bedrooms and two baths make it easy to share with another couple.",
+      "summary": "A mountain hideaway above Gatlinburg, with a hot tub facing the ridge.",
+      "description": "Wood lines the cabin's interior, and a fireplace anchors the living room. A porch extends along the full length of the house, opening this mountain hideaway toward the ridge. The deck has a fire pit at its edge. Two bedrooms and two bathrooms provide separate spaces for two couples.",
       "vibe": [
         "wooded",
         "cozy",
         "quiet",
         "mountain"
       ],
-      "setting": "It is on a wooded ridge above Gatlinburg, with layered mountain views through the trees and a steep, paved driveway.",
-      "nearby": "The national park's Roaring Fork Motor Nature Trail is close, and downtown Gatlinburg is ten minutes down the hill. Pigeon Forge is about 20 minutes for groceries and attractions.",
-      "neighborhoodDescription": "The ridge is a mix of rental cabins and family homes, spread far enough apart for privacy. It is quiet at night, though the driveway is steep and the nearest grocery is a drive.",
+      "setting": "The cabin sits on a wooded ridge above Gatlinburg, where trees frame layers of mountain views. Access is by a steep, paved driveway.",
+      "nearby": "Roaring Fork Motor Nature Trail is nearby, and downtown Gatlinburg is a ten-minute trip downhill. Pigeon Forge is about 20 minutes away for groceries and attractions.",
+      "neighborhoodDescription": "Rental cabins and family homes share the ridge, with space between properties for privacy. Nights are quiet, and reaching the nearest grocery requires a drive.",
       "rating": 4.7,
       "reviewCount": 412,
       "hostSeedKey": "host-marcus-bell",
@@ -1265,17 +1258,16 @@
           "alt": "Cabin on a lake at dusk"
         }
       ],
-      "summary": "A cedar cabin on Coeur d'Alene's west shore with a private dock, a fire pit, and lake views.",
-      "description": "The cabin is cedar inside and out, with a living room that faces the water through a wall of windows. A covered porch runs along the lake side, and the fire pit is set into the bank above the dock. Three bedrooms and two baths sleep six.",
+      "summary": "This lakeside cedar cabin has a fire pit set into the bank above the water.",
+      "description": "Cedar lines both the interior and exterior of the cabin beside the lake. A wall of living room windows looks out across the water. Three bedrooms and two bathrooms accommodate six guests.",
       "vibe": [
-        "lake",
         "quiet",
         "wooded",
         "cozy"
       ],
-      "setting": "It sits on a wooded lot with 60 feet of lake frontage on Coeur d'Alene, facing east for morning sun on the water.",
-      "nearby": "The lake is at the end of the path, and the nearest boat launch is five minutes away. Coeur d'Alene's downtown is 20 minutes south for restaurants and groceries.",
-      "neighborhoodDescription": "The west shore is a quiet stretch of cabins and year-round homes, with the highway behind the trees. Boat traffic is the main activity in summer, and winters are still and dark.",
+      "setting": "The wooded lot has 60 feet of frontage on Coeur d'Alene. Its east-facing position catches morning sunlight on the water.",
+      "nearby": "The nearest boat launch is five minutes away. Downtown Coeur d'Alene is 20 minutes south for restaurants and groceries.",
+      "neighborhoodDescription": "Cabins and year-round homes line this quiet stretch of the west shore, with the highway behind the trees. A path leads down to the lake. Summer activity centers on boat traffic, while winter brings stillness and dark nights.",
       "rating": 4.8,
       "reviewCount": 198,
       "hostSeedKey": "host-maya-chen",
@@ -1332,17 +1324,16 @@
           "alt": "Modern cabin with a wooden deck in the forest"
         }
       ],
-      "summary": "A small cabin under the redwoods with a creek, a fire pit, and a short drive to the Mendocino coast.",
-      "description": "The cabin is compact and warm, with a wood stove, a small kitchen, and windows that look into the redwoods. A bedroom and a sleeping nook share one bath, and the deck overlooks the creek. The fire pit is a few steps down the bank.",
+      "summary": "Beneath the redwoods beside a creek, this cabin has a fire pit a few steps down the bank.",
+      "description": "The compact cabin has windows facing the redwoods. Inside, there is a small kitchen. A bedroom and sleeping nook share a bathroom. The deck looks out over the creek.",
       "vibe": [
         "wooded",
         "quiet",
-        "cozy",
-        "creek"
+        "cozy"
       ],
-      "setting": "It sits under second-growth redwoods in a narrow creek canyon east of Mendocino, with ferns and moss on every surface.",
-      "nearby": "The coast and Mendocino village are 15 minutes west. Jackson State Forest's logging roads and trails are close, and the Anderson Valley wineries are about 40 minutes east.",
-      "neighborhoodDescription": "The canyon road passes a handful of cabins and disappears into the forest. It is damp, green, and very quiet, with the creek audible from the deck.",
+      "setting": "A narrow creek canyon east of Mendocino holds the cabin among second-growth redwoods. Ferns and moss cover the surrounding landscape.",
+      "nearby": "Mendocino village and the coast are 15 minutes west, with logging roads and trails close by in Jackson State Forest. The wineries of Anderson Valley are about 40 minutes east.",
+      "neighborhoodDescription": "A handful of cabins line the canyon road before it continues into the forest. The surroundings are damp and very quiet, and you can hear the creek from the deck.",
       "rating": 4.7,
       "reviewCount": 126,
       "hostSeedKey": "host-priya-natarajan",
@@ -1401,17 +1392,16 @@
           "alt": "Beach house with ocean views"
         }
       ],
-      "summary": "A shingled dune house in Wellfleet with ocean views, an outdoor shower, and a path toward the beach.",
-      "description": "The house is classic Cape Cod: cedar shingles, white trim, and a wide covered porch facing the dunes. Inside, the living room and kitchen share an open space with a fireplace at one end. Three bedrooms are upstairs, and the outdoor shower is off the back porch.",
+      "summary": "A dune house in Wellfleet with views of the Atlantic from the upper windows.",
+      "description": "The dune house has cedar shingles, white trim, and a broad covered porch looking toward the dunes. The living room and kitchen occupy one open space, with three bedrooms upstairs. An outdoor shower sits off the back porch.",
       "vibe": [
-        "ocean",
         "quiet",
         "coastal",
         "family"
       ],
-      "setting": "It sits on a sandy lane behind the dunes in Wellfleet, with the Atlantic visible from the upper windows and a path toward the beach.",
-      "nearby": "The beach path is a five-minute walk, and Wellfleet's harbor and oyster bars are a short drive. The Cape Cod National Seashore's trails and ponds are close.",
-      "neighborhoodDescription": "The lane is a mix of seasonal cottages and year-round homes, quiet except in July and August. It is a short walk to the sand but far enough from the road to feel removed.",
+      "setting": "A sandy lane leads to the house behind the dunes, with a path continuing toward the beach.",
+      "nearby": "Wellfleet's harbor and oyster bars are a short drive away. Trails and ponds are close by in the Cape Cod National Seashore.",
+      "neighborhoodDescription": "Seasonal cottages share the lane with year-round homes. The area is generally quiet outside July and August, and the house is set back from the road. The beach path is a five-minute walk away.",
       "rating": 4.9,
       "reviewCount": 231,
       "hostSeedKey": "host-grace-whitfield",
@@ -1469,17 +1459,16 @@
           "alt": "Sandy beach and turquoise water"
         }
       ],
-      "summary": "A bright bungalow in Nags Head with a screened porch, an outdoor shower, and the beach a short walk away.",
-      "description": "The bungalow is open and bright, with white walls, wood floors, and a screened porch that runs the length of the house. Two bedrooms share a bath, and the kitchen opens to a dining table for six. Beach chairs, umbrellas, and a cart are in the shed.",
+      "summary": "This beach bungalow has an outdoor shower for rinsing off after time on the sand.",
+      "description": "White walls and wood floors give the bungalow a bright interior. The kitchen opens onto a dining area with a table that seats six. The two bedrooms share one bathroom.",
       "vibe": [
-        "beach",
+        "casual",
         "bright",
-        "family",
-        "casual"
+        "beach"
       ],
-      "setting": "It is on a quiet sand road in Nags Head, two streets back from the beach and close to Jockey's Ridge.",
-      "nearby": "The beach access is a five-minute walk, and Jockey's Ridge State Park is a short drive. Nags Head's restaurants and the Wright Brothers memorial are close.",
-      "neighborhoodDescription": "The neighborhood is a grid of beach cottages and rentals, with sandy shoulders instead of sidewalks. It is busy in summer and nearly empty in winter, when the pace slows to walks on the beach.",
+      "setting": "The house sits along a sand road in Nags Head, two streets back from the beach.",
+      "nearby": "Jockey's Ridge and the Wright Brothers memorial are close by. Restaurants in Nags Head are also nearby.",
+      "neighborhoodDescription": "Beach cottages and rentals line a grid of streets with sandy shoulders rather than sidewalks. Beach access is about five minutes away on foot. The area is busy during summer and nearly empty in winter.",
       "rating": 4.6,
       "reviewCount": 348,
       "hostSeedKey": "host-marcus-bell",
@@ -1537,17 +1526,17 @@
           "alt": "Coastal cottage near the water"
         }
       ],
-      "summary": "A one-bedroom suite in Santa Monica with a kitchenette, a workspace, and the beach a short walk away.",
-      "description": "The suite is on the second floor of a small apartment building, with windows on two sides and a compact kitchenette. A queen bed and a sofa bed sleep three, and the desk faces the window. The bathroom has a walk-in shower and a skylight.",
+      "summary": "Windows on two sides bring light into this Santa Monica suite, a short walk from the beach.",
+      "description": "Set on the second floor of a small apartment building, the suite has a bright interior. A compact kitchenette provides space for preparing food. The workspace includes a desk positioned facing a window.",
       "vibe": [
-        "beach",
-        "walkable",
         "bright",
-        "urban"
+        "urban",
+        "walkable",
+        "beach"
       ],
-      "setting": "It is a few blocks from the beach in Santa Monica, on a quiet residential street north of Wilshire.",
-      "nearby": "The beach and the Santa Monica Pier are a 15-minute walk, and the Expo Line is close for downtown. Montana Avenue's shops and cafes are a few blocks north.",
-      "neighborhoodDescription": "The street is a mix of small apartment buildings and single-family homes, with tree cover and little through traffic. It is walkable and busy during the day, and quiet at night.",
+      "setting": "The surrounding residential street sits north of Wilshire, with tree cover among small apartment buildings and single-family homes.",
+      "nearby": "Walk to Santa Monica Pier in about 15 minutes, or head a few blocks north to the shops and cafes on Montana Avenue. The Expo Line is also close by.",
+      "neighborhoodDescription": "The area is easy to explore on foot, with daytime activity and little through traffic. The neighborhood settles down at night.",
       "rating": 4.7,
       "reviewCount": 405,
       "hostSeedKey": "host-kenji-watanabe",
@@ -1606,17 +1595,16 @@
           "alt": "Waves breaking on a sandy shore"
         }
       ],
-      "summary": "A plantation-style cottage in Hanalei with a garden, an outdoor shower, and a short walk to the bay.",
-      "description": "The cottage has high ceilings, louvered windows, and a covered lanai that looks into the garden. Two bedrooms and two baths are arranged for privacy, and the kitchen opens to the dining lanai. An outdoor shower is tucked behind the house for after the beach.",
+      "summary": "This plantation-style cottage near Hanalei Bay has a covered lanai overlooking the garden.",
+      "description": "The cottage has tall ceilings and windows with louvers. Its two bedrooms and two bathrooms are laid out to provide privacy. The kitchen connects to the lanai's dining area. Behind the cottage, an outdoor shower offers a place to rinse after the beach.",
       "vibe": [
-        "tropical",
         "quiet",
-        "garden",
+        "tropical",
         "romantic"
       ],
-      "setting": "It sits on a lush lot a few streets back from Hanalei Bay, surrounded by palms, ti plants, and banana trees.",
-      "nearby": "Hanalei Bay and the pier are a ten-minute walk, and the town's shops and food trucks are close. The Kalalau Trail and Ke'e Beach are about 20 minutes up the coast.",
-      "neighborhoodDescription": "Hanalei is a small town of plantation cottages, farms, and surfers, with one main road and a slow pace. The street is quiet, and rain showers pass through often, keeping everything green.",
+      "setting": "A few streets separate the property from Hanalei Bay. Palms, ti plants, and banana trees surround the cottage.",
+      "nearby": "Walk to Hanalei Bay and the pier in about ten minutes. The Kalalau Trail and Ke'e Beach are roughly 20 minutes farther up the coast.",
+      "neighborhoodDescription": "Hanalei moves at a slow pace, with plantation cottages, farms, surfers, and a single main road. The cottage's street is quiet, with town shops and food trucks close by. Frequent passing showers keep the area green.",
       "rating": 4.9,
       "reviewCount": 186,
       "hostSeedKey": "host-kenji-watanabe",
@@ -1673,17 +1661,17 @@
           "alt": "Sunset over the surf at the beach"
         }
       ],
-      "summary": "A cedar cottage in Cannon Beach with a fireplace, a covered porch, and Haystack Rock a short walk away.",
-      "description": "The cottage is cedar-sided and simple, with a fireplace in the living room and a kitchen that opens to the porch. Two bedrooms share a bath, and there is a fold-out sofa for a fifth guest. Beach chairs and a wagon are in the entry closet.",
+      "summary": "This Cannon Beach cottage is built with cedar, with Haystack Rock a short walk away.",
+      "description": "The cottage has a simple interior. A fireplace sits in the living room, and the kitchen connects to the outdoor space. The two bedrooms share one bathroom.",
       "vibe": [
         "coastal",
         "cozy",
         "quiet",
         "walkable"
       ],
-      "setting": "It is on a quiet street a few blocks from the sand in Cannon Beach, with Haystack Rock visible down the beach.",
-      "nearby": "The beach and Haystack Rock are a ten-minute walk, and downtown's galleries and bakeries are close. Ecola State Park is a short drive north for longer trails.",
-      "neighborhoodDescription": "The neighborhood is a mix of cottages, larger homes, and a few inns, all within walking distance of town. It is quiet in the evenings, with the sound of the surf carrying inland.",
+      "setting": "The cottage sits a few blocks back from the sand. Haystack Rock is visible farther along the beach.",
+      "nearby": "Head north by car to Ecola State Park for longer trails.",
+      "neighborhoodDescription": "Cottages, larger homes, and a few inns make up the surrounding neighborhood. Town is within walking distance, with galleries and bakeries nearby. Evenings are quiet enough for the sound of surf to carry inland.",
       "rating": 4.8,
       "reviewCount": 274,
       "hostSeedKey": "host-maya-chen",
@@ -1742,17 +1730,16 @@
           "alt": "Loft with exposed brick and large windows"
         }
       ],
-      "summary": "A cast-iron SoHo loft with skyline views, a chef's kitchen, and two bedrooms above the neighborhood.",
-      "description": "The loft has 12-foot ceilings, cast-iron columns, and oversized windows facing south. The kitchen is a full chef's setup with a long island, and the living area opens to a small balcony. Two bedrooms are separated by a hallway, each with its own bath.",
+      "summary": "This SoHo loft has 12-foot ceilings.",
+      "description": "Cast-iron columns and oversized south-facing windows frame the loft's interior. The full kitchen includes a long island. A hallway separates the two bedrooms, and each bedroom has its own bathroom.",
       "vibe": [
         "urban",
         "bright",
-        "walkable",
-        "stylish"
+        "walkable"
       ],
-      "setting": "It is on the fourth floor of a cast-iron building in SoHo, with skyline views from the living room and balcony.",
-      "nearby": "The subway is a block away, and Washington Square Park is a ten-minute walk. The shops on Broadway and the restaurants on Prince Street are close.",
-      "neighborhoodDescription": "SoHo is busy at all hours, with shoppers, residents, and delivery bikes on every block. The loft is high enough that the street noise fades, but the neighborhood is never quiet.",
+      "setting": "The home occupies the fourth floor of a cast-iron building in SoHo. The living room looks out over the skyline.",
+      "nearby": "Walk to Washington Square Park in ten minutes, or reach the subway a block away.",
+      "neighborhoodDescription": "Shops on Broadway and restaurants on Prince Street are close by. Shoppers, residents, and delivery bikes keep SoHo active throughout the day and night. Street noise is less noticeable at the loft's height, but the neighborhood is not quiet.",
       "rating": 4.8,
       "reviewCount": 391,
       "hostSeedKey": "host-olivia-brooks",
@@ -1810,17 +1797,16 @@
           "alt": "Bright apartment living room"
         }
       ],
-      "summary": "A sunny Mission flat with a big kitchen, a shared garden, and the best of Valencia Street nearby.",
-      "description": "The flat is on the ground floor of a Victorian, with bay windows in the living room and a large kitchen at the back. One bedroom and a study sleep four, and the shared garden has a table and a lemon tree. Original details mix with a renovated bath and a washer-dryer.",
+      "summary": "This Mission flat has bay windows in the living room.",
+      "description": "The flat occupies the ground floor of a Victorian. A large kitchen sits at the back, with a bedroom and study providing sleeping space for four. Original details remain alongside a renovated bathroom, and a washer-dryer is available.",
       "vibe": [
-        "walkable",
         "sunny",
         "urban",
         "lively"
       ],
-      "setting": "It is on a quiet side street in the Mission, a block from Valencia and a short walk from Dolores Park.",
-      "nearby": "Valencia Street's restaurants and bookstores are around the corner, and Dolores Park is a ten-minute walk. BART is close for downtown and the airport.",
-      "neighborhoodDescription": "The Mission is dense and lively, with murals, taquerias, and a constant stream of people. The side street is calmer than Valencia, but the neighborhood stays busy into the evening.",
+      "setting": "The home sits on a side street in the Mission, one block from Valencia.",
+      "nearby": "Dolores Park is about a ten-minute walk away. Nearby BART provides connections to downtown and the airport.",
+      "neighborhoodDescription": "Murals, taquerias, and steady foot traffic characterize the Mission, with restaurants and bookstores around the corner on Valencia Street. The side street is calmer than Valencia, though the surrounding neighborhood stays busy into the evening.",
       "rating": 4.7,
       "reviewCount": 258,
       "hostSeedKey": "host-olivia-brooks",
@@ -1878,17 +1864,17 @@
           "alt": "Row house interior with original details"
         }
       ],
-      "summary": "A brick rowhouse on Capitol Hill with a private patio, a workspace, and the Metro a short walk away.",
-      "description": "The rowhouse is narrow and tall, with a living room at the front, a kitchen in the middle, and two bedrooms upstairs. A private patio sits behind the kitchen, and the second bedroom doubles as a workspace. Original pine floors and a restored staircase give it character.",
+      "summary": "This Capitol Hill brick rowhouse has a private patio behind the kitchen.",
+      "description": "The rowhouse has a narrow, tall layout with original pine floors and a restored staircase. The living room is at the front, with the kitchen in the middle and two bedrooms upstairs. The second bedroom also serves as a workspace.",
       "vibe": [
         "historic",
-        "walkable",
         "quiet",
-        "urban"
+        "urban",
+        "residential"
       ],
-      "setting": "It is on a tree-lined block of brick rowhouses on Capitol Hill, close to Eastern Market and the Metro.",
-      "nearby": "Eastern Market is a ten-minute walk, and the Capitol and Library of Congress are about 20 minutes. The Metro is close for trips across the city.",
-      "neighborhoodDescription": "Capitol Hill is residential and walkable, with families, staffers, and long-time residents. The block is quiet at night, and the weekend market draws a crowd.",
+      "setting": "Brick rowhouses line the tree-lined block surrounding the home on Capitol Hill.",
+      "nearby": "Walk to Eastern Market in ten minutes, or reach the Capitol and Library of Congress in about 20 minutes on foot.",
+      "neighborhoodDescription": "Capitol Hill is a walkable neighborhood of families, staffers, and long-time residents, with the Metro a short walk away. The block stays quiet at night, while the weekend market brings crowds.",
       "rating": 4.8,
       "reviewCount": 213,
       "hostSeedKey": "host-olivia-brooks",
@@ -1946,17 +1932,16 @@
           "alt": "Living room with a blue sofa and herringbone floors"
         }
       ],
-      "summary": "A compact Wicker Park studio with a kitchenette, a workspace, and the Blue Line around the corner.",
-      "description": "The studio is bright and efficiently laid out, with a queen bed, a sofa, and a desk by the window. A kitchenette covers coffee, breakfast, and simple meals, and the bathroom was recently renovated. The building has a shared laundry room and a bike rack.",
+      "summary": "This Wicker Park studio is a two-minute walk from the Blue Line.",
+      "description": "The studio has a compact, light-filled layout. A desk beside the window provides a place to work. The kitchenette supports breakfast and simple meals, and the bathroom has been recently renovated.",
       "vibe": [
         "urban",
-        "walkable",
         "compact",
         "lively"
       ],
-      "setting": "It is on the second floor of a brick walk-up in Wicker Park, a block from the Blue Line and the neighborhood's main strip.",
-      "nearby": "The Blue Line is a two-minute walk, and Milwaukee Avenue's shops and bars are close. The 606 trail and Humboldt Park are within a 15-minute walk.",
-      "neighborhoodDescription": "Wicker Park is busy and walkable, with coffee shops, record stores, and late-night restaurants. The street is lively on weekends, and the train can be heard from the front windows.",
+      "setting": "The home occupies the second floor of a brick walk-up, one block from the neighborhood's main strip.",
+      "nearby": "Browse shops and stop at bars along Milwaukee Avenue nearby. The 606 trail and Humboldt Park are each within a 15-minute walk.",
+      "neighborhoodDescription": "Wicker Park is easy to explore on foot, with coffee shops, record stores, and restaurants open late. Expect weekend street activity and train noise audible through the front windows.",
       "rating": 4.6,
       "reviewCount": 446,
       "hostSeedKey": "host-olivia-brooks",
@@ -2016,17 +2001,16 @@
           "alt": "Pool villa with mountain views"
         }
       ],
-      "summary": "A vineyard villa in Sonoma with a pool, a hot tub, and four bedrooms opening to the garden.",
-      "description": "The villa is built around a courtyard with a pool and a hot tub, with sliding doors from the living room and kitchen. A long dining table seats ten, and the kitchen has a professional range and a pantry. Four bedrooms open to the garden, each with its own bath.",
+      "summary": "This vineyard villa in Sonoma centers on a courtyard with a pool.",
+      "description": "Sliding doors link the vineyard villa’s living room and kitchen to the courtyard. A hot tub also sits in the courtyard. The long dining table accommodates ten. Each of the four bedrooms opens onto the garden and has its own bathroom.",
       "vibe": [
         "private",
-        "garden",
-        "sunny",
-        "wine"
+        "quiet",
+        "sunny"
       ],
-      "setting": "It sits at the edge of a working vineyard in Sonoma Valley, with rows of vines on three sides and the Mayacamas in the distance.",
-      "nearby": "Sonoma Plaza is ten minutes away for restaurants and tasting rooms. Several wineries are within a short drive, and the coast is about 45 minutes west.",
-      "neighborhoodDescription": "The road passes a few vineyards and estate homes before ending at the property, so traffic is minimal. Mornings are quiet and cool, and the afternoons fill with light.",
+      "setting": "Rows of working vines border the property on three sides in Sonoma Valley. The Mayacamas rise in the distance.",
+      "nearby": "Restaurants and tasting rooms at Sonoma Plaza are ten minutes away. Several wineries are a short drive away, while the coast is about 45 minutes to the west.",
+      "neighborhoodDescription": "The approach road runs past vineyards and estate homes and ends at the property, keeping passing traffic low. Cool, quiet mornings give way to light-filled afternoons.",
       "rating": 4.9,
       "reviewCount": 178,
       "hostSeedKey": "host-sofia-alvarez",
@@ -2085,17 +2069,17 @@
           "alt": "Hillside villa surrounded by trees"
         }
       ],
-      "summary": "An adobe villa in Santa Fe with a kiva fireplace, a walled garden, and mountain views from the patio.",
-      "description": "The villa is true adobe, with thick walls, vigas, and a kiva fireplace in the living room. A walled garden and patio run along the south side, with a fire pit and a shaded portal. Three bedrooms and three baths are arranged around two courtyards.",
+      "summary": "This adobe villa in Santa Fe has a patio overlooking the mountains.",
+      "description": "Thick adobe walls and vigas define the villa's interior. A kiva fireplace sits in the living room. The three bedrooms and three bathrooms are laid out around two courtyards. Along the south side, a walled garden and patio include a fire pit and shaded portal.",
       "vibe": [
         "desert",
         "quiet",
         "warm",
         "historic"
       ],
-      "setting": "It is on the edge of Santa Fe's east side, where the city meets the foothills of the Sangre de Cristo Mountains.",
-      "nearby": "The Plaza and Canyon Road galleries are a ten-minute drive. The Dale Ball trails and Ski Santa Fe are close, and Meow Wolf is about 15 minutes away.",
-      "neighborhoodDescription": "The neighborhood is a quiet mix of adobe homes and newer Pueblo-style houses, with dirt shoulders and low walls. It is dark at night and close enough to town for dinner.",
+      "setting": "On Santa Fe's eastern edge, the surrounding city gives way to the foothills of the Sangre de Cristo Mountains.",
+      "nearby": "Drive ten minutes to the Plaza and Canyon Road galleries, or about 15 minutes to Meow Wolf. The Dale Ball trails and Ski Santa Fe are also nearby.",
+      "neighborhoodDescription": "Adobe homes and newer Pueblo-style houses line the quiet neighborhood, with low walls and dirt shoulders. Nights are dark here, while town remains close enough for dinner.",
       "rating": 4.8,
       "reviewCount": 242,
       "hostSeedKey": "host-sofia-alvarez",
@@ -2155,17 +2139,16 @@
           "alt": "Desert adobe villa with a patio"
         }
       ],
-      "summary": "A hill country villa near Austin with a pool, a covered patio, and space for eight.",
-      "description": "The villa is low and wide, with a living room that opens to a covered patio and a pool. A large kitchen and dining area anchor the center of the house, and four bedrooms are split between two wings. A fire pit and a grill sit beyond the pool.",
+      "summary": "This Hill Country villa near Austin pairs a hillside setting with a pool.",
+      "description": "The villa has a low, wide layout, with the living room opening onto a covered patio. A large kitchen and dining area occupy the center of the home. Four bedrooms are divided between two wings, and a grill sits beyond the pool.",
       "vibe": [
         "sunny",
         "private",
-        "pool",
-        "family"
+        "quiet"
       ],
-      "setting": "It sits on a wooded lot in the hills west of Austin, with live oaks around the pool and a long view toward the valley.",
-      "nearby": "Downtown Austin is about 25 minutes east, and the Barton Creek greenbelt is close. Lake Travis and the Hill Country wineries are a short drive.",
-      "neighborhoodDescription": "The neighborhood is a sparse collection of large lots and gated drives, with deer and birds more common than traffic. It is quiet, dark, and a drive from groceries.",
+      "setting": "Woods surround the lot in the hills west of Austin. Live oaks frame the pool, with a long view extending toward the valley.",
+      "nearby": "Downtown Austin is about 25 minutes to the east, and the Barton Creek greenbelt is nearby. Lake Travis and wineries in the Hill Country are a short drive away.",
+      "neighborhoodDescription": "Large lots and gated drives are spaced apart, with deer and birds outnumbering passing traffic. The area is quiet and dark, and groceries require a drive.",
       "rating": 4.9,
       "reviewCount": 319,
       "hostSeedKey": "host-marcus-bell",
@@ -2225,17 +2208,16 @@
           "alt": "Living room with glass walls opening to a pool"
         }
       ],
-      "summary": "A Miami Beach villa with a pool, a tropical garden, and the beach a short walk away.",
-      "description": "The villa is bright and open, with a living room that opens to a pool deck and a tropical garden. Four bedrooms and four baths are arranged for groups, and the kitchen has a long island and a wine fridge. A covered outdoor table seats eight.",
+      "summary": "This Miami Beach villa has a pool for time at home between beach outings.",
+      "description": "The villa's open layout brings light into the living space. The living room leads onto the pool deck and into a tropical garden. The kitchen includes a long island.",
       "vibe": [
         "tropical",
-        "pool",
         "bright",
-        "beach"
+        "open"
       ],
-      "setting": "It is on a quiet residential street in Miami Beach, a few blocks from the ocean and the boardwalk.",
-      "nearby": "The beach is a ten-minute walk, and Lincoln Road's shops and restaurants are close. South Beach and the Design District are a short drive.",
-      "neighborhoodDescription": "The street is a mix of restored apartments and single-family homes, with palm trees and little through traffic. It is walkable to the beach but away from the loudest blocks of South Beach.",
+      "setting": "The surrounding residential streets sit a few blocks inland from the ocean and boardwalk.",
+      "nearby": "Browse shops and stop for a meal on Lincoln Road nearby. South Beach and the Design District are each a short drive away.",
+      "neighborhoodDescription": "Restored apartments and single-family homes share a palm-lined street with little passing traffic. The beach is about ten minutes away on foot, while the loudest blocks of South Beach are farther from the home.",
       "rating": 4.7,
       "reviewCount": 367,
       "hostSeedKey": "host-marcus-bell",

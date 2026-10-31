@@ -17,14 +17,21 @@ import Animated, {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { SearchStayCard } from "@/components/search-stay-card";
+import {
+  StaysError,
+  StaysLoading,
+  StaysRefreshNotice,
+} from "@/components/stays-state";
 import { AppText, Button, Chip, Icon } from "@/components/ui";
 import {
-  searchStays,
+  searchStaysIn,
   SORT_LABELS,
   STAY_CATEGORIES,
+  type Stay,
   type StayCategoryId,
   type StaySort,
 } from "@/data/stays";
+import { useRefreshStaysOnFocus, useStays } from "@/data/stays-provider";
 import { cn } from "@/lib/cn";
 import { toggleSaved, useSavedStays } from "@/lib/saved-stays";
 import { motion, typography, useThemeColors } from "@/theme";
@@ -91,6 +98,7 @@ function FilterSheet({
   onClose,
   query,
   sort,
+  stays,
   draft,
   onChange,
   onClear,
@@ -100,13 +108,14 @@ function FilterSheet({
   onClose: () => void;
   query: string;
   sort: StaySort;
+  stays: Stay[];
   draft: SearchFilters;
   onChange: (next: SearchFilters) => void;
   onClear: () => void;
   onApply: () => void;
 }) {
   const colors = useThemeColors();
-  const draftCount = searchStays(query, { ...draft, sort }).length;
+  const draftCount = searchStaysIn(stays, query, { ...draft, sort }).length;
 
   return (
     <BottomSheet
@@ -308,6 +317,8 @@ function SearchContent({
   const colors = useThemeColors();
   const savedIds = useSavedStays();
   const body = typography.body;
+  const { stays, status, error, refreshError, retry } = useStays();
+  useRefreshStaysOnFocus();
 
   const [query, setQuery] = useState(initialQuery);
   const [filters, setFilters] = useState<SearchFilters>({
@@ -322,7 +333,7 @@ function SearchContent({
     category: initialCategory,
   });
 
-  const results = searchStays(query, { ...filters, sort });
+  const results = searchStaysIn(stays, query, { ...filters, sort });
   const countLabel = `${results.length} ${results.length === 1 ? "stay" : "stays"}`;
   const isCabins = filters.category === "cabins";
   const isUnder300 = filters.maxPrice === 300;
@@ -454,51 +465,75 @@ function SearchContent({
           </ScrollView>
         </Animated.View>
 
-        <View
-          className="flex-row items-center justify-between"
-          style={{ marginTop: 20, paddingHorizontal: 16 }}
-        >
-          <AppText variant="cardTitleCompact">{countLabel}</AppText>
-
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel={`Sort stays, currently ${SORT_LABELS[sort]}`}
-            onPress={() => setSortOpen(true)}
-            className="ml-3 flex-row items-center gap-1"
-            style={({ pressed }) => (pressed ? { opacity: 0.8 } : null)}
+        {status === "ready" ? (
+          <View
+            className="flex-row items-center justify-between"
+            style={{ marginTop: 20, paddingHorizontal: 16 }}
           >
-            <AppText variant="caption">Sort by</AppText>
-            <AppText variant="label" numberOfLines={1} className="shrink">
-              {SORT_LABELS[sort]}
-            </AppText>
-            <Icon name="chevronDown" size={16} color={colors.foreground} />
-          </Pressable>
-        </View>
+            <AppText variant="cardTitleCompact">{countLabel}</AppText>
 
-        <FlatList
-          data={results}
-          keyExtractor={(stay) => stay.id}
-          renderItem={({ item }) => (
-            <SearchStayCard
-              stay={item}
-              saved={savedIds.has(item.id)}
-              onToggleSave={() => toggleSaved(item.id)}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={`Sort stays, currently ${SORT_LABELS[sort]}`}
+              onPress={() => setSortOpen(true)}
+              className="ml-3 flex-row items-center gap-1"
+              style={({ pressed }) => (pressed ? { opacity: 0.8 } : null)}
+            >
+              <AppText variant="caption">Sort by</AppText>
+              <AppText variant="label" numberOfLines={1} className="shrink">
+                {SORT_LABELS[sort]}
+              </AppText>
+              <Icon name="chevronDown" size={16} color={colors.foreground} />
+            </Pressable>
+          </View>
+        ) : status === "loading" ? (
+          <View style={{ marginTop: 20, paddingHorizontal: 16 }}>
+            <AppText variant="cardTitleCompact">Loading stays…</AppText>
+          </View>
+        ) : null}
+
+        {status === "loading" ? (
+          <View className="flex-1 justify-center">
+            <StaysLoading />
+          </View>
+        ) : status === "error" ? (
+          <View className="flex-1 justify-center">
+            <StaysError message={error} onRetry={retry} />
+          </View>
+        ) : (
+          <>
+            {refreshError ? (
+              <View className="px-4 pb-3">
+                <StaysRefreshNotice message={refreshError} onRetry={retry} />
+              </View>
+            ) : null}
+
+            <FlatList
+              data={results}
+              keyExtractor={(stay) => stay.id}
+              renderItem={({ item }) => (
+                <SearchStayCard
+                  stay={item}
+                  saved={savedIds.has(item.id)}
+                  onToggleSave={() => toggleSaved(item.id)}
+                />
+              )}
+              ItemSeparatorComponent={Separator}
+              ListEmptyComponent={<EmptyState onClear={clearSearch} />}
+              contentContainerStyle={{
+                flexGrow: 1,
+                paddingHorizontal: 16,
+                paddingTop: 12,
+                paddingBottom: insets.bottom + 24,
+              }}
+              contentInsetAdjustmentBehavior="never"
+              automaticallyAdjustContentInsets={false}
+              keyboardShouldPersistTaps="handled"
+              keyboardDismissMode="on-drag"
+              showsVerticalScrollIndicator={false}
             />
-          )}
-          ItemSeparatorComponent={Separator}
-          ListEmptyComponent={<EmptyState onClear={clearSearch} />}
-          contentContainerStyle={{
-            flexGrow: 1,
-            paddingHorizontal: 16,
-            paddingTop: 12,
-            paddingBottom: insets.bottom + 24,
-          }}
-          contentInsetAdjustmentBehavior="never"
-          automaticallyAdjustContentInsets={false}
-          keyboardShouldPersistTaps="handled"
-          keyboardDismissMode="on-drag"
-          showsVerticalScrollIndicator={false}
-        />
+          </>
+        )}
       </View>
 
       <FilterSheet
@@ -506,6 +541,7 @@ function SearchContent({
         onClose={() => setFilterOpen(false)}
         query={query}
         sort={sort}
+        stays={stays}
         draft={draft}
         onChange={setDraft}
         onClear={() => setDraft(DEFAULT_FILTERS)}
