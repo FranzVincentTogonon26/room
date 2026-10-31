@@ -2,6 +2,7 @@ import {
   CATEGORY_LABELS,
   type Stay,
   type StayCategory,
+  type StayHost,
 } from "@/data/stays";
 
 const projectId = process.env.EXPO_PUBLIC_SANITY_PROJECT_ID ?? "";
@@ -40,7 +41,26 @@ export const STAYS_QUERY = `*[_type == "stay"] | order(featured desc, rating des
   nearby,
   neighborhoodDescription,
   "image": coverPhoto.asset->url,
-  featured
+  "gallery": gallery[].asset->url,
+  "host": host->{
+    _id,
+    name,
+    bio,
+    superhost,
+    responseTime,
+    joinedYear,
+    languages,
+    "photo": photo.asset->url,
+    "photoAlt": photo.alt
+  },
+  featured,
+  "policies": policies[]->{
+    _id,
+    title,
+    policyType,
+    summary,
+    body
+  }
 }`;
 
 type SanityStay = {
@@ -69,7 +89,30 @@ type SanityStay = {
   nearby?: string;
   neighborhoodDescription?: string;
   image?: string;
+  gallery?: string[];
+  host?: SanityHost;
   featured?: boolean;
+  policies?: SanityPolicy[];
+};
+
+type SanityHost = {
+  _id?: string;
+  name?: string;
+  bio?: string;
+  superhost?: boolean;
+  responseTime?: string;
+  joinedYear?: number;
+  languages?: string[];
+  photo?: string;
+  photoAlt?: string;
+};
+
+type SanityPolicy = {
+  _id?: string;
+  title?: string;
+  policyType?: string;
+  summary?: string;
+  body?: string;
 };
 
 const CATEGORIES = new Set(Object.keys(CATEGORY_LABELS));
@@ -82,9 +125,25 @@ export class StaysFetchError extends Error {
 }
 
 /** Sanity's CDN resizes on request; the app only needs a card-sized image. */
-function imageUrl(url: string) {
+function imageUrl(url: string, width = 1200) {
   const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}auto=format&w=1200&q=80&fit=max`;
+  return `${url}${separator}auto=format&w=${width}&q=80&fit=max`;
+}
+
+function mapHost(doc?: SanityHost): StayHost | undefined {
+  if (!doc?._id || !doc.name) return undefined;
+
+  return {
+    id: doc._id,
+    name: doc.name,
+    photo: doc.photo ? imageUrl(doc.photo, 400) : undefined,
+    photoAlt: doc.photoAlt,
+    bio: doc.bio,
+    superhost: doc.superhost === true,
+    responseTime: doc.responseTime,
+    joinedYear: doc.joinedYear,
+    languages: doc.languages ?? [],
+  };
 }
 
 function mapStay(doc: SanityStay): Stay | null {
@@ -125,6 +184,14 @@ function mapStay(doc: SanityStay): Stay | null {
     doc.neighborhoodDescription,
   ].filter((value): value is string => Boolean(value));
 
+  const policies = (doc.policies ?? []).map((p) => ({
+    id: p._id ?? "",
+    title: p.title ?? "",
+    policyType: p.policyType ?? "",
+    summary: p.summary ?? "",
+    body: p.body ?? "",
+  }));
+
   return {
     id: doc._id,
     title: doc.title,
@@ -146,9 +213,15 @@ function mapStay(doc: SanityStay): Stay | null {
     ],
     description: doc.summary ?? doc.description ?? "",
     image: imageUrl(doc.image),
+    gallery: (doc.gallery ?? []).filter(Boolean).map((url) => imageUrl(url)),
+    host: mapHost(doc.host),
     featured: doc.featured === true,
     petsAllowed: doc.petsAllowed === true,
     quiet: doc.quiet === true,
+    policies,
+    setting: doc.setting,
+    nearby: doc.nearby,
+    neighborhoodDescription: doc.neighborhoodDescription,
     searchText: [
       doc.title,
       location,

@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
+import { useRouter } from "expo-router";
 
 import { Icon } from "@/components/ui/icon";
 import { AppText } from "@/components/ui/text";
@@ -13,17 +14,19 @@ export type StayCardProps = {
 };
 
 /**
- * Full-width photo card used on Home and Search. The card is display-only
- * until a stay detail route exists, so it is not a Pressable.
+ * Full-width photo card used on Home. Tapping navigates to the stay detail screen.
  */
 export function StayCard({ stay, className }: StayCardProps) {
+  const router = useRouter();
   const colors = useThemeColors();
 
   return (
-    <View
-      accessible
+    <Pressable
+      accessibilityRole="button"
       accessibilityLabel={`${stay.title}, ${stay.location}, rated ${stay.rating} of 5, $${stay.price} per night`}
+      onPress={() => router.push(`/stay/${stay.id}`)}
       className={cn("h-72 overflow-hidden rounded-card bg-muted", className)}
+      style={({ pressed }) => (pressed ? { opacity: 0.85 } : null)}
     >
       <Image
         source={{ uri: stay.image }}
@@ -69,6 +72,6 @@ export function StayCard({ stay, className }: StayCardProps) {
           <Icon name="chevronRight" size={22} color={colors.foreground} />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }

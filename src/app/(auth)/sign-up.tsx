@@ -150,7 +150,7 @@ export default function SignUpScreen() {
 
     if (signUp.status === "complete") {
       await signUp.finalize({
-        navigate: () => router.replace("/(app)/home"),
+        navigate: () => router.replace("/home"),
       });
       return;
     }

@@ -1,6 +1,7 @@
 import { ActivityIndicator, Pressable, View, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
 
 import { cn } from "@/lib/cn";
+import type { TypeVariant } from "@/theme";
 import { useThemeColors } from "@/theme/use-theme-colors";
 
 import { Icon, type IconName } from "./icon";
@@ -14,12 +15,14 @@ const variantClasses = {
 const heightClasses = {
   sm: "h-10",
   md: "h-control",
+  lg: "h-action-lg",
 } as const;
 
 export type ButtonProps = Omit<PressableProps, "children" | "style"> & {
   label: string;
   variant?: keyof typeof variantClasses;
   size?: keyof typeof heightClasses;
+  labelVariant?: TypeVariant;
   leftIcon?: IconName;
   leftElement?: React.ReactNode;
   rightIcon?: IconName;
@@ -32,6 +35,7 @@ export function Button({
   label,
   variant = "primary",
   size = "md",
+  labelVariant = "button",
   leftIcon,
   leftElement,
   rightIcon,
@@ -66,7 +70,7 @@ export function Button({
         {loading ? <ActivityIndicator size="small" color={iconColor} /> : null}
         {leftElement && !loading ? leftElement : null}
         {!leftElement && leftIcon && !loading ? <Icon name={leftIcon} size="md" color={iconColor} /> : null}
-        <AppText variant="button" tone={isPrimary ? "primaryForeground" : "foreground"}>
+        <AppText variant={labelVariant} tone={isPrimary ? "primaryForeground" : "foreground"}>
           {label}
         </AppText>
       </View>

@@ -1,19 +1,12 @@
 import { useAuth } from "@clerk/expo";
-import { NativeTabs } from "expo-router/native-tabs";
-import { Redirect } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 
-import { LiquidGlassTabBar } from "@/components/liquid-glass-tab-bar";
 import { StaysProvider } from "@/data/stays-provider";
-import { fontFamily, useThemeColors } from "@/theme";
+import { useThemeColors } from "@/theme";
 
-const TABS: { name: string; label: string; icon: string }[] = [
-  { name: "home", label: "Home", icon: "house" },
-  { name: "search", label: "Search", icon: "magnifyingglass" },
-  { name: "trips", label: "Trips", icon: "calendar" },
-  { name: "profile", label: "Profile", icon: "person" },
-];
+export const unstable_settings = { initialRouteName: "(tabs)" };
 
 export default function AppLayout() {
   const { isLoaded, isSignedIn } = useAuth();
@@ -26,43 +19,18 @@ export default function AppLayout() {
     <StaysProvider>
       <View style={{ flex: 1, backgroundColor: colors.canvas }}>
         <StatusBar style="auto" />
-        {/* Decorative Liquid Glass pill with drag-effect motion, rendered behind
-            the native tab bar so it shows through iOS 26's translucent bar. */}
-        <LiquidGlassTabBar className="absolute bottom-0 left-0 right-0" />
-        <NativeTabs
-          tintColor={colors.primary}
-          iconColor={{
-            default: colors.mutedForeground,
-            selected: colors.primary,
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.canvas },
           }}
-          labelStyle={{
-            default: {
-              fontFamily: fontFamily.sansMedium,
-              fontSize: 12,
-              color: colors.mutedForeground,
-            },
-            selected: {
-              fontFamily: fontFamily.sansSemiBold,
-              fontSize: 12,
-              color: colors.primary,
-            },
-          }}
-          minimizeBehavior="never"
         >
-          {TABS.map((tab) => (
-            <NativeTabs.Trigger
-              key={tab.name}
-              name={tab.name}
-              accessibilityLabel={tab.label}
-            >
-              <NativeTabs.Trigger.Icon
-                sf={tab.icon as any}
-                md={tab.icon as any}
-              />
-              <NativeTabs.Trigger.Label>{tab.label}</NativeTabs.Trigger.Label>
-            </NativeTabs.Trigger>
-          ))}
-        </NativeTabs>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="stay/[id]"
+            options={{ animation: "slide_from_right" }}
+          />
+        </Stack>
       </View>
     </StaysProvider>
   );

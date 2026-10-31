@@ -100,12 +100,18 @@ const typeOrder: TypeVariant[] = [
   "title",
   "cardTitle",
   "cardTitleCompact",
+  "searchCardTitle",
+  "propertyTitle",
   "body",
+  "bodyLarge",
+  "bodyCompact",
   "label",
   "caption",
   "button",
+  "detailButton",
   "badge",
   "price",
+  "searchPrice",
   "tab",
 ];
 
@@ -119,12 +125,18 @@ const typeSamples: Record<TypeVariant, string> = {
   title: "Cozy A-Frame Cabin",
   cardTitle: "Modern Cabin\nwith Hot Tub",
   cardTitleCompact: "124 stays",
+  searchCardTitle: "Modern Cabin\nwith Hot Tub",
+  propertyTitle: "Modern Cabin\nwith Hot Tub",
   body: "From mountain cabins to oceanfront villas, room helps you find unforgettable stays for every kind of trip.",
+  bodyLarge: "Lake Arrowhead, CA",
+  bodyCompact: "Cancellation, house rules, pets, check-in and more.",
   label: "Personal info",
   caption: "Lake Arrowhead, CA",
   button: "Book this stay",
+  detailButton: "Book this stay",
   badge: "Guest favorite",
   price: "$280",
+  searchPrice: "$280",
   tab: "Home",
   wordmark: "room",
   wordmarkCompact: "room",
@@ -149,6 +161,8 @@ const iconSamples: IconName[] = [
   "treePine",
   "waves",
   "globe",
+  "messageCircleMore",
+  "award",
 ];
 
 const tabItems: GlassTabItem[] = [
@@ -392,6 +406,12 @@ export default function CatalogScreen() {
           <Section title="04. Buttons">
             <View className="gap-3">
               <Button label="Book this stay" rightIcon="arrowRight" onPress={() => {}} />
+              <Button
+                label="Book this stay"
+                size="lg"
+                labelVariant="detailButton"
+                onPress={() => {}}
+              />
               <Button
                 label="Continue with Google"
                 variant="secondary"

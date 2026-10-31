@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { Pressable, View } from "react-native";
+import { useRouter } from "expo-router";
 
 import { Icon, type IconName } from "@/components/ui/icon";
 import { AppText } from "@/components/ui/text";
@@ -11,6 +12,7 @@ export type SearchStayCardProps = {
   stay: Stay;
   saved: boolean;
   onToggleSave: () => void;
+  onPress?: () => void;
   className?: string;
 };
 
@@ -74,20 +76,37 @@ function titleCase(label: string) {
 
 /**
  * Compact search result row: photo on the left, stay facts on the right.
- * The heart is the only interactive element until a detail route exists.
+ * Tapping the card navigates to the stay detail screen; the heart button
+ * toggles the saved state independently.
  */
 export function SearchStayCard({
   stay,
   saved,
   onToggleSave,
+  onPress,
   className,
 }: SearchStayCardProps) {
+  const router = useRouter();
   const colors = useThemeColors();
   const amenities = featuredAmenities(stay);
 
+  const handlePress = () => {
+    if (onPress) {
+      onPress();
+    } else {
+      router.push(`/stay/${stay.id}`);
+    }
+  };
+
   return (
-    <View className={cn("flex-row", className)} style={{ gap: 12 }}>
-      <View className="h-39 w-36 overflow-hidden rounded-tile bg-muted">
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`${stay.title}, ${stay.location}, rated ${stay.rating} of 5, $${stay.price} per night`}
+      onPress={handlePress}
+      className={cn("flex-row gap-3.5 rounded-field bg-card p-1 shadow-card", className)}
+      style={({ pressed }) => (pressed ? { opacity: 0.85 } : null)}
+    >
+      <View className="h-38 w-36 overflow-hidden rounded-tile bg-muted">
         <Image
           source={{ uri: stay.image }}
           contentFit="cover"
@@ -97,34 +116,35 @@ export function SearchStayCard({
         />
       </View>
 
-      <View className="flex-1 justify-between">
+      <View className="relative flex-1 justify-between">
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={
+            saved ? `Remove ${stay.title} from saved stays` : `Save ${stay.title}`
+          }
+          accessibilityState={{ selected: saved }}
+          hitSlop={4}
+          onPress={(e) => {
+            e.stopPropagation();
+            onToggleSave();
+          }}
+          className="absolute right-0 top-0 z-10 h-11 w-11 items-center justify-center rounded-full bg-muted"
+          style={({ pressed }) => (pressed ? { opacity: 0.8 } : null)}
+        >
+          <Icon
+            name="heart"
+            size={22}
+            color={saved ? colors.error : colors.foreground}
+            fill={saved ? colors.error : "none"}
+          />
+        </Pressable>
+
         <View className="gap-1">
-          <View className="flex-row items-start" style={{ gap: 8 }}>
-            <AppText variant="cardTitleCompact" numberOfLines={2} className="flex-1">
-              {stay.title}
-            </AppText>
+          <AppText variant="searchCardTitle" numberOfLines={2} className="pr-13">
+            {stay.title}
+          </AppText>
 
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={
-                saved ? `Remove ${stay.title} from saved stays` : `Save ${stay.title}`
-              }
-              accessibilityState={{ selected: saved }}
-              hitSlop={4}
-              onPress={onToggleSave}
-              className="h-11 w-11 items-center justify-center rounded-full bg-muted"
-              style={({ pressed }) => (pressed ? { opacity: 0.8 } : null)}
-            >
-              <Icon
-                name="heart"
-                size={22}
-                color={saved ? colors.error : colors.foreground}
-                fill={saved ? colors.error : "none"}
-              />
-            </Pressable>
-          </View>
-
-          <View className="flex-row items-center gap-1.5">
+          <View className="flex-row items-center gap-1.5 pr-13">
             <Icon name="mapPin" size={14} color={colors.mutedForeground} />
             <AppText
               variant="caption"
@@ -145,11 +165,11 @@ export function SearchStayCard({
           </View>
 
           {amenities.length > 0 ? (
-            <View className="mt-1 flex-row" style={{ gap: 6 }}>
+            <View className="flex-row" style={{ gap: 8 }}>
               {amenities.map((amenity) => (
                 <View
                   key={amenity.label}
-                  className="h-6 min-w-0 shrink flex-row items-center gap-1 rounded-pill bg-muted px-[10px]"
+                  className="h-[26px] min-w-0 shrink flex-row items-center gap-1 rounded-pill bg-muted px-1.5"
                 >
                   <Icon name={amenity.icon} size={14} color={colors.foreground} />
                   <AppText variant="badge" numberOfLines={1} className="shrink">
@@ -162,12 +182,12 @@ export function SearchStayCard({
         </View>
 
         <View className="flex-row items-baseline gap-1">
-          <AppText variant="price">${stay.price}</AppText>
+          <AppText variant="searchPrice">${stay.price}</AppText>
           <AppText variant="caption" tone="mutedForeground">
             / night
           </AppText>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }

@@ -84,7 +84,7 @@ export default function VerifyOtpScreen() {
   };
 
   const goHome = () => {
-    router.replace("/(app)/home");
+    router.replace("/home");
   };
 
   const failCode = (message: string) => {

@@ -14,7 +14,7 @@ const variantClasses = {
 
 const sizeClasses = {
   md: "h-chip px-5",
-  sm: "h-[30px] px-[13px]",
+  sm: "h-9 px-3",
 } as const;
 
 const toneByVariant: Record<keyof typeof variantClasses, TextTone> = {
@@ -65,11 +65,7 @@ export function Chip({
       style={({ pressed }) => [pressed && !disabled ? { opacity: 0.8 } : null, style]}
     >
       {icon ? <Icon name={icon} size="md" color={iconColor} /> : null}
-      <AppText
-        variant={size === "sm" ? "badge" : "label"}
-        tone={tone}
-        className={size === "sm" ? "font-sans-semibold" : undefined}
-      >
+      <AppText variant="label" tone={tone}>
         {label}
       </AppText>
     </Pressable>

@@ -476,7 +476,7 @@ export default function IndexScreen() {
   const { isLoaded, isSignedIn } = useAuth();
 
   if (!isLoaded) return null;
-  if (isSignedIn) return <Redirect href="/(app)/home" />;
+  if (isSignedIn) return <Redirect href="/home" />;
 
   return <OnboardingView />;
 }

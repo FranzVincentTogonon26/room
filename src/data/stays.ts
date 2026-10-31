@@ -21,8 +21,36 @@ export type Stay = {
   featured?: boolean;
   petsAllowed?: boolean;
   quiet?: boolean;
+  policies?: StayPolicy[];
+  /** Live Sanity host and extra photos; the local samples omit both. */
+  host?: StayHost;
+  gallery?: string[];
+  /** Story fields from Sanity */
+  setting?: string;
+  nearby?: string;
+  neighborhoodDescription?: string;
   /** Precomputed lowercase haystack for live Sanity stays. */
   searchText?: string;
+};
+
+export type StayPolicy = {
+  id: string;
+  title: string;
+  policyType: string;
+  summary: string;
+  body: string;
+};
+
+export type StayHost = {
+  id: string;
+  name: string;
+  photo?: string;
+  photoAlt?: string;
+  bio?: string;
+  superhost: boolean;
+  responseTime?: string;
+  joinedYear?: number;
+  languages: string[];
 };
 
 export type StayCategoryOption = {

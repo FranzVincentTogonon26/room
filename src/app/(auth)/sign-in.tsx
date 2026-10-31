@@ -97,7 +97,7 @@ export default function SignInScreen() {
 
     if (signIn.status === "complete") {
       await signIn.finalize({
-        navigate: () => router.replace("/(app)/home"),
+        navigate: () => router.replace("/home"),
       });
       return;
     }
