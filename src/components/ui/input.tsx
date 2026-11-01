@@ -90,8 +90,6 @@ export function Input({
               {...props}
               value={value}
               onChangeText={onChangeText}
-              autoCorrect={autoCorrect}
-              spellCheck={spellCheck}
               accessibilityState={{ disabled }}
               editable={!disabled}
               secureTextEntry={showPasswordToggle ? !revealed : false}
@@ -99,6 +97,8 @@ export function Input({
               selectionColor={colors.accent}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              autoCorrect={false}
+              spellCheck={false}
               style={[
                 {
                   paddingVertical: 0,
@@ -117,8 +117,6 @@ export function Input({
             {...props}
             value={value}
             onChangeText={onChangeText}
-            autoCorrect={autoCorrect}
-            spellCheck={spellCheck}
             accessibilityState={{ disabled }}
             editable={!disabled}
             secureTextEntry={showPasswordToggle ? !revealed : false}
@@ -126,6 +124,8 @@ export function Input({
             selectionColor={colors.accent}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            autoCorrect={false}
+            spellCheck={false}
             style={[
               {
                 flex: 1,
