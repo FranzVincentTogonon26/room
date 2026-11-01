@@ -1,3 +1,4 @@
+import { useAuth } from "@clerk/expo";
 import { BottomSheet, RNHostView } from "@expo/ui";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
@@ -32,16 +33,10 @@ import {
   type StaySort,
 } from "@/data/stays";
 import { useRefreshStaysOnFocus, useStays } from "@/data/stays-provider";
+import { useStaySearch, type SearchFilters } from "@/data/use-stay-search";
 import { cn } from "@/lib/cn";
 import { toggleSaved, useSavedStays } from "@/lib/saved-stays";
 import { motion, typography, useThemeColors } from "@/theme";
-
-type SearchFilters = {
-  category: StayCategoryId;
-  maxPrice?: number;
-  petFriendly: boolean;
-  quiet: boolean;
-};
 
 const DEFAULT_FILTERS: SearchFilters = {
   category: "all",
@@ -96,9 +91,8 @@ function EmptyState({ onClear }: { onClear: () => void }) {
 function FilterSheet({
   open,
   onClose,
-  query,
   sort,
-  stays,
+  results,
   draft,
   onChange,
   onClear,
@@ -106,16 +100,17 @@ function FilterSheet({
 }: {
   open: boolean;
   onClose: () => void;
-  query: string;
   sort: StaySort;
-  stays: Stay[];
+  results: Stay[];
   draft: SearchFilters;
   onChange: (next: SearchFilters) => void;
   onClear: () => void;
   onApply: () => void;
 }) {
   const colors = useThemeColors();
-  const draftCount = searchStaysIn(stays, query, { ...draft, sort }).length;
+  // The sentence's intent is already applied to `results` by the server, so the
+  // draft count only has to layer the sheet's own filters on top.
+  const draftCount = searchStaysIn(results, "", { ...draft, sort }).length;
 
   return (
     <BottomSheet
@@ -318,6 +313,7 @@ function SearchContent({
   const savedIds = useSavedStays();
   const body = typography.body;
   const { stays, status, error, refreshError, retry } = useStays();
+  const { getToken } = useAuth();
   useRefreshStaysOnFocus();
 
   const [query, setQuery] = useState(initialQuery);
@@ -333,7 +329,12 @@ function SearchContent({
     category: initialCategory,
   });
 
-  const results = searchStaysIn(stays, query, { ...filters, sort });
+  const {
+    stays: results,
+    status: searchStatus,
+    error: searchError,
+    retry: retrySearch,
+  } = useStaySearch({ allStays: stays, query, filters, sort, getToken });
   const countLabel = `${results.length} ${results.length === 1 ? "stay" : "stays"}`;
   const isCabins = filters.category === "cabins";
   const isUnder300 = filters.maxPrice === 300;
@@ -473,7 +474,9 @@ function SearchContent({
             className="flex-row items-center justify-between"
             style={{ marginTop: 20, paddingHorizontal: 16 }}
           >
-            <AppText variant="cardTitleCompact">{countLabel}</AppText>
+            <AppText variant="cardTitleCompact">
+              {searchStatus === "searching" ? "Searching…" : countLabel}
+            </AppText>
 
             <Pressable
               accessibilityRole="button"
@@ -502,6 +505,14 @@ function SearchContent({
         ) : status === "error" ? (
           <View className="flex-1 justify-center">
             <StaysError message={error} onRetry={retry} />
+          </View>
+        ) : searchStatus === "error" ? (
+          <View className="flex-1 justify-center">
+            <StaysError message={searchError} onRetry={retrySearch} />
+          </View>
+        ) : searchStatus === "searching" && results.length === 0 ? (
+          <View className="flex-1 justify-center">
+            <StaysLoading label="Searching stays…" />
           </View>
         ) : (
           <>
@@ -542,9 +553,8 @@ function SearchContent({
       <FilterSheet
         open={filterOpen}
         onClose={() => setFilterOpen(false)}
-        query={query}
         sort={sort}
-        stays={stays}
+        results={results}
         draft={draft}
         onChange={setDraft}
         onClear={() => setDraft(DEFAULT_FILTERS)}

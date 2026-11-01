@@ -4,6 +4,7 @@ import {
   type StayCategory,
   type StayHost,
 } from "@/data/stays";
+import { STAY_PROJECTION } from "@/data/stay-projection";
 
 const projectId = process.env.EXPO_PUBLIC_SANITY_PROJECT_ID ?? "";
 const dataset = process.env.EXPO_PUBLIC_SANITY_DATASET ?? "";
@@ -18,52 +19,9 @@ const API_VERSION = "v2025-02-19";
 /** The uncached live API: published edits must show up on the next focus. */
 const QUERY_URL = `https://${projectId}.api.sanity.io/${API_VERSION}/data/query/${dataset}`;
 
-export const STAYS_QUERY = `*[_type == "stay"] | order(featured desc, rating desc) {
-  _id,
-  title,
-  "slug": slug.current,
-  location,
-  category,
-  pricePerNight,
-  rating,
-  reviewCount,
-  maxGuests,
-  bedrooms,
-  beds,
-  bathrooms,
-  amenities,
-  petsAllowed,
-  quiet,
-  vibe,
-  summary,
-  description,
-  setting,
-  nearby,
-  neighborhoodDescription,
-  "image": coverPhoto.asset->url,
-  "gallery": gallery[].asset->url,
-  "host": host->{
-    _id,
-    name,
-    bio,
-    superhost,
-    responseTime,
-    joinedYear,
-    languages,
-    "photo": photo.asset->url,
-    "photoAlt": photo.alt
-  },
-  featured,
-  "policies": policies[]->{
-    _id,
-    title,
-    policyType,
-    summary,
-    body
-  }
-}`;
+export const STAYS_QUERY = `*[_type == "stay"] | order(featured desc, rating desc) ${STAY_PROJECTION}`;
 
-type SanityStay = {
+export type SanityStay = {
   _id?: string;
   title?: string;
   location?: {
@@ -146,7 +104,7 @@ function mapHost(doc?: SanityHost): StayHost | undefined {
   };
 }
 
-function mapStay(doc: SanityStay): Stay | null {
+export function mapStay(doc: SanityStay): Stay | null {
   const city = doc.location?.city;
   const category = doc.category;
 
@@ -165,7 +123,7 @@ function mapStay(doc: SanityStay): Stay | null {
     !Array.isArray(doc.amenities) ||
     !doc.image
   ) {
-    if (__DEV__) {
+    if (typeof __DEV__ !== "undefined" && __DEV__) {
       console.warn(`Skipping stay ${doc._id ?? "(no id)"}: missing required fields`);
     }
     return null;
