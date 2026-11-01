@@ -245,6 +245,13 @@ export async function callKBTool<T = unknown>(
       if (Array.isArray(inner)) return inner as T[];
     }
 
+    // Some KB tools wrap hits in an object with a `hits` or `documents` array.
+    if (parsed && typeof parsed === "object") {
+      const obj = parsed as Record<string, unknown>;
+      if (Array.isArray(obj.hits)) return obj.hits as T[];
+      if (Array.isArray(obj.documents)) return obj.documents as T[];
+    }
+
     return [];
   } catch {
     throw new KnowledgeBaseError(

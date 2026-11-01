@@ -89,6 +89,33 @@ async function fetchStayPolicies(
   }[];
 }
 
+async function fetchAllPoliciesForStay(
+  stayId: string,
+): Promise<PolicyMatch[]> {
+  const projectId = process.env.EXPO_PUBLIC_SANITY_PROJECT_ID ?? "";
+  const dataset = process.env.EXPO_PUBLIC_SANITY_DATASET ?? "";
+
+  if (!projectId || !dataset) {
+    return [];
+  }
+
+  const query = `*[_type == "stay" && _id == $stayId][0]{ policies[]->{ _id, title, policyType, summary, body } }`;
+  const url = `https://${projectId}.api.sanity.io/v2025-02-19/data/query/${dataset}`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, params: { stayId } }),
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const payload = (await response.json()) as { result?: { policies?: PolicyMatch[] } };
+  return payload.result?.policies ?? [];
+}
+
 async function narrowWithJev(
   question: string,
   matches: PolicyMatch[],
@@ -206,10 +233,13 @@ export async function POST(request: Request): Promise<Response> {
   } catch (error) {
     if (error instanceof KnowledgeBaseError) {
       console.error("Knowledge Base call failed:", error.message);
+      // If the KB endpoint is misconfigured, fall back to a direct Sanity read
+      // for the stay's policies so the chat still answers.
+      kbMatches = await fetchAllPoliciesForStay(stayId);
+    } else {
+      console.error("Knowledge Base call failed:", error);
       return Response.json({ cards: [NO_ANSWER_CARD] });
     }
-    console.error("Knowledge Base call failed:", error);
-    return Response.json({ cards: [NO_ANSWER_CARD] });
   }
 
   // Filter to only this stay's policies.
