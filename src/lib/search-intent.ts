@@ -14,6 +14,7 @@ import {
   type ResolvedNumber,
   type SearchIntent,
 } from "./search-filters";
+import { parseIntent } from "./search-parse";
 
 const MODEL_ID = "jev-latest";
 const TIMEOUT_MS = 6_000;
@@ -135,19 +136,27 @@ export function intentFromAnswers(
   return intent;
 }
 
+/** True when the intent carries at least one filter or a usable number. */
+function hasFilters(intent: SearchIntent) {
+  return (
+    intent.pets !== "notMentioned" ||
+    Object.values(intent.categories).some((state) => state !== "notMentioned") ||
+    Object.values(intent.amenities).some((state) => state !== "notMentioned") ||
+    Object.values(intent.vibes).some((state) => state !== "notMentioned") ||
+    intent.numbers.some((number) => number.slot !== "ignore")
+  );
+}
+
 /**
  * Asks Jev what the guest wants. Code supplies every option and every number,
  * so the answers can only be a filter state or a slot, never free text.
  */
 export async function resolveSearchIntent(sentence: string): Promise<SearchIntent> {
+  // No decision model: code still reads the sentence, so a typed search filters
+  // instead of ranking every stay. Same vocabularies, same result shape.
+  if (!isIntentResolutionConfigured()) return parseIntent(sentence);
+
   const mentions = extractNumberMentions(sentence);
-  const intent = emptyIntent();
-
-  if (!isIntentResolutionConfigured()) {
-    intent.numbers = mentions.map((mention) => ({ ...mention, slot: "ignore" }));
-    return intent;
-  }
-
   const questions = buildQuestions(mentions);
 
   let answers: Record<string, { type: string; choice?: string }>;
@@ -162,14 +171,22 @@ export async function resolveSearchIntent(sentence: string): Promise<SearchInten
 
     answers = result.answers as Record<string, { type: string; choice?: string }>;
   } catch (error) {
-    // Search must still return semantic results when the decision layer fails.
+    // Search must still filter when the decision layer fails.
     console.error(
       "Search intent resolution failed:",
       error instanceof Error ? error.message : error,
     );
-    intent.numbers = mentions.map((mention) => ({ ...mention, slot: "ignore" }));
-    return intent;
+    return parseIntent(sentence);
   }
 
-  return intentFromAnswers(mentions, answers);
+  const intent = intentFromAnswers(mentions, answers);
+
+  // A model that answers nothing is a failure, not a request for everything:
+  // fall back to the code reading when it found something to filter on.
+  if (!hasFilters(intent)) {
+    const parsed = parseIntent(sentence);
+    if (hasFilters(parsed)) return parsed;
+  }
+
+  return intent;
 }
