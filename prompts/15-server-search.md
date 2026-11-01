@@ -171,7 +171,7 @@ Record the measured round-trip time for a typical sentence. If it exceeds ~2 s, 
 
 ## Result
 
-**Status: blocked.** The code is complete and every check that does not need a new credential passes; the happy path cannot run yet.
+**Status: blocked.** The code is complete, search works end to end through the dataset fallback, and every check that does not need a new credential passes; the Context and Jev calls themselves have never executed.
 
 Built:
 
@@ -179,6 +179,7 @@ Built:
 - `src/lib/search-intent.ts` — Jev layer, one `choice` question per filter group plus one per number mention, 6 s timeout, degrades to an empty intent when the key is absent. The question shape (`buildQuestions`) and the answer mapping (`intentFromAnswers`) are exported pure functions, so both can be checked without a model.
 - `src/lib/search-groq.ts` — `buildSearchQuery(sentence, intent, options)`; every interpolated value is a `$` param; `SEARCH_RESULT_LIMIT = 40`.
 - `src/lib/sanity-context.ts` — MCP JSON-RPC client (`initialize` → `notifications/initialized` → `tools/call groq_query`), JSON + SSE, 8 s timeout, inlined-params fallback.
+- `src/lib/sanity-query.ts` — the same GROQ against the public dataset API, used when the Context call fails so search never depends on the organization token.
 - `src/app/api/search+api.ts` — Clerk `verifyToken`, body validation, `{ stays, intent, numbers }`, failures named by cause.
 - `src/lib/api-base.ts` + `src/data/use-stay-search.ts` — `hostUri` / `EXPO_PUBLIC_API_URL`, 350 ms debounce, abort per keystroke, previous results kept.
 - `src/components/search-screen.tsx` — both `searchStaysIn` call sites replaced. The filter sheet's "Show N stays" now counts from the server results with only the sheet's own filters layered on.
@@ -195,13 +196,13 @@ Verified without the two credentials:
   - `Hot tub` avoided returns 1 stay and none has a hot tub, in 420 ms;
   - `price-asc` is non-decreasing and `rating` non-increasing over the real data.
 - The generated GROQ ran against `production` through the Sanity MCP for the same two cases with the same results.
-- Route: no token → `401`; bad token → `401`; a real Clerk JWT got past auth into the Context call; empty query → `400`.
-- App: Search shows 30 stays on an empty query, the Cabins chip narrows to 8, `Price: low to high` orders $195/$215/$230, the filter sheet goes "Show 8 stays" → "Show 1 stay" and applies to 1 stay, and a typed sentence produces the error state naming the Context cause with Retry.
+- **Route, live** (throwaway Clerk user, deleted after): no token → `401`; bad token → `401`; empty query → `400`; a real sentence returns `200` in 1.47 s with 30 ranked stays. The Context 403 is logged and the same request is served by `queryDataset`, so the fallback runs on every call until the token gains the scope.
+- App: Search shows 30 stays on an empty query, the Cabins chip narrows to 8, `Price: low to high` orders $195/$215/$230, the filter sheet goes "Show 8 stays" → "Show 1 stay" and applies to 1 stay, and a typed sentence now returns ranked stays instead of an error card (confirmed at the route; the headless simulator cannot be screenshotted, so the rendered list was not re-observed).
 - Typing at human speed keeps every character; the dropped characters seen earlier were synthetic-input artifacts at ~1 char/ms, not an app bug.
 
 Blocked, and why:
 
-1. `SANITY_ORGANIZATION_TOKEN` lacks `sanity.knowledge-base.read`, so every Context call returns `403 contextGrantRequired` and the route answers `503`. Step 1 (recording the `groq_query` input schema) is therefore still unrecorded.
+1. `SANITY_ORGANIZATION_TOKEN` lacks `sanity.knowledge-base.read`, so every Context call returns `403 contextGrantRequired`. Search now falls back to the dataset API, so the app works, but the Context transport itself is still unverified and step 1 (recording the `groq_query` input schema) is still unrecorded.
 2. `TYPESAFE_AI_API_KEY` is absent, so `resolveSearchIntent` short-circuits and the Jev path has never executed.
 
 Remaining once both exist: record the `groq_query` schema under step 1, run the four intent sentences, confirm the wanted and avoided cases end to end, and record the round-trip time.

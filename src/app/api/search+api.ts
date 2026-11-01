@@ -4,7 +4,8 @@ import { mapStay, type SanityStay } from "@/data/live-stays";
 import type { Stay, StayCategoryId, StaySort } from "@/data/stays";
 import { buildSearchQuery, type SearchQueryOptions } from "@/lib/search-groq";
 import { resolveSearchIntent } from "@/lib/search-intent";
-import { SanityContextError, runGroq } from "@/lib/sanity-context";
+import { queryDataset } from "@/lib/sanity-query";
+import { runGroq } from "@/lib/sanity-context";
 
 const CATEGORY_IDS = new Set<StayCategoryId>(["all", "cabins", "beach", "city", "villas"]);
 const SORTS = new Set<StaySort>(["best", "price-asc", "price-desc", "rating"]);
@@ -54,7 +55,9 @@ function parseOptions(body: SearchBody): SearchQueryOptions {
 /**
  * Server-side search: Jev resolves the guest's sentence into filter intent,
  * code builds the GROQ from its own vocabularies, and the `room-search` Context
- * endpoint runs it with dataset embeddings.
+ * endpoint runs it with dataset embeddings. If Context is unavailable the same
+ * query runs against the public dataset API, so search never depends on the
+ * organization token.
  */
 export async function POST(request: Request): Promise<Response> {
   const header = request.headers.get("authorization") ?? "";
@@ -88,20 +91,27 @@ export async function POST(request: Request): Promise<Response> {
   let documents: SanityStay[];
   try {
     documents = await runGroq<SanityStay>(groq, params);
-  } catch (error) {
-    if (error instanceof SanityContextError) {
-      console.error("Search query failed:", error.message);
+  } catch (contextError) {
+    // Context needs an organization token with Context Viewer. The public
+    // dataset runs the same query — params and embeddings included — so a
+    // missing scope degrades the transport, not the search.
+    console.warn(
+      "Context search failed, querying the dataset API instead:",
+      contextError instanceof Error ? contextError.message : contextError,
+    );
+
+    try {
+      documents = await queryDataset<SanityStay>(groq, params);
+    } catch (error) {
+      console.error("Search query failed:", error);
       return Response.json(
-        { error: error.message, cause: "context" },
-        { status: error.status === 403 || error.status === 401 ? 503 : 502 },
+        {
+          error: "Search is unavailable right now. Try again in a moment.",
+          cause: "query",
+        },
+        { status: 502 },
       );
     }
-
-    console.error("Search query failed:", error);
-    return Response.json(
-      { error: "Search is unavailable right now.", cause: "context" },
-      { status: 502 },
-    );
   }
 
   const stays = documents
