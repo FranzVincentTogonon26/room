@@ -1,6 +1,6 @@
 import { verifyToken } from "@clerk/backend";
-import { typeSafeAi } from "@ai-sdk/typesafe-ai";
-import { experimental_decide } from "ai";
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 import { callKBTool, KnowledgeBaseError } from "@/lib/sanity-kb";
 import type { ChatCard } from "@/lib/stay-chat";
@@ -121,50 +121,61 @@ async function narrowWithJev(
   matches: PolicyMatch[],
 ): Promise<PolicyMatch[]> {
   if (matches.length === 0) return [];
-  if (!process.env.TYPESAFE_AI_API_KEY) return matches;
+  if (!process.env.OPENAI_API_KEY) return matches;
 
-  const questions: Record<
-    string,
-    { type: "boolean"; instructions: string }
-  > = {};
+  const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
 
-  for (let i = 0; i < matches.length; i += 1) {
-    const match = matches[i];
-    const title = match.title ?? "";
-    const summary = match.summary ?? "";
-    questions[`policy${i}`] = {
-      type: "boolean",
-      instructions: `Does the policy "${title}" (${summary}) answer the guest's question: "${question}"?`,
-    };
-  }
+  const items = matches.map((m, i) => ({
+    index: i,
+    title: m.title ?? "",
+    summary: m.summary ?? "",
+  }));
+
+  const schema = z.object({
+    decisions: z.array(
+      z.object({
+        index: z.number().int().min(0),
+        relevant: z.boolean(),
+        confidence: z.enum(["low", "medium", "high"]),
+      })
+    ),
+    confidence: z.enum(["low", "medium", "high"]),
+  });
+
+  const system = `You are a policy relevance classifier. Given a guest question and a list of stay policies, decide which policies directly answer the question. Return confidence low/medium/high for each decision and overall.`;
+
+  const user = `Question: "${question}"
+Policies:
+${items.map(i => `${i.index}: ${i.title} - ${i.summary}`).join("\n")}
+Return decisions for each index with relevant boolean and confidence.`;
 
   try {
-    const result = await experimental_decide({
-      model: typeSafeAi.decisionModel("jev-latest"),
-      state: [{ type: "text", text: question }],
-      questions,
-      abortSignal: AbortSignal.timeout(DECISION_TIMEOUT_MS),
+    const result = await generateText({
+      model: OPENAI_MODEL,
+      output: Output.object({ schema }),
+      system,
+      prompt: user,
     });
 
-    const answers = result.answers as Record<
-      string,
-      { type: string; value?: boolean }
-    >;
-    const relevant: PolicyMatch[] = [];
+    const output = result.output as z.infer<typeof schema>;
 
-    for (let i = 0; i < matches.length; i += 1) {
-      const answer = answers[`policy${i}`];
-      if (answer?.value === true) relevant.push(matches[i]);
+    if (output.confidence === "low") {
+      console.warn("Policy narrowing confidence low, returning all matches");
+      return matches;
     }
 
-    // If Jev filters everything out, return empty so the UI can show "No answer found"
-    // instead of falling back to all policies.
+    const relevant: PolicyMatch[] = [];
+    for (const dec of output.decisions) {
+      const match = matches[dec.index];
+      if (!match) continue;
+      if (dec.relevant && dec.confidence !== "low") {
+        relevant.push(match);
+      }
+    }
+
     return relevant;
   } catch (error) {
-    console.error(
-      "Policy narrowing with Jev failed:",
-      error instanceof Error ? error.message : error,
-    );
+    console.error("Policy narrowing with OpenAI failed:", error instanceof Error ? error.message : error);
     return matches;
   }
 }

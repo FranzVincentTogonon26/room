@@ -1,5 +1,5 @@
-import { typeSafeAi } from "@ai-sdk/typesafe-ai";
-import { experimental_decide } from "ai";
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 import {
   emptyIntent,
@@ -16,8 +16,8 @@ import {
 } from "./search-filters";
 import { parseIntent } from "./search-parse";
 
-const MODEL_ID = "jev-latest";
 const TIMEOUT_MS = 6_000;
+const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
 
 /** Every filter question offers exactly these three answers. */
 const FILTER_CRITERIA = {
@@ -74,7 +74,7 @@ function slotFor(answer: { type: string; choice?: string } | undefined): NumberS
 
 /** True when the decision layer is configured; search still runs without it. */
 export function isIntentResolutionConfigured() {
-  return Boolean(process.env.TYPESAFE_AI_API_KEY);
+  return Boolean(process.env.OPENAI_API_KEY);
 }
 
 /**
@@ -148,7 +148,7 @@ function hasFilters(intent: SearchIntent) {
 }
 
 /**
- * Asks Jev what the guest wants. Code supplies every option and every number,
+ * Asks the model what the guest wants. Code supplies every option and every number,
  * so the answers can only be a filter state or a slot, never free text.
  */
 export async function resolveSearchIntent(sentence: string): Promise<SearchIntent> {
@@ -157,36 +157,80 @@ export async function resolveSearchIntent(sentence: string): Promise<SearchInten
   if (!isIntentResolutionConfigured()) return parseIntent(sentence);
 
   const mentions = extractNumberMentions(sentence);
-  const questions = buildQuestions(mentions);
 
-  let answers: Record<string, { type: string; choice?: string }>;
+  const schema = z.object({
+    pets: z.enum(["wanted", "avoided", "notMentioned"]),
+    categories: z.record(z.enum(SEARCH_CATEGORIES), z.enum(["wanted", "avoided", "notMentioned"])),
+    amenities: z.record(z.enum(SEARCH_AMENITIES), z.enum(["wanted", "avoided", "notMentioned"])),
+    vibes: z.record(z.enum(SEARCH_VIBES), z.enum(["wanted", "avoided", "notMentioned"])),
+    numbers: z.array(
+      z.object({
+        index: z.number().int(),
+        slot: z.enum(NUMBER_SLOTS),
+        confidence: z.enum(["low", "medium", "high"]),
+      })
+    ),
+    confidence: z.enum(["low", "medium", "high"]),
+  });
+
+  const system = `You are a search intent classifier. Classify the guest sentence into filters.
+Only use the provided vocabularies. Return wanted/avoided/notMentioned for each filter.
+For numbers, choose the slot from maxPrice/guests/bedrooms/nights/ignore.
+Provide confidence low/medium/high.`;
+
+  const user = `Sentence: "${sentence}"
+Numbers found: ${mentions.map(m => `${m.index}:${m.raw}@${m.context}`).join("; ")}
+Classify pets, categories, amenities, vibes, and numbers.`;
 
   try {
-    const result = await experimental_decide({
-      model: typeSafeAi.decisionModel(MODEL_ID),
-      state: [{ type: "text", text: sentence }],
-      questions,
-      abortSignal: AbortSignal.timeout(TIMEOUT_MS),
+    const result = await generateText({
+      model: OPENAI_MODEL,
+      output: Output.object({ schema }),
+      system,
+      prompt: user,
     });
 
-    answers = result.answers as Record<string, { type: string; choice?: string }>;
+    const output = result.output as z.infer<typeof schema>;
+
+    // Validate confidence
+    if (output.confidence === "low") {
+      console.warn("Search intent confidence low, falling back to parser");
+      return parseIntent(sentence);
+    }
+
+    // Map to SearchIntent shape
+    const intent = emptyIntent();
+    intent.pets = output.pets;
+    for (const cat of SEARCH_CATEGORIES) {
+      intent.categories[cat] = output.categories[cat] ?? "notMentioned";
+    }
+    for (const am of SEARCH_AMENITIES) {
+      intent.amenities[am] = output.amenities[am] ?? "notMentioned";
+    }
+    for (const vibe of SEARCH_VIBES) {
+      intent.vibes[vibe] = output.vibes[vibe] ?? "notMentioned";
+    }
+    intent.numbers = mentions.map((mention, idx) => {
+      const numOut = output.numbers.find(n => n.index === idx);
+      const slot = (numOut?.slot ?? "ignore") as NumberSlot;
+      const conf = numOut?.confidence ?? "medium";
+      if (conf === "low") {
+        // fallback slot to parser for this number
+        const parsed = parseIntent(sentence);
+        const pNum = parsed.numbers[idx];
+        return { ...mention, slot: (pNum?.slot ?? "ignore") as NumberSlot };
+      }
+      return { ...mention, slot };
+    });
+
+    if (!hasFilters(intent)) {
+      const parsed = parseIntent(sentence);
+      if (hasFilters(parsed)) return parsed;
+    }
+
+    return intent;
   } catch (error) {
-    // Search must still filter when the decision layer fails.
-    console.error(
-      "Search intent resolution failed:",
-      error instanceof Error ? error.message : error,
-    );
+    console.error("Search intent resolution failed:", error instanceof Error ? error.message : error);
     return parseIntent(sentence);
   }
-
-  const intent = intentFromAnswers(mentions, answers);
-
-  // A model that answers nothing is a failure, not a request for everything:
-  // fall back to the code reading when it found something to filter on.
-  if (!hasFilters(intent)) {
-    const parsed = parseIntent(sentence);
-    if (hasFilters(parsed)) return parsed;
-  }
-
-  return intent;
 }
