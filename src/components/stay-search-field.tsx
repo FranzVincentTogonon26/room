@@ -57,9 +57,8 @@ export function StaySearchField({
         accessibilityLabel="Describe your stay"
         style={{
           flex: 1,
-          alignSelf: "stretch",
+          height: "100%",
           paddingVertical: 0,
-          textAlignVertical: "center",
           fontFamily: typography.caption.fontFamily,
           fontSize: typography.caption.fontSize,
           letterSpacing: typography.caption.letterSpacing,
