@@ -121,7 +121,7 @@ async function narrowWithJev(
   matches: PolicyMatch[],
 ): Promise<PolicyMatch[]> {
   if (matches.length === 0) return [];
-  if (!process.env.OPENAI_API_KEY) return matches;
+  if (!process.env.OPENAI_API_KEY) return [];
 
   const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
 
@@ -142,12 +142,12 @@ async function narrowWithJev(
     confidence: z.enum(["low", "medium", "high"]),
   });
 
-  const system = `You are a policy relevance classifier. Given a guest question and a list of stay policies, decide which policies directly answer the question. Return confidence low/medium/high for each decision and overall.`;
+  const system = `You are a strict policy relevance classifier. Given a guest question and a list of stay policies, select ONLY the policies that directly and specifically answer the question. If a policy is only tangentially related, mark it not relevant. Return confidence low/medium/high for each decision and overall.`;
 
   const user = `Question: "${question}"
 Policies:
 ${items.map(i => `${i.index}: ${i.title} - ${i.summary}`).join("\n")}
-Return decisions for each index with relevant boolean and confidence.`;
+Return decisions for each index with relevant boolean and confidence. Only mark relevant if the policy directly answers the question.`;
 
   try {
     const result = await generateText({
@@ -159,24 +159,26 @@ Return decisions for each index with relevant boolean and confidence.`;
 
     const output = result.output as z.infer<typeof schema>;
 
-    if (output.confidence === "low") {
-      console.warn("Policy narrowing confidence low, returning all matches");
-      return matches;
+    if (!output || output.confidence === "low") {
+      console.warn("Policy narrowing confidence low or missing, returning no matches");
+      return [];
     }
 
     const relevant: PolicyMatch[] = [];
+    const seen = new Set<number>();
     for (const dec of output.decisions) {
-      const match = matches[dec.index];
-      if (!match) continue;
-      if (dec.relevant && dec.confidence !== "low") {
-        relevant.push(match);
+      if (typeof dec.index !== "number" || dec.index < 0 || dec.index >= matches.length) continue;
+      if (seen.has(dec.index)) continue;
+      seen.add(dec.index);
+      if (dec.relevant && dec.confidence === "high") {
+        relevant.push(matches[dec.index]);
       }
     }
 
     return relevant;
   } catch (error) {
     console.error("Policy narrowing with OpenAI failed:", error instanceof Error ? error.message : error);
-    return matches;
+    return [];
   }
 }
 
