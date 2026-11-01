@@ -121,7 +121,10 @@ async function narrowWithJev(
   matches: PolicyMatch[],
 ): Promise<PolicyMatch[]> {
   if (matches.length === 0) return [];
-  if (!process.env.OPENAI_API_KEY) return [];
+  if (!process.env.OPENAI_API_KEY) {
+    // No model configured: return all stay-matched policies so the chat still answers
+    return matches;
+  }
 
   const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
 
@@ -142,12 +145,12 @@ async function narrowWithJev(
     confidence: z.enum(["low", "medium", "high"]),
   });
 
-  const system = `You are a strict policy relevance classifier. Given a guest question and a list of stay policies, select ONLY the policies that directly and specifically answer the question. If a policy is only tangentially related, mark it not relevant. Return confidence low/medium/high for each decision and overall.`;
+  const system = `You are a policy relevance classifier. Given a guest question and a list of stay policies, decide which policies directly answer the question. Return confidence low/medium/high for each decision and overall. Be generous: if a policy is clearly related, mark it relevant.`;
 
   const user = `Question: "${question}"
 Policies:
 ${items.map(i => `${i.index}: ${i.title} - ${i.summary}`).join("\n")}
-Return decisions for each index with relevant boolean and confidence. Only mark relevant if the policy directly answers the question.`;
+Return decisions for each index with relevant boolean and confidence.`;
 
   try {
     const result = await generateText({
@@ -160,8 +163,8 @@ Return decisions for each index with relevant boolean and confidence. Only mark 
     const output = result.output as z.infer<typeof schema>;
 
     if (!output || output.confidence === "low") {
-      console.warn("Policy narrowing confidence low or missing, returning no matches");
-      return [];
+      // Low overall confidence: fall back to all stay-matched policies
+      return matches;
     }
 
     const relevant: PolicyMatch[] = [];
@@ -170,15 +173,21 @@ Return decisions for each index with relevant boolean and confidence. Only mark 
       if (typeof dec.index !== "number" || dec.index < 0 || dec.index >= matches.length) continue;
       if (seen.has(dec.index)) continue;
       seen.add(dec.index);
-      if (dec.relevant && dec.confidence === "high") {
+      if (dec.relevant && dec.confidence !== "low") {
         relevant.push(matches[dec.index]);
       }
+    }
+
+    // If model filtered everything out, fall back to all stay-matched policies
+    if (relevant.length === 0) {
+      return matches;
     }
 
     return relevant;
   } catch (error) {
     console.error("Policy narrowing with OpenAI failed:", error instanceof Error ? error.message : error);
-    return [];
+    // Fail open: return all stay-matched policies
+    return matches;
   }
 }
 
