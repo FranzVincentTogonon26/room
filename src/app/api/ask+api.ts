@@ -143,15 +143,20 @@ async function narrowWithJev(
     if (q.includes("check") || q.includes("arrive") || q.includes("leave") || q.includes("time")) {
       return type === "checkinout" || title.includes("check") || summary.includes("check");
     }
-    return true;
+    if (q.includes("fee") || q.includes("cost") || q.includes("price") || q.includes("charge") || q.includes("pay")) {
+      // Room doesn't have a separate fee policy; fees are covered by cancellation or pricing.
+      // Return cancellation or house rules if fees mentioned, or avoid dumping all.
+      return type === "cancellation" || type === "houserules";
+    }
+    return false; // By default, do NOT return everything if no keyword matches! Return empty so "No answer found" or exact single match happens.
   });
 
   if (filtered.length > 0) {
     return filtered;
   }
 
-  // If no keyword match, return at most 1 best match or empty
-  return matches.slice(0, 1);
+  // If no keyword match, return empty array so "No answer found" card displays cleanly
+  return [];
 }
 
 /**
