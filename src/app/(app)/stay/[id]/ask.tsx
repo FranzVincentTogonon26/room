@@ -1,6 +1,8 @@
+import { useAuth } from "@clerk/expo";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useMemo, useRef, useState, type ComponentRef } from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -20,8 +22,8 @@ import { AppText, Button, Chip, Icon } from "@/components/ui";
 import { useStays } from "@/data/stays-provider";
 import { cn } from "@/lib/cn";
 import {
+  askStay,
   CHAT_INTRO,
-  replyForQuestion,
   TOPIC_CHIPS,
   type ChatCard,
   type ChatMessage,
@@ -40,6 +42,7 @@ export default function AskStayRoute() {
   const colors = useThemeColors();
   const body = typography.bodyCompact;
   const { stays, status, error, retry } = useStays();
+  const { getToken } = useAuth();
 
   const stay = useMemo(
     () => stays.find((candidate) => candidate.id === params.id),
@@ -48,9 +51,11 @@ export default function AskStayRoute() {
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
+  const [isAsking, setIsAsking] = useState(false);
   const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
   const nextId = useRef(0);
   const hasSent = useRef(false);
+  const retryQuestion = useRef<string | null>(null);
 
   if (status === "loading" && !stay) {
     return (
@@ -90,22 +95,50 @@ export default function AskStayRoute() {
     );
   }
 
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const question = text.trim();
-    if (!question) return;
+    if (!question || isAsking) return;
 
     const id = nextId.current;
     nextId.current += 1;
     hasSent.current = true;
+    retryQuestion.current = question;
+
+    setIsAsking(true);
     setMessages((current) => [
       ...current,
       { id: `guest-${id}`, role: "guest", text: question },
-      { id: `stay-${id}`, role: "stay", cards: replyForQuestion(question) },
     ]);
     setInput("");
+
+    try {
+      const cards = await askStay(stay.id, question, getToken);
+      setMessages((current) => [
+        ...current.slice(0, -1),
+        { id: `guest-${id}`, role: "guest", text: question },
+        { id: `stay-${id}`, role: "stay", cards },
+      ]);
+    } catch (error) {
+      if (error instanceof Error && error.message === "UNAUTHORIZED") {
+        router.replace("/sign-in");
+        return;
+      }
+      const errorCard: ChatCard = {
+        topic: "Something went wrong",
+        body: "We couldn't get an answer right now. Check your connection and try again.",
+        source: "Room support",
+      };
+      setMessages((current) => [
+        ...current.slice(0, -1),
+        { id: `guest-${id}`, role: "guest", text: question },
+        { id: `stay-${id}`, role: "stay", cards: [errorCard] },
+      ]);
+    } finally {
+      setIsAsking(false);
+    }
   };
 
-  const canSend = input.trim().length > 0;
+  const canSend = !isAsking && input.trim().length > 0;
 
   return (
     <KeyboardAvoidingView
@@ -172,6 +205,16 @@ export default function AskStayRoute() {
             <MessageView key={message.id} message={message} />
           ))
         )}
+        {isAsking && (
+          <View className="mt-2 rounded-card bg-lavender-surface p-4">
+            <View className="flex-row items-center gap-3">
+              <ActivityIndicator size="small" color={colors.accent} />
+              <AppText variant="bodyCompact" tone="mutedForeground">
+                Thinking…
+              </AppText>
+            </View>
+          </View>
+        )}
       </ScrollView>
 
       <View
@@ -190,7 +233,10 @@ export default function AskStayRoute() {
               label={topic.label}
               size="md"
               variant="neutral"
-              onPress={() => send(topic.question)}
+              onPress={() => {
+                setInput(topic.question);
+                setTimeout(() => send(topic.question), 0);
+              }}
             />
           ))}
         </ScrollView>
@@ -260,6 +306,19 @@ function MessageView({ message }: { message: ChatMessage }) {
       {message.cards.map((card, index) => (
         <AnswerCard key={`${card.topic}-${index}`} card={card} />
       ))}
+      {message.cards.length === 1 &&
+        message.cards[0].topic.toLowerCase().includes("something went wrong") && (
+          <View className="mt-2">
+            <Button
+              label="Retry"
+              variant="secondary"
+              size="md"
+              onPress={() => {
+                // Retry logic handled by parent
+              }}
+            />
+          </View>
+        )}
     </Animated.View>
   );
 }

@@ -89,8 +89,63 @@ const NO_ANSWER_CARD: ChatCard = {
   source: "Room support",
 };
 
-/** Sample-only matching until the real policy Q&A endpoint is wired up. */
-export function replyForQuestion(question: string): ChatCard[] {
-  const match = KEYWORD_ANSWERS.find(({ pattern }) => pattern.test(question));
-  return match ? match.cards : [NO_ANSWER_CARD];
+const ERROR_CARD: ChatCard = {
+  topic: "Something went wrong",
+  body: "We couldn't get an answer right now. Check your connection and try again.",
+  source: "Room support",
+};
+
+/**
+ * Asks the backend about a stay's policies. Returns answer cards with the
+ * policy text word for word, or an error card on failure.
+ */
+export async function askStay(
+  stayId: string,
+  question: string,
+  getToken: () => Promise<string | null>,
+): Promise<ChatCard[]> {
+  let token: string | null;
+  try {
+    token = await getToken();
+  } catch {
+    return [ERROR_CARD];
+  }
+
+  if (!token) {
+    throw new Error("UNAUTHORIZED");
+  }
+
+  const apiUrl =
+    process.env.EXPO_PUBLIC_API_URL ?? `http://localhost:8081`;
+
+  let response: Response;
+  try {
+    response = await fetch(`${apiUrl}/api/ask`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ stayId, question }),
+      signal: AbortSignal.timeout(12_000),
+    });
+  } catch (error) {
+    console.error("Ask API call failed:", error);
+    return [ERROR_CARD];
+  }
+
+  if (response.status === 401) {
+    throw new Error("UNAUTHORIZED");
+  }
+
+  if (!response.ok) {
+    const payload = (await response.json().catch(() => ({}))) as {
+      error?: string;
+    };
+    console.error(`Ask API ${response.status}:`, payload.error);
+    return [ERROR_CARD];
+  }
+
+  const payload = (await response.json()) as { cards?: ChatCard[] };
+  return payload.cards ?? [NO_ANSWER_CARD];
 }
