@@ -157,7 +157,9 @@ async function narrowWithJev(
       if (answer?.value === true) relevant.push(matches[i]);
     }
 
-    return relevant.length > 0 ? relevant : matches;
+    // If Jev filters everything out, return empty so the UI can show "No answer found"
+    // instead of falling back to all policies.
+    return relevant;
   } catch (error) {
     console.error(
       "Policy narrowing with Jev failed:",
