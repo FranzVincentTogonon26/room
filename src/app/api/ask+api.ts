@@ -121,74 +121,37 @@ async function narrowWithJev(
   matches: PolicyMatch[],
 ): Promise<PolicyMatch[]> {
   if (matches.length === 0) return [];
-  if (!process.env.OPENAI_API_KEY) {
-    // No model configured: return all stay-matched policies so the chat still answers
-    return matches;
-  }
 
-  const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
+  const q = question.toLowerCase();
+  
+  // Deterministic strict keyword filter so we never dump unrelated cards when KB/OpenAI fails
+  const filtered = matches.filter((m) => {
+    const title = (m.title ?? "").toLowerCase();
+    const summary = (m.summary ?? "").toLowerCase();
+    const body = (m.body ?? "").toLowerCase();
+    const type = (m.policyType ?? "").toLowerCase();
 
-  const items = matches.map((m, i) => ({
-    index: i,
-    title: m.title ?? "",
-    summary: m.summary ?? "",
-  }));
-
-  const schema = z.object({
-    decisions: z.array(
-      z.object({
-        index: z.number().int().min(0),
-        relevant: z.boolean(),
-        confidence: z.enum(["low", "medium", "high"]),
-      })
-    ),
-    confidence: z.enum(["low", "medium", "high"]),
+    if (q.includes("pet") || q.includes("dog") || q.includes("cat")) {
+      return type === "pets" || title.includes("pet") || summary.includes("pet") || body.includes("pet");
+    }
+    if (q.includes("rule") || q.includes("party") || q.includes("child") || q.includes("smoke")) {
+      return type === "houserules" || type === "smoking" || type === "quiethours" || title.includes("rule") || summary.includes("rule");
+    }
+    if (q.includes("cancel") || q.includes("refund")) {
+      return type === "cancellation" || title.includes("cancel") || summary.includes("cancel");
+    }
+    if (q.includes("check") || q.includes("arrive") || q.includes("leave") || q.includes("time")) {
+      return type === "checkinout" || title.includes("check") || summary.includes("check");
+    }
+    return true;
   });
 
-  const system = `You are a policy relevance classifier. Given a guest question and a list of stay policies, decide which policies directly answer the question. Return confidence low/medium/high for each decision and overall. Be generous: if a policy is clearly related, mark it relevant.`;
-
-  const user = `Question: "${question}"
-Policies:
-${items.map(i => `${i.index}: ${i.title} - ${i.summary}`).join("\n")}
-Return decisions for each index with relevant boolean and confidence.`;
-
-  try {
-    const result = await generateText({
-      model: OPENAI_MODEL,
-      output: Output.object({ schema }),
-      system,
-      prompt: user,
-    });
-
-    const output = result.output as z.infer<typeof schema>;
-
-    if (!output || output.confidence === "low") {
-      // Low overall confidence: fall back to all stay-matched policies
-      return matches;
-    }
-
-    const relevant: PolicyMatch[] = [];
-    const seen = new Set<number>();
-    for (const dec of output.decisions) {
-      if (typeof dec.index !== "number" || dec.index < 0 || dec.index >= matches.length) continue;
-      if (seen.has(dec.index)) continue;
-      seen.add(dec.index);
-      if (dec.relevant && dec.confidence !== "low") {
-        relevant.push(matches[dec.index]);
-      }
-    }
-
-    // If model filtered everything out, fall back to all stay-matched policies
-    if (relevant.length === 0) {
-      return matches;
-    }
-
-    return relevant;
-  } catch (error) {
-    console.error("Policy narrowing with OpenAI failed:", error instanceof Error ? error.message : error);
-    // Fail open: return all stay-matched policies
-    return matches;
+  if (filtered.length > 0) {
+    return filtered;
   }
+
+  // If no keyword match, return at most 1 best match or empty
+  return matches.slice(0, 1);
 }
 
 /**
