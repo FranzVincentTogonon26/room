@@ -38,6 +38,10 @@ export function Input({
   secureTextEntry,
   onFocus,
   onBlur,
+  onChangeText,
+  value,
+  autoCorrect = false,
+  spellCheck = false,
   ...props
 }: InputProps) {
   const colors = useThemeColors();
@@ -47,6 +51,16 @@ export function Input({
 
   const showPasswordToggle = Boolean(secureTextEntry);
   const trailingIcon = showPasswordToggle ? (revealed ? "eyeOff" : "eye") : rightIcon;
+
+  const handleFocus = (event: any) => {
+    setFocused(true);
+    onFocus?.(event);
+  };
+
+  const handleBlur = (event: any) => {
+    setFocused(false);
+    onBlur?.(event);
+  };
 
   return (
     <View className={cn("gap-1.5", disabled && "opacity-40", className)}>
@@ -74,62 +88,56 @@ export function Input({
             </AppText>
             <TextInput
               {...props}
+              value={value}
+              onChangeText={onChangeText}
+              autoCorrect={autoCorrect}
+              spellCheck={spellCheck}
               accessibilityState={{ disabled }}
               editable={!disabled}
               secureTextEntry={showPasswordToggle ? !revealed : false}
               placeholderTextColor={colors.placeholder}
               selectionColor={colors.accent}
-              onFocus={(event) => {
-                setFocused(true);
-                onFocus?.(event);
-              }}
-              onBlur={(event) => {
-                setFocused(false);
-                onBlur?.(event);
-              }}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               style={[
                 {
                   paddingVertical: 0,
                   fontFamily: type.fontFamily,
                   fontSize: 14,
-                  lineHeight: 18,
                   letterSpacing: type.letterSpacing,
                   color: colors.foreground,
+                  width: "100%",
                 },
                 style,
               ]}
-              className="w-full"
             />
           </View>
         ) : (
           <TextInput
             {...props}
+            value={value}
+            onChangeText={onChangeText}
+            autoCorrect={autoCorrect}
+            spellCheck={spellCheck}
             accessibilityState={{ disabled }}
             editable={!disabled}
             secureTextEntry={showPasswordToggle ? !revealed : false}
             placeholderTextColor={colors.placeholder}
             selectionColor={colors.accent}
-            onFocus={(event) => {
-              setFocused(true);
-              onFocus?.(event);
-            }}
-            onBlur={(event) => {
-              setFocused(false);
-              onBlur?.(event);
-            }}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             style={[
               {
                 flex: 1,
                 paddingVertical: 0,
                 fontFamily: type.fontFamily,
                 fontSize: type.fontSize,
-                lineHeight: type.lineHeight,
                 letterSpacing: type.letterSpacing,
                 color: colors.foreground,
+                height: "100%",
               },
               style,
             ]}
-            className="h-full"
           />
         )}
 

@@ -381,9 +381,12 @@ function SearchContent({
                 returnKeyType="search"
                 multiline={false}
                 numberOfLines={1}
+                autoCorrect={false}
+                spellCheck={false}
                 accessibilityLabel="Search stays"
-                className="h-full flex-1"
                 style={{
+                  height: "100%",
+                  flex: 1,
                   paddingVertical: 0,
                   fontFamily: body.fontFamily,
                   fontSize: body.fontSize,

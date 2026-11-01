@@ -15,7 +15,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { StayHostSheet } from "@/components/stay-host-sheet";
-import { StayPolicySheet } from "@/components/stay-policy-sheet";
 import { AppText, Button, Icon, type IconName } from "@/components/ui";
 import type { Stay } from "@/data/stays";
 import { useStays } from "@/data/stays-provider";
@@ -67,6 +66,7 @@ export default function StayDetailRoute() {
       saved={saved.has(stay.id)}
       onToggleSaved={() => toggleSaved(stay.id)}
       onBack={() => (router.canGoBack() ? router.back() : router.replace("/home"))}
+      router={router}
     />
   );
 }
@@ -76,17 +76,18 @@ function StayDetail({
   saved,
   onToggleSaved,
   onBack,
+  router,
 }: {
   stay: Stay;
   saved: boolean;
   onToggleSaved: () => void;
   onBack: () => void;
+  router: ReturnType<typeof useRouter>;
 }) {
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const colors = useThemeColors();
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [policyOpen, setPolicyOpen] = useState(false);
   const [hostOpen, setHostOpen] = useState(false);
   const heroHeight = Math.round(width * HERO_RATIO) + SHEET_OVERLAP;
   const images = galleryFor(stay);
@@ -231,9 +232,9 @@ function StayDetail({
               <View className="-mx-1 mt-1.5 gap-2">
                 <PolicyCard
                   icon="messageCircleMore"
-                  title="Ask about policies"
+                  title="Ask about this stay"
                   subtitle="Cancellation, house rules, pets, check-in and more."
-                  onPress={() => setPolicyOpen(true)}
+                  onPress={() => router.push(`/stay/${stay.id}/ask`)}
                 />
 
                 {cancellation ? (
@@ -241,7 +242,7 @@ function StayDetail({
                     icon="fileText"
                     title={cancellation.title}
                     subtitle={cancellation.summary}
-                    onPress={() => setPolicyOpen(true)}
+                    onPress={() => router.push(`/stay/${stay.id}/cancellation-policy`)}
                   />
                 ) : null}
               </View>
@@ -322,11 +323,6 @@ function StayDetail({
         />
       </View>
 
-      <StayPolicySheet
-        visible={policyOpen}
-        policies={policies}
-        onClose={() => setPolicyOpen(false)}
-      />
       <StayHostSheet
         visible={hostOpen}
         host={host}

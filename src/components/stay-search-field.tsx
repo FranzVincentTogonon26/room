@@ -51,10 +51,13 @@ export function StaySearchField({
         returnKeyType="search"
         multiline={false}
         autoCapitalize="none"
+        autoCorrect={false}
+        spellCheck={false}
         underlineColorAndroid="transparent"
         accessibilityLabel="Describe your stay"
-        className="flex-1 self-stretch"
         style={{
+          flex: 1,
+          alignSelf: "stretch",
           paddingVertical: 0,
           textAlignVertical: "center",
           fontFamily: typography.caption.fontFamily,

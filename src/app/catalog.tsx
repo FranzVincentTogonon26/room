@@ -162,6 +162,8 @@ const iconSamples: IconName[] = [
   "waves",
   "globe",
   "messageCircleMore",
+  "messageSquareMore",
+  "wandSparkles",
   "award",
 ];
 
