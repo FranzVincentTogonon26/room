@@ -255,19 +255,22 @@ export async function POST(request: Request): Promise<Response> {
       { query: question },
     );
   } catch (error) {
-    if (error instanceof KnowledgeBaseError) {
-      console.error("Knowledge Base call failed:", error.message);
-      // If the KB endpoint is misconfigured, fall back to a direct Sanity read
-      // for the stay's policies so the chat still answers.
-      kbMatches = await fetchAllPoliciesForStay(stayId);
-    } else {
-      console.error("Knowledge Base call failed:", error);
-      return Response.json({ cards: [NO_ANSWER_CARD] });
-    }
+    console.warn("Knowledge Base call failed, falling back to direct Sanity read:", error instanceof Error ? error.message : error);
+    kbMatches = await fetchAllPoliciesForStay(stayId);
+  }
+
+  // If KB returned nothing or failed, use all policies for the stay directly.
+  if (kbMatches.length === 0) {
+    kbMatches = await fetchAllPoliciesForStay(stayId);
   }
 
   // Filter to only this stay's policies.
   const stayMatches = kbMatches.filter((match) => policyIds.has(match?._id));
+
+  if (stayMatches.length === 0) {
+    // If filtering didn't match IDs, fall back to all stay policies directly
+    stayMatches.push(...(await fetchAllPoliciesForStay(stayId)));
+  }
 
   if (stayMatches.length === 0) {
     return Response.json({ cards: [NO_ANSWER_CARD] });
