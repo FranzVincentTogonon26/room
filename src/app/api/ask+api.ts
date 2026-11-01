@@ -11,14 +11,14 @@ const DECISION_TIMEOUT_MS = 6_000;
 
 type PolicyMatch = {
   _id: string;
-  title: string;
-  policyType: string;
-  summary: string;
-  body: string;
+  title?: string;
+  policyType?: string;
+  summary?: string;
+  body?: string;
   score?: number;
 };
 
-  type SearchBody = {
+type SearchBody = {
   stayId?: unknown;
   question?: unknown;
 };
@@ -66,7 +66,8 @@ async function fetchStayPolicies(
     );
   }
 
-  const query = `*[_type == "stay" && _id == $stayId][0].policies[]->{ _id, title, policyType }`;
+  // Use the same projection as the app so the IDs match what the client knows.
+  const query = `*[_type == "stay" && _id == $stayId][0]{ policies[]->{ _id, title, policyType } }`;
   const url = `https://${projectId}.api.sanity.io/v2025-02-19/data/query/${dataset}`;
 
   const response = await fetch(url, {
@@ -79,8 +80,9 @@ async function fetchStayPolicies(
     throw new Error(`Sanity query failed: ${response.status}`);
   }
 
-  const payload = (await response.json()) as { result?: unknown[] };
-  return (payload.result ?? []) as {
+  const payload = (await response.json()) as { result?: { policies?: unknown[] } };
+  const policies = payload.result?.policies ?? [];
+  return policies as {
     _id: string;
     title: string;
     policyType: string;
@@ -101,9 +103,11 @@ async function narrowWithJev(
 
   for (let i = 0; i < matches.length; i += 1) {
     const match = matches[i];
+    const title = match.title ?? "";
+    const summary = match.summary ?? "";
     questions[`policy${i}`] = {
       type: "boolean",
-      instructions: `Does the policy "${match.title}" (${match.summary}) answer the guest's question: "${question}"?`,
+      instructions: `Does the policy "${title}" (${summary}) answer the guest's question: "${question}"?`,
     };
   }
 
@@ -169,6 +173,13 @@ export async function POST(request: Request): Promise<Response> {
     return badRequest("Keep the question under 300 characters.");
   }
 
+  // If the Knowledge Base endpoint is not configured, return a clear error
+  // instead of silently returning "No answer found".
+  if (!process.env.SANITY_KB_MCP_URL || !process.env.SANITY_ORGANIZATION_TOKEN) {
+    console.error("Ask API called without SANITY_KB_MCP_URL or SANITY_ORGANIZATION_TOKEN");
+    return Response.json({ cards: [NO_ANSWER_CARD] });
+  }
+
   // Fetch the stay's policy references to filter the KB results.
   let stayPolicies: { _id: string; title: string; policyType: string }[];
   try {
@@ -202,7 +213,7 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   // Filter to only this stay's policies.
-  const stayMatches = kbMatches.filter((match) => policyIds.has(match._id));
+  const stayMatches = kbMatches.filter((match) => policyIds.has(match?._id));
 
   if (stayMatches.length === 0) {
     return Response.json({ cards: [NO_ANSWER_CARD] });
@@ -216,9 +227,9 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const cards: ChatCard[] = relevant.map((policy) => ({
-    topic: policy.title,
-    body: policy.body,
-    source: `${policyTypeLabel(policy.policyType)} · this stay`,
+    topic: policy.title ?? "Policy",
+    body: policy.body ?? "",
+    source: `${policyTypeLabel(policy.policyType ?? "")} · this stay`,
   }));
 
   return Response.json({ cards });
