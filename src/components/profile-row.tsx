@@ -21,14 +21,16 @@ export function ProfileRow({ icon, label, onPress, className }: ProfileRowProps)
       accessibilityRole="button"
       accessibilityLabel={label}
       onPress={onPress}
-      className={cn("h-14 flex-row items-center gap-4 px-card", className)}
+      className={cn("h-13 flex-row items-center gap-4 px-3", className)}
       style={({ pressed }) => (pressed ? { opacity: 0.7 } : null)}
     >
-      <Icon name={icon} size="lg" color={colors.foreground} />
-      <AppText variant="label" className="flex-1">
+      <View className="h-9 w-9 items-center justify-center rounded-tile bg-muted">
+        <Icon name={icon} size="lg" color={colors.foreground} />
+      </View>
+      <AppText variant="caption" tone="foreground" className="flex-1">
         {label}
       </AppText>
-      <Icon name="chevronRight" size="md" color={colors.foreground} />
+      <Icon name="chevronRight" size="md" color={colors.foreground} strokeWidth={2} />
     </Pressable>
   );
 }
@@ -50,7 +52,9 @@ export function ProfileRowGroup({ children, className }: ProfileRowGroupProps) {
       {rows.map((row, index) => (
         <Fragment key={index}>
           {row}
-          {index < rows.length - 1 ? <View className="border-b border-border" /> : null}
+          {index < rows.length - 1 ? (
+            <View className="ml-14 mr-3 h-px bg-border" />
+          ) : null}
         </Fragment>
       ))}
     </View>

@@ -63,9 +63,11 @@ const semanticKeys = [
   "lavender",
   "lavenderSurface",
   "lavenderStrong",
+  "lavenderMist",
   "focus",
   "focusRing",
   "accent",
+  "accentSoft",
   "star",
   "success",
   "successForeground",
@@ -92,6 +94,7 @@ const typeOrder: TypeVariant[] = [
   "display",
   "wordmark",
   "wordmarkCompact",
+  "wordmarkSmall",
   "heading",
   "hero",
   "tagline",
@@ -107,6 +110,7 @@ const typeOrder: TypeVariant[] = [
   "bodyCompact",
   "label",
   "caption",
+  "captionSmall",
   "button",
   "detailButton",
   "badge",
@@ -127,11 +131,14 @@ const typeSamples: Record<TypeVariant, string> = {
   cardTitleCompact: "124 stays",
   searchCardTitle: "Modern Cabin\nwith Hot Tub",
   propertyTitle: "Modern Cabin\nwith Hot Tub",
+  profileName: "Joanna Smith",
+  promoTitle: "Free cancellation",
   body: "From mountain cabins to oceanfront villas, room helps you find unforgettable stays for every kind of trip.",
   bodyLarge: "Lake Arrowhead, CA",
   bodyCompact: "Cancellation, house rules, pets, check-in and more.",
   label: "Personal info",
   caption: "Lake Arrowhead, CA",
+  captionSmall: "Full refund up to 7 days before check-in.",
   button: "Book this stay",
   detailButton: "Book this stay",
   badge: "Guest favorite",
@@ -140,6 +147,7 @@ const typeSamples: Record<TypeVariant, string> = {
   tab: "Home",
   wordmark: "room",
   wordmarkCompact: "room",
+  wordmarkSmall: "room",
 };
 
 const iconSamples: IconName[] = [
@@ -165,6 +173,9 @@ const iconSamples: IconName[] = [
   "messageSquareMore",
   "wandSparkles",
   "award",
+  "bell",
+  "circleHelp",
+  "luggage",
 ];
 
 const tabItems: GlassTabItem[] = [

@@ -9,11 +9,13 @@ import { displayNameFor } from "@/lib/user-name";
 const sizeClasses = {
   md: "h-14 w-14",
   lg: "h-22 w-22",
+  xl: "h-26 w-26",
 } as const;
 
 const textVariants = {
   md: "title",
   lg: "heading",
+  xl: "heading",
 } as const;
 
 export type UserAvatarProps = {
