@@ -1,57 +1,70 @@
-# Welcome to your Expo app 👋
+# Room 🏠
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Room is a premium Expo React Native rental application that allows guests to find their perfect stay using natural language. Instead of complex filters, users can describe their ideal trip in a single sentence, and Room provides a ranked list of stays that match their intent.
 
-## Get started
+## ✨ Key Features
 
-1. Install dependencies
+- **Natural Language Search:** Describe a stay (e.g., *"quiet pet friendly cabin with a hot tub under $300 a night"*) and get AI-ranked results.
+- **AI-Powered Policy Q&A:** Ask specific questions about a stay's policies and receive exact, cited answers from the property's documentation.
+- **Curated Stay Details:** Rich property pages with high-resolution galleries, amenity highlights, and host information.
+- **Seamless Authentication:** Secure onboarding and account management.
+- **Modern Design:** A polished, native experience with a sophisticated design system.
 
+## 📸 App Walkthrough
+
+Below are the key screens of the Room experience:
+
+| Screen | Preview |
+| :--- | :--- |
+| **Onboarding** | ![Onboarding](./prompts/assets/onboarding.png) |
+| **Login** | ![Login](./prompts/assets/login.png) |
+| **Sign Up** | ![Sign Up](./prompts/assets/sign%20up.png) |
+| **Home** | ![Home](./prompts/assets/home.png) |
+| **Search** | ![Search](./prompts/assets/search.png) |
+| **Profile** | ![Profile](./prompts/assets/profile.png) |
+| **AI Assistant** | ![Chat Assistant](./prompts/assets/chat%20assistant.png) |
+
+## 🛠 Tech Stack
+
+### Frontend
+- **Framework:** [Expo](https://expo.dev/) (React Native)
+- **Routing:** [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **Styling:** [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native)
+- **Animations:** [React Native Reanimated](https://reanimated.sysfme.com/)
+- **UI Components:** `@expo/ui` (Bottom Sheets, etc.)
+- **Icons:** [Lucide React Native](https://lucide.dev/)
+
+### Backend & Infrastructure
+- **CMS:** [Sanity.io](https://www.sanity.io/) (Content Lake for stays, hosts, and policies)
+- **Authentication:** [Clerk](https://clerk.com/)
+- **AI/ML:** 
+  - **Sanity Context:** For RAG-based policy answering.
+  - **Dataset Embeddings:** For semantic search and ranking.
+  - **TypeSafe AI (Jev):** For intent parsing and structured decisions.
+- **Analytics:** [PostHog](https://posthog.com/)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js
+- Expo Go or an iOS/Android Simulator
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd room
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Start the development server:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# room
+### Useful Commands
+- `npx expo lint` - Run linting
+- `npx tsc --noEmit` - Type check the project
+- `npx expo-doctor` - Diagnose project health
